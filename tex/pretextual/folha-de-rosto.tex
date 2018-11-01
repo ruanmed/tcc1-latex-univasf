@@ -1,0 +1,30 @@
+%--------------------------------------------------------------------------------
+% Constrói a folha de rosto com base na seção de identificação do main.tex
+%--------------------------------------------------------------------------------
+\begin{folhaderosto}
+    \center
+    	{\ABNTEXchapterfont\large\imprimirinstituicao}
+    	
+		\vspace*{2cm}
+    	    {\imprimirautor}
+    	\vspace*{2cm}
+		\vspace*{\fill}
+
+		{\ABNTEXchapterfont\bfseries\large\imprimirtitulo}
+		\vspace*{\fill}
+
+		{\hspace{.45\textwidth}
+		\begin{minipage}{.5\textwidth}
+			\SingleSpacing
+			\imprimirpreambulo \\ \\
+
+			{\imprimirorientadorRotulo~\imprimirorientador\par}
+			{\imprimircoorientadorRotulo~\imprimircoorientador\par}
+
+		\end{minipage}%
+		\vspace*{\fill}}%
+		\vspace*{\fill}
+			\ABNTEXchapterfont\bfseries\large\imprimirlocal\\ 
+			\the\year
+		\vspace*{1cm}
+\end{folhaderosto}

@@ -1,0 +1,30 @@
+%--------------------------------------------------------------------------------
+% Constrói a capa com base na seção de identificação do main.tex
+%--------------------------------------------------------------------------------
+\begin{capa}
+    \setlength{\belowcaptionskip}{0pt}
+    \setlength{\abovecaptionskip}{0pt}
+    \setlength{\intextsep}{-18pt}
+        \begin{figure}[h]
+    		\begin{center}
+    		    \includegraphics[scale=1.0]{img/LOGO_UNIVASF_big.pdf}
+    		\end{center}
+    	\end{figure}
+        
+        %\includegraphics[scale=0.6]{img/univasf.jpg}
+        \center
+    	{\ABNTEXchapterfont\large\imprimirinstituicao}
+    
+    	\vspace*{2cm}
+    	    {\imprimirautor}
+    	\vspace*{2cm}
+        \begin{center}
+    		\ABNTEXchapterfont\bfseries\large\imprimirtitulo
+        \end{center}
+    	\vfill
+        
+    	\ABNTEXchapterfont\bfseries\large\imprimirlocal\\ 
+    	\the\year
+    	
+    	\vspace*{1cm}
+\end{capa}
