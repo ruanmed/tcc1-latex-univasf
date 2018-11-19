@@ -1,8 +1,20 @@
 %---------------------------------------------------------------------------------
 % Insere lista de abreviaturas e siglas
 %---------------------------------------------------------------------------------
-\begin{siglas}
-	\item[LI]       Lorem Ipsum
-    \item[LII]		Lorem Ipsum Ipsum
+%   -   Use o comando \nomenclature em qualquer lugar do seu texto para definir as siglas
+%       Siga o exemplo abaixo: \nomenclature{SIGLA}{DefiniçÃo da sigla}
+%   \nomenclature{Fig.}{Figura TTTTT}
+
+\renewcommand{\nomname}{\listadesiglasname}
+\pdfbookmark[0]{\nomname}{las}
+\printnomenclature
+\cleardoublepage
+
+%   -   Modo manual de fazer a lista de siglas
+% \begin{siglas}
+% 	\item[LI]       Lorem Ipsum
+%     \item[LII]		Lorem Ipsum Ipsum
 	    
-\end{siglas}
+% \end{siglas}
+
+
