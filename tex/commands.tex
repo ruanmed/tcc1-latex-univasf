@@ -3,9 +3,16 @@
 % -----------------------------------------------------------------------------
 \usepackage{xcolor}
 \newcommand\myworries[1]{\textcolor{red}{[#1]}}
-\usepackage{lmodern}		% Usa a fonte Latin Modern (Serifada, tipo Times New Roman
-%\usepackage{helvet}		% Usa a fonte Helvetica (Tipo Arial)	
-%\renewcommand{\familydefault}{\sfdefault} tira o serifado
+
+% Escolhendo a fonte
+% Consultar catálogo de fontes: http://www.tug.dk/FontCatalogue/
+% \usepackage{lmodern}        % Usa a fonte Latin Modern (Serifada, tipo Times New Roman
+\usepackage{fourier}        % Usa a fonte Utopia Regular with Fourier
+\usepackage[T1]{fontenc}    % ^^^^
+
+% \usepackage{helvet}         % Usa a fonte Helvetica (Tipo Arial)		
+% \renewcommand{\familydefault}{\sfdefault}   % tira o serifado
+
 \usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
 \usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
 \usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
@@ -223,7 +230,7 @@
 % -----------------------------------------------------------------------------
 % Pacotes adicionados por @ruanmed
 % ----------------------------------------------------------------------------- 
-\usepackage[binary-units=true]{siunitx}
+\usepackage[binary-units=true]{siunitx}     %   Pacote de unidades do SI com unidades binárias
 
 
 %--------------------------------------------------------------------------------
