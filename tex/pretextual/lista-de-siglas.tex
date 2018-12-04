@@ -4,11 +4,12 @@
 %   -   Use o comando \nomenclature em qualquer lugar do seu texto para definir as siglas
 %       Siga o exemplo abaixo: \nomenclature{SIGLA}{DefiniçÃo da sigla}
 %   \nomenclature{Fig.}{Figura TTTTT}
-
-\renewcommand{\nomname}{\listadesiglasname}
-\pdfbookmark[0]{\nomname}{las}
-\printnomenclature
-\cleardoublepage
+\begin{KeepFromToc} 
+    \renewcommand{\nomname}{\listadesiglasname}
+    \pdfbookmark[0]{\nomname}{las}
+    \printnomenclature
+    \cleardoublepage
+\end{KeepFromToc}
 
 %   -   Modo manual de fazer a lista de siglas
 % \begin{siglas}

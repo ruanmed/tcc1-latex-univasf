@@ -8,7 +8,7 @@
 % Consultar catálogo de fontes: http://www.tug.dk/FontCatalogue/
 % \usepackage{lmodern}        % Usa a fonte Latin Modern (Serifada, tipo Times New Roman
 \usepackage{fourier}        % Usa a fonte Utopia Regular with Fourier
-\usepackage[T1]{fontenc}    % ^^^^
+% \usepackage[T1]{fontenc}    % ^^^^
 
 % \usepackage{helvet}         % Usa a fonte Helvetica (Tipo Arial)		
 % \renewcommand{\familydefault}{\sfdefault}   % tira o serifado
@@ -236,20 +236,20 @@
 %--------------------------------------------------------------------------------
 % Comando para inserir códigos - by @ruanmed
 %--------------------------------------------------------------------------------
-\usepackage{caption}
+% \usepackage{caption}
 
-\newenvironment{code}{\captionsetup{type=listing}}{}
-\SetupFloatingEnvironment{listing}{name=Código}
+% \newenvironment{code}{\captionsetup{type=listing}}{}
+% \SetupFloatingEnvironment{listing}{name=Código}
 
-\newcommand{\sourcecodenolist}[4]{
-	\begin{code}
-	    \refstepcounter{sourcecode}
-        \captionof{listing}{#1 }
-        \label{code:#2}
-        \inputminted[linenos, bgcolor=bg, tabsize=4,breaklines]{#3}{codes/#4}
-        \Wedidthis
-    \end{code}
-}
+% \newcommand{\sourcecodenolist}[4]{
+% 	\begin{code}
+% 	    \refstepcounter{sourcecode}
+%         \captionof{listing}{#1 }
+%         \label{code:#2}
+%         \inputminted[linenos, bgcolor=bg, tabsize=4,breaklines]{#3}{codes/#4}
+%         \Wedidthis
+%     \end{code}
+% }
 
 % \newcommand{\sourcecodenolist}[4]{
 % 	\refstepcounter{sourcecode}
@@ -285,3 +285,13 @@
 %--------------------------------------------------------------------------------
 \usepackage{nomencl}
 \makenomenclature
+
+% Pacote para fazer listas enumeradas na mesma linha
+% http://www.texnia.com/archive/enumitem.pdf
+% \usepackage{enumerate}
+\usepackage[inline, shortlabels]{enumitem}
+
+\newlist{inlinelist}{enumerate*}{1}
+\setlist*[inlinelist,1]{%
+  label=(\alph*),
+}

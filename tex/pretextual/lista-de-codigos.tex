@@ -1,15 +1,19 @@
-\begin{KeepFromToc}  % Este comando evita que todas as seções dentro dele de apareçam no sumário
+  % Este comando evita que todas as seções dentro dele de apareçam no sumário
 %---------------------------------------------------------------------------------
 % Ajusta lista de código - alterar de figures para códigos - by @Gabrielr2508
 %---------------------------------------------------------------------------------
 \makeatletter
-    \let\l@listing\l@figure
-    \def\newfloat@listoflisting@hook{\let\figurename\listingname}
+\let\l@listing\l@figure
+\def\newfloat@listoflisting@hook{\let\figurename\listingname}
 \makeatother
 
+
+\begin{KeepFromToc}
 %---------------------------------------------------------------------------------
 % Insere lista de códigos - by @leolleocomp
 %---------------------------------------------------------------------------------
-\listoflistings
+
+% BUG COM O SUMÁRIO AQUI, AINDA NÃO CONSEGUI RESOLVER
+% \listoflisting
 
 \end{KeepFromToc}
