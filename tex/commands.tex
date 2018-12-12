@@ -288,10 +288,19 @@
 
 % Pacote para fazer listas enumeradas na mesma linha
 % http://www.texnia.com/archive/enumitem.pdf
-% \usepackage{enumerate}
-\usepackage[inline, shortlabels]{enumitem}
+% % \usepackage{enumerate}
+% \usepackage[inline, shortlabels]{enumitem}
 
 \newlist{inlinelist}{enumerate*}{1}
 \setlist*[inlinelist,1]{%
   label=(\alph*),
 }
+
+% Pacote para inserir divisória diagonal em tabela
+\usepackage{diagbox}
+
+% Pacote para auxiliar em tabelas criando novas células
+\usepackage{makecell}
+
+\usepackage{pbox,ragged2e}
+
