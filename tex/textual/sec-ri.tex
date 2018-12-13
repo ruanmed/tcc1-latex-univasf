@@ -40,28 +40,16 @@ sendo a busca como melhor fazer essas tarefas o objetivo da RI.
 Logo no início do seu desenvolvimento as técnicas de RI buscaram se basear em sistemas existentes já consolidados no campo bibliotecário para indexar coleções de itens, tendo como uma técnica de abordagem clássica atribuir códigos numéricos a essas coleções, como por exemplo o feito pelo sistema de Classificação Decimal de Dewey \cite[p.~1446]{Sanderson2012THIRR}, no entanto foi demonstrado por \citeonline{Cleverdon1959TESUIR} que um sistema baseado em palavras, como o sistema Uniterm proposto por \citeonline{Taube1952UTCI}, era tão bom e até melhor que outras abordagens clássicas, sendo a indexação por palavras posteriormente adotada pelos SRI \cite[p.~1446]{Sanderson2012THIRR}.
 
 % -- Os primeiros sistemas de RI, booleanos 
+\input{tex/table/matriz-incidencia-termo-documento.tex}
+
 Uma \textit{query} (ou consulta) representa uma necessidade de informação a ser saciada por um SRI, e essa query é composta de termos (um sinônimo para palavras) que nos primeiros desses sistemas era limitada a combinações lógicas e eram recuperados os documentos que tinham correspondência exata com ela \cite[p.~1446]{Sanderson2012THIRR}. 
-Este método de recuperação de informação é conhecido como recuperação booleana, e para indexar os documentos ele geralmente utiliza de uma matriz binária de incidência de termo-documento. 
+Este método de recuperação de informação é conhecido como recuperação booleana, e para indexar os documentos é utilizada, geralmente, uma matriz binária de incidência de termo-documento. 
 Exemplificamos uma matriz dessas na Tabela \ref{tab:matriz-incidência-termo-documento}, que é o exemplo dado por \citeonline[p.~3--4]{Manning2008IIR} de uma matriz de incidência de termo-documento para o livro \textit{Shakespeare’s Collected Works}, que reúne as obras completas de Shakespeare.
 
-\begin{table}[]
-    \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c}\hline
-         \diagbox{Palavra}{\raisebox{-1.27cm}{\rotatebox{90}{\parbox{1.6cm}{\centering Peça \\ de teatro}}}} & \makecell{Antony \\ and \\ Cleopatra} & \makecell{Julius \\ Caesar} & The Tempest & Hamlet & Othello & Macbeth & ... \\ \hline
-         Antony     & 1 & 1 & 0 & 0 & 0 & 1 & \\
-         Brutus     & 1 & 1 & 0 & 1 & 0 & 0 & \\
-         Caeasar    & 1 & 1 & 0 & 1 & 1 & 1 & \\
-         Calpurnia  & 0 & 1 & 0 & 0 & 0 & 0 & \\
-         Cleopatra  & 1 & 0 & 0 & 0 & 0 & 0 & \\
-         mercy      & 1 & 0 & 1 & 1 & 1 & 1 & \\
-         worser     & 1 & 0 & 1 & 1 & 1 & 0 & \\
-         ...        & & & & & & & 
-    \end{tabular}
-    \caption{Matriz de incidência de termo-documento do livro Shakespeare’s Collected Works adaptada de \citeonline[p.~4]{Manning2008IIR}. Cada elemento (i, j) da matriz é 1 se a peça de teatro na coluna j contém a palavra na linha i, caso contrário então o elemento é 0.}
-    \label{tab:matriz-incidência-termo-documento}
-\end{table}
+Devido à limitação dos métodos booleanos de somente retornar resultados conforme a presença ou não dos termos da consulta nos documentos \cite[p.~100]{Manning2008IIR}, foi proposto em 1957 por Luhn e 1959 por Maron \textit{et al.} uma abordagem de recuperação ranqueada \cite[p.~1446]{Sanderson2012THIRR} a qual, em contraste com recuperação booleana, com base nos termos de consulta, estabelecia uma pontuação para cada artigo de modo probabilístico e retornava os artigos de modo ordenado e demonstraram que essa técnica sobressaía a recuperação booleana.
 
-No entanto, foi proposto em 1957 por Luhn e 1959 por Maron \textit{et al.} uma abordagem de recuperação ranqueada \cite[p.~1446]{Sanderson2012THIRR}, em contraste com recuperação booleana, a qual, com base nos termos de \textit{query}, estabelecia uma pontuação para cada artigo de modo probabilístico e retornava os artigos de modo ordenado e demonstraram que essa técnica sobressaía a recuperação booleana. 
+
+
 Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sobre a recuperação booleana \cite{Jones:1981:IRE:539571}, são essas técnicas de recuperação ranqueadas que trazem maior interesse para a área de Mineração de Textos.
 
 % -- A pesquisa de RI sendo desenvolvida, citar sistemas rankeados
