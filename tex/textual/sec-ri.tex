@@ -48,10 +48,21 @@ Exemplificamos uma matriz dessas na Tabela \ref{tab:matriz-incidência-termo-doc
 
 Devido à limitação dos métodos booleanos de somente retornar resultados conforme a presença ou não dos termos da consulta nos documentos \cite[p.~100]{Manning2008IIR}, foi proposto em 1957 por Luhn e 1959 por Maron \textit{et al.} uma abordagem de recuperação ranqueada \cite[p.~1446]{Sanderson2012THIRR} a qual, em contraste com recuperação booleana, com base nos termos de consulta, estabelecia uma pontuação para cada artigo de modo probabilístico e retornava os artigos de modo ordenado e demonstraram que essa técnica sobressaía a recuperação booleana.
 
+% Explicar o funcionamento de uma recuperação ranqueada, como é feito esse ranqueamento?
+O ranqueamento dos documentos conforme os termos de consulta é feito pela atribuição de pontuação aos documentos a partir do número de aparições de de cada um termos no documento, e essa pontuação é calculada considerando que além da frequência do termo existe também a sua relevância, que depende do número de aparições do termo na coleção de documentos inteira, quanto mais um termo aparece na coleção menos relevante ele é. 
+O valor resultante da relação entre a frequência do termo e o inverso da frequência nos documentos chamado de tf-idf (\textit{term frequency-inverse document frequency}), sendo este valor um dos pesos mais utilizados para ranqueamento. \cite[p.~107--110]{Manning2008IIR}
 
+\input{tex/table/tf-idf-exemplo.tex}
 
-Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sobre a recuperação booleana \cite{Jones:1981:IRE:539571}, são essas técnicas de recuperação ranqueadas que trazem maior interesse para a área de Mineração de Textos.
+Um exemplo de cálculo dos valores de tf-idf para posterior cálculo do ranqueamento conforme uma determinada consulta pode ser visto na \ref{tab:exemplo-tf-idf}, uma consulta com os termos \textit{auto car} retornaria os documentos com o seguinte ranqueamento:
+\begin{itemize}
+    \item Doc1: xxx
+    \item Doc2: xxx
+    \item Doc3: xxx
+\end{itemize}
 
+Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sobre a recuperação booleana \cite{Jones:1981:IRE:539571}, são as técnicas de recuperação ranqueadas que trazem maior interesse para a área de Mineração de Textos.
+% ESTOU PENSANDO EM JÁ CITAR O BM25 no parágrafo acima.
 % -- A pesquisa de RI sendo desenvolvida, citar sistemas rankeados
 % -- Em algum ponto mencionar que Recuperação de Informação (Information Retrieval) não deve ser confundido com Procura de Informação (Information Search), pois a Procura de Informação é o campo que estuda a interação das pessoas com sistemas de recuperação de informação.
 
