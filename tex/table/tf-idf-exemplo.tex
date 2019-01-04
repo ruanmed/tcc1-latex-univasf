@@ -1,13 +1,13 @@
 \begin{table}[h]
     \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
-         \diagbox{Termo}{\raisebox{-1.27cm}{\rotatebox{90}{\parbox{1.6cm}{\centering Documento}}}} & \multicolumn{3}{|c|}{Doc1} & \multicolumn{3}{|c|}{Doc2} & \multicolumn{3}{|c|}{Doc3} \\ \hline
-                    & tf & idf & tf-idf & tf & idf & tf-idf & tf & idf & tf-idf \\
-         car        & 27 & falta & 0 & 4 & falta & 0 & 24 & falta & 0 \\
-         auto       & 3 & falta & 0 & 33 & falta & 0 & 0 & falta & 0 \\
-         insurance  & 0 & falta & 0 & 33 & falta & 0 & 29 & falta & 0 \\
-         best       & 14 & falta & 0 & 0 & falta & 0 & 17 & falta & 0
+    \begin{tabular}{|l|r|r|r|r|r|r|r|r|}\hline
+         \multicolumn{3}{|c|}{\diagbox{Termo}{\raisebox{-1.87cm}{\rotatebox{90}{\parbox{1.6cm}{\centering Documento}}}}} & \multicolumn{2}{|c|}{Doc1} & \multicolumn{2}{|c|}{Doc2} & \multicolumn{2}{|c|}{Doc3} \\ \hline
+                    & $\text{df}_{\text{\textit{t}}}$ & $\text{idf}_{\text{\textit{t}}}$ & $\text{tf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ \\ \hline
+         car        & 18165 & 1,65 & 27 & 44,55 & 4 & 6,6 & 24 & 39,6 \\
+         auto       & 6723 & 2,08 & 3 & 6,24 & 33 & 68,64 & 0 & 0 \\
+         insurance  & 19241 & 1,62 & 0 & 0 & 33 & 54,46 & 29 & 46,98 \\
+         best       & 25235 & 1,5 & 14 & 21 & 0 & 0 & 17 & 25,5
     \end{tabular}
-    \caption{Exemplo de cálculo do valor de tf-idf baseado na tabela disponível em \citeonline[p.~110]{Manning2008IIR}.}
+    \caption{Exemplo de cálculo do valor de tf-idf baseado nas tabelas disponível em \citeonline[p.~109--110]{Manning2008IIR}.}
     \label{tab:exemplo-tf-idf}
 \end{table}
