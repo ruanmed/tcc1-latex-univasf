@@ -7,28 +7,29 @@
 
 
 A procura por informação é uma necessidade das pessoas, e um dos modos primordiais de assim fazer é consultar outras pessoas por informação.
-No entanto, devido ao grande acumulo de informação das sociedades, uma só pessoa não pode carregar consigo todo o conhecimento da humanidade.
+No entanto, devido ao grande acúmulo de informação das sociedades, uma pessoa não pode carregar consigo todo o conhecimento da humanidade.
 Assim, um modo eficiente, considerado também primordial, de transferir esse conhecimento, que tratamos aqui como informação, é por meio de registros físicos em papel, livros e similares \cite[p.~1]{Grossman2004IRAH}.
 
-No intuito de organizar esses diversos livros, artigos e afins, é notória a função dos bibliotecários em separar os diversos tipos de conhecimento que os mais diversos livros podem abrigar, e portanto os sistemas de classificação de áreas, e subáreas, do conhecimento são um auxílio para as necessidades de busca por informação que uma pessoa pode ter \cite[p.~1]{Manning2008IIR} \cite[p.~1446]{Sanderson2012THIRR}. 
+No intuito de organizar esses diversos livros, artigos e afins é notória a função dos bibliotecários em separar os diversos tipos de conhecimento que os mais diversos livros podem abrigar e, portanto, os sistemas de classificação de áreas e subáreas do conhecimento são um auxílio para as necessidades de busca por informação que uma pessoa pode ter \cite[p.~1]{Manning2008IIR} \cite[p.~1446]{Sanderson2012THIRR}. 
 Esses sistemas de classificação facilitam a localização de informações específicas a partir de uma pergunta que uma pessoa pode fazer, mas é necessário o conhecimento de como o sistema de classificação funciona para que um usuário possa tentar saciar sua necessidade, ou pelo menos será preciso de um especialista no sistema (o bibliotecário) para lhe guiar.
 E mesmo assim, depois de adquirir os diversos materiais que podem responder à sua pergunta, esta pessoa ainda terá que conferir nos textos se estes satisfazem sua necessidade.
 
 % - RI em equipamentos eletromecânicos no início do século 20
 % -- O que fez surgir esses sistemas, a necessidade
 
-Esses sistemas de classificação manual se mostram bem ineficazes devido ao surgimento crescente constante de novas informações desde o início do século 20, temos assim uma imensidão de novas pesquisas científicas sendo publicadas, livros surgindo, entre outros registro históricos, que precisam ser classificados, mas existe também o problema da classificação não poder abranger todo tipo de necessidade que tal material pode satisfazer \cite[p.~1444]{Sanderson2012THIRR}. 
+Esses sistemas de classificação manual se mostram bem ineficazes devido ao surgimento crescente constante de novas informações desde o início do século 20. 
+Temos assim uma imensidão de novas pesquisas científicas sendo publicadas, livros surgindo, entre outros registro históricos, que precisam ser classificados, mas existe também o problema da classificação não poder abranger todo tipo de necessidade que tal material pode satisfazer \cite[p.~1444]{Sanderson2012THIRR}. 
 A preocupação com sistemas que possam indexar todo esse material e fornecer um acesso rápido às necessidades de informação de uma pessoa surgiu também no início do século 20 \cite{Bush:1979:WMT:1113634.1113638}, onde sistemas mecânicos de recuperação de informação foram visionados.
 
 
 % - A área de pesquisa de RI que surgiu com a utilização de computadores para indexar informação
 % -- A utilização de computadores para fazer o serviço de RI
 
-A partir da criação de sistemas computacionais na década de 1940, foi vista a possibilidade de criação de sistemas que armazenassem informações e possibilitassem essa consulta rápida sobre as informações armazenadas, sendo necessários estabelecer algoritmos que retornassem informação relevante ao que usuário do sistema procura. 
-Tendo então aqui o início do campo científico de Recuperação de Informação (\textit{Information retrieval}, IR) que é encontrar material (geralmente documentos) de natureza desestruturada (geralmente texto) que satisfaça uma necessidade de informação dentro de grandes acervos (geralmente armazenados em computadores) \cite[p.~1]{Manning2008IIR}.
+A partir da criação de sistemas computacionais na década de 1940, foi vista a possibilidade de criação de sistemas que armazenassem informações e possibilitassem essa consulta rápida sobre as informações armazenadas, sendo necessários estabelecer algoritmos que retornassem informação relevante ao que o usuário do sistema procura. 
+Tendo então nesse momento o início do campo científico de Recuperação de Informação (\textit{Information retrieval}, IR) que é encontrar material (geralmente documentos) de natureza desestruturada (geralmente texto) que satisfaça uma necessidade de informação dentro de grandes acervos (geralmente armazenados em computadores) \cite[p.~1]{Manning2008IIR}.
 
-A necessidade de Sistemas de Recuperação de Informação (SRI) surge do crescimento exponencial das coleções de informação, e consequente inabilidade das técnicas tradicionais de catalogação de lidar com isso \cite{Sanderson2012THIRR}. 
-A lei de Moore diz que o crescimento da velocidade de processamento é contínua, e similarmente existe uma duplicação constante da capacidade de armazenamento digital a cada dois anos. 
+A lei de Moore diz que o crescimento da velocidade de processamento é contínua, e similarmente existe uma duplicação constante da capacidade de armazenamento digital a cada dois anos. % CARECE DE FONTES - Preciso procurar
+Logo, a necessidade de sistemas de Recuperação de Informação surge do crescimento exponencial das coleções de informação derivadas do crescimento de armazenamento, e consequente inabilidade das técnicas tradicionais de catalogação de lidar com isso \cite{Sanderson2012THIRR}.
 Ter um amontoado de conhecimento, informação, e não poder acessar o que é relevante de modo rápido não é interessante pois assim o desenvolvimento de pesquisas, por exemplo, fica comprometido e pode perder relevância \cite{Bush:1979:WMT:1113634.1113638}.
 
 % -- Conceitos fundamentais de RI
@@ -43,7 +44,7 @@ Logo no início do seu desenvolvimento as técnicas de RI buscaram se basear em 
 % -- Os primeiros sistemas de RI, booleanos 
 \subsection{Métodos booleanos} \label{subsec:MétodosBooleanos}
 
-Uma \textit{query} (ou consulta) representa uma necessidade de informação a ser saciada por um sistema de RI, e essa query é composta de termos (um sinônimo para palavras) que nos primeiros desses sistemas era limitada a combinações lógicas e eram recuperados os documentos que tinham correspondência exata com ela \cite[p.~1446]{Sanderson2012THIRR}. 
+Uma \textit{query} (ou consulta) representa uma necessidade de informação a ser saciada por um sistema de RI, e essa consulta é composta de termos (um sinônimo para palavras) que nos primeiros desses sistemas era limitada a combinações lógicas e eram recuperados os documentos que tinham correspondência exata com ela \cite[p.~1446]{Sanderson2012THIRR}. 
 Este método de recuperação de informação é conhecido como recuperação booleana, e para indexar os documentos é utilizada, geralmente, uma matriz binária de incidência de termo-documento. 
 Exemplificamos uma matriz dessas na Tabela \ref{tab:matriz-incidência-termo-documento}, que é o exemplo dado por \citeonline[p.~3--4]{Manning2008IIR} de uma matriz de incidência de termo-documento para o livro \textit{Shakespeare’s Collected Works}, que reúne as obras completas de Shakespeare.
 
@@ -77,9 +78,11 @@ A pontuação de um documento \textit{d} é a soma dos pesos de tf-idf de cada t
     \text{Pontuação(\textit{q},\textit{d})} = \sum_{\textit{t} \in \textit{q}}^{} \text{tf-idf}_{\text{\textit{t},\textit{d}}}.
 \end{equation}
 
-Quando uma consulta é feita são utilizados os valores consulta com os termos \textit{auto car} retornaria os documentos com o seguinte ranqueamento:
+% Quando uma consulta é feita são utilizados os valores 
+
+Uma consulta com os termos \textit{auto car} retornaria no seu ranqueamento os documentos com a seguinte pontuação, por exemplo:
 \begin{itemize}
-    \item Doc1: xxx
+    \item Doc1: xxx (falta calcular)
     \item Doc2: xxx
     \item Doc3: xxx
 \end{itemize}
