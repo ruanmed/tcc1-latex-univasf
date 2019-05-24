@@ -5,7 +5,30 @@
 
 
 \section{Seção de exemplo 1} 
+% Metologia:
 
+% Vão ser elecandas as tecnologias para armazenamento e indexação dos dados por meio do BM25:
+% * Elasticsearch
+% * APache Spark
+% * ArangoDB
+% * Zettair
+
+% Os bancos de teste serão:
+% * PanCLEF Hyperpartisan 2019
+% * A definir
+
+% O teste de desempenho será feito comparando as ferramentas de indexação, tempo para indexar o treino de cada banco (TIME_TRN) em cada ferramenta.
+
+% O tempo para consultar para cada linha do teste as variáveis a serem criadas (no caso de classificação binária iremos definir agregações do tipo count, sum e avg). Por exemplo, para a classificação binária do PANCLEF 2019 Hyperpartisan podem ser criadas as variáveis a seguir:
+% * avg_0 
+% * count_0
+% * sum_0
+% * avg_1
+% * count_1
+% * sum_1
+
+% Ao final será comparado o ganho de desempenho (acurácia, precisão, recall e F1-score) nas melhores soluções dos bancos definidos a partir da adição das variáveis criadas.
+% Por exemplo para a PANCLEF 2019 Hyperpartisan será utilizada a solução que está disponível no github com melhor score e ela será executada novamente para conferir o resultado obtido de acurária que eles dizem e então será rodado novamente com a adição das variáveis de RI (BM25).
 
 
 \subsection{Subseção de exemplo 1 - Referenciando seções} \label{subsec:subsec1}

@@ -29,17 +29,58 @@ A pontuação de um documento \textit{d} é a soma dos pesos de tf-idf de cada t
 % Quando uma consulta é feita são utilizados os valores 
 % (onde Pontuação({\textit{auto},\textit{car}},DocX))  
 
-Utilizando a Equação \ref{eq:pontuação-simples-tf-idf} uma consulta com os termos \textit{auto car} retornaria no seu ranqueamento os documentos com a seguinte pontuação, calculamos Pontuação(\{\textit{auto},\textit{car}\},DocX) para cada documento, por exemplo:
+Utilizando a Equação \ref{eq:pontuação-simples-tf-idf} uma consulta com os termos \textit{auto car} retornaria no seu ranqueamento os documentos com a seguinte pontuação, calculamos Pontuação(\{\textit{auto},\textit{car}\},D\textsubscript{x}) para cada documento, por exemplo:
 \begin{itemize}
     \setlength\itemsep{-0.2em}
-    \item Doc1: 50,79
-    \item Doc2: 75,24
-    \item Doc3: 39,60
+    \item D\textsubscript{1}: 50,79
+    \item D\textsubscript{2}: 75,24
+    \item D\textsubscript{3}: 39,60
 \end{itemize}
 
-A ordenação dos documentos apresentados como resultado à consulta \textit{auto car} seria então a seguinte: 1\textordmasculine{} - Doc2; 2\textordmasculine{} - Doc1; e 3\textordmasculine{} - Doc3, que se observamos a Tabela \ref{tab:exemplo-tf-idf} é um bom resulto já que o Doc2 contém uma grande frequência do termo \textit{auto} e o Doc3 não possui este termo.
+A ordenação dos documentos apresentados como resultado à consulta \textit{auto car} seria então a seguinte: 1\textordmasculine{} - D\textsubscript{2}; 2\textordmasculine{} - D\textsubscript{1}; e 3\textordmasculine{} - D\textsubscript{3}, que se observamos a Tabela \ref{tab:exemplo-tf-idf} é um bom resultado, já que o D\textsubscript{2} contém uma grande frequência do termo \textit{auto} e o D\textsubscript{3} não possui este termo.
 
 
 Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sobre a recuperação booleana \cite{Jones:1981:IRE:539571}, e são as técnicas de recuperação ranqueadas que trazem maior interesse para a área de Mineração de Textos, em específico estamos interessados nos modelos vetoriais e os modelos probabilísticos de RI que são evoluções da recuperação ranqueada.
 % ESTOU PENSANDO EM JÁ CITAR O BM25 no parágrafo acima.
 % -- Em algum ponto mencionar que Recuperação de Informação (Information Retrieval) não deve ser confundido com Procura de Informação (Information Search), pois a Procura de Informação é o campo que estuda a interação das pessoas com sistemas de recuperação de informação.
+
+\subsubsection{Modelo de espaço vetorial} \label{subsubsec:Modelo-espaço-vetorial}
+% O modelo de espaço vetorial.
+
+% Modelo vetorial
+
+%   	Tirado da cabeça
+%     		Utiliza do vetor gerado pelo cálculo dos tf-idf calculados para cada palavra a partir da coleção inteira, e então define que o nível de similaridade entre uma consulta e um arquivo é dado pelo cosseno do ângulo entre os dois vetores.
+
+%   	Do livro do Baeza
+    A modelo vetorial surge a partir das limitações do modelo Booleano, que não considera frequência dos termos, e ele oferece a possibilidade de resultados parciais por meio da atribuição de pesos não binários para os termos da consulta e também para os termos presentes nos documentos, que são utilizados para determinar o grau de similaridade entre cada documento armazenado no sistema e uma determinada consulta.
+    
+    Neste modelo os resultados são apresentados em ordem decrescente de similaridade, considerando a correspondência parcial, e não obrigatoriamente total, com os termos da consulta, provendo assim uma resposta mais precisa para as necessidades de informação do usuário.
+    
+    Os pesos $w_{i,j}$ associados com um par termo-documento são não negativos e não binários. 
+    Os termos de indexação são considerados mutualmente independentes e são representados como vetores unitários de um espaço t-dimensional, aonde t é número total de termos de indexação.
+    A representação de um documento $d_j$ e uma consulta q são vetores t-dimensionais representandos como segue nas Equações abaixo:
+    \begin{equation}
+    			\vec{d_j} = (w_{1,j}, w_{2,j}, \cdots , w_{t,j})
+    \end{equation}
+    \begin{equation}
+    			\vec{q} = (w_{1,q}, w_{2,q}, \cdots , w_{t,q})
+    \end{equation}
+    
+    Aonde $w_{i,q}$ é o peso associado com o par termo-consulta $(k_i, q)$.
+    
+    Logo, tanto o documento $d_j$ quanto uma consulta $q$ feita pelo usuário são representados como vetores t-dimensionais como ilustrado na Figura \ref{fig:similaridade-cosseno}. 
+    
+    \input{tex/figure/cosine-sim.tex}
+    
+    E então é feita a avaliação do grau de similaridade entre esses vetores, sendo esta correlação, ou a pontuação que o documento $d_j$ vai receber para a consulta $q$, quantificada pelo cosseno do ângulo entre esses dois vetores, conforme demonstra a Equação .
+    \begin{equation}
+    			\text{Pontuação}(\vec{d_j}, \vec{q}) = \frac{\vec{d_j} \bullet \vec{q} }{ \norm{\vec{d_j}} \times \norm{\vec{q}} }
+    \end{equation}
+
+
+
+
+\subsubsection{Modelo probabilístico}  \label{subsubsec:Modelo-probabilístico}
+        
+    
