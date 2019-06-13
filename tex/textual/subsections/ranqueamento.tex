@@ -2,7 +2,7 @@
 Devido à limitação dos métodos booleanos de somente retornar resultados conforme a presença ou não dos termos da consulta nos documentos \cite[p.~100]{Manning2008IIR}, foi proposto em 1957 por Luhn e 1959 por Maron \textit{et al.} uma abordagem de recuperação ranqueada \cite[p.~1446]{Sanderson2012THIRR} a qual, em contraste com recuperação booleana, baseada nos termos de consulta estabelecia uma pontuação para cada artigo de modo probabilístico e retornava os artigos de modo ordenado e demonstraram que essa técnica sobressaía a recuperação booleana.
 
 % Explicar o funcionamento de uma recuperação ranqueada, como é feito esse ranqueamento?
-O procedimento fundamental para ranqueamento dos documentos, conforme os termos de consulta, consiste na atribuição de pontuação aos documentos a partir da contabilização do número de aparições (chama de frequência) de cada um dos termos no documento.
+O procedimento fundamental para ranqueamento dos documentos, conforme os termos de consulta, consiste na atribuição de pontuação aos documentos a partir da contabilização do número de aparições (chamada de frequência) de cada um dos termos no documento.
 Essa pontuação é calculada considerando que além da frequência do termo, denotada como $\text{tf}_{\text{\textit{t},\textit{d}}}$ que é o número de ocorrências do termo \textit{t} em um documento \textit{d}, existe também a sua relevância, que depende do número de aparições do termo na coleção de documentos inteira.
 Quanto mais um termo aparece na coleção menos relevante ele é, e este valor de relevância é denotado por $\text{idf}_{\text{\textit{t}}}$ que é o inverso da frequência de um termo \textit{t} em uma coleção de documentos.
 Segundo \citeonline[p.~108]{Manning2008IIR} este valor da relevância é calculado do seguinte modo:
@@ -29,7 +29,7 @@ A pontuação de um documento \textit{d} é a soma dos pesos de tf-idf de cada t
 % Quando uma consulta é feita são utilizados os valores 
 % (onde Pontuação({\textit{auto},\textit{car}},DocX))  
 
-Utilizando a Equação \ref{eq:pontuação-simples-tf-idf} uma consulta com os termos \textit{auto car} retornaria no seu ranqueamento os documentos com a seguinte pontuação, calculamos Pontuação(\{\textit{auto},\textit{car}\},D\textsubscript{x}) para cada documento, por exemplo:
+Utilizando a Equação \ref{eq:pontuação-simples-tf-idf} uma consulta com os termos \textit{auto car} retornaria no seu ranqueamento os documentos com a seguinte pontuação, calculamos $\text{Pontuação(\{\textit{auto},\textit{car}\},D\textsubscript{x})}$ para cada documento, por exemplo:
 \begin{itemize}
     \setlength\itemsep{-0.2em}
     \item D\textsubscript{1}: 50,79
@@ -53,34 +53,51 @@ Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sob
 %     		Utiliza do vetor gerado pelo cálculo dos tf-idf calculados para cada palavra a partir da coleção inteira, e então define que o nível de similaridade entre uma consulta e um arquivo é dado pelo cosseno do ângulo entre os dois vetores.
 
 %   	Do livro do Baeza
-    A modelo vetorial surge a partir das limitações do modelo Booleano, que não considera frequência dos termos, e ele oferece a possibilidade de resultados parciais por meio da atribuição de pesos não binários para os termos da consulta e também para os termos presentes nos documentos, que são utilizados para determinar o grau de similaridade entre cada documento armazenado no sistema e uma determinada consulta.
+    A modelo vetorial surge a partir das limitações do modelo Booleano, que não considera frequência dos termos, e nele são representados um conjunto de documentos num espaço vetorial comum \cite[p.~110]{Manning2008IIR}, oferecendo a possibilidade de resultados parciais por meio da atribuição de pesos não binários para os termos da consulta e também para os termos presentes nos documentos, que são utilizados para determinar o grau de similaridade entre cada documento armazenado no sistema e uma determinada consulta \cite[p.~77]{Baeza-Yates2011}.
     
     Neste modelo os resultados são apresentados em ordem decrescente de similaridade, considerando a correspondência parcial, e não obrigatoriamente total, com os termos da consulta, provendo assim uma resposta mais precisa para as necessidades de informação do usuário.
     
-    Os pesos $w_{i,j}$ associados com um par termo-documento são não negativos e não binários. 
-    Os termos de indexação são considerados mutualmente independentes e são representados como vetores unitários de um espaço t-dimensional, aonde t é número total de termos de indexação.
-    A representação de um documento $d_j$ e uma consulta q são vetores t-dimensionais representandos como segue nas Equações abaixo:
+    Segundo \citeonline[p.~77]{Baeza-Yates2011}, os pesos $w_{i,j}$ associados com um par termo-documento são não negativos e não binários.
+    Os termos de indexação são considerados mutualmente independentes e são representados como vetores unitários de um espaço $t$-dimensional, aonde $t$ é número total de termos de indexação.
+    A representação de um documento $d_j$ e uma consulta $q$ são vetores $t$-dimensionais representados como segue nas Equações \ref{eq:vetor-pesos-documento} e \ref{eq:vetor-pesos-consulta} abaixo:
     \begin{equation}
-    			\vec{d_j} = (w_{1,j}, w_{2,j}, \cdots , w_{t,j})
+        \label{eq:vetor-pesos-documento}
+		\vec{d_j} = (w_{1,j}, w_{2,j}, \cdots , w_{t,j})
     \end{equation}
     \begin{equation}
-    			\vec{q} = (w_{1,q}, w_{2,q}, \cdots , w_{t,q})
+        \label{eq:vetor-pesos-consulta}
+		\vec{q} = (w_{1,q}, w_{2,q}, \cdots , w_{t,q})
     \end{equation}
     
-    Aonde $w_{i,q}$ é o peso associado com o par termo-consulta $(k_i, q)$.
+    O valor $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ (apresentado na Subseção \ref{subsec:Ranqueamento}) é um dos padrões de pesos mais comuns utilizados, sendo aplicado diretamente para os pesos de cada termo do documento $d_j$.
+    E como $w_{i,q}$ é o peso associado com o par termo-consulta $(k_i, q)$, a aplicação do $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ vira $\text{tf-idf}_{k_i\text{,}\textit{q}}$ para os pesos associados à consulta $q$ \cite[p.~77--78]{Baeza-Yates2011}.
     
-    Logo, tanto o documento $d_j$ quanto uma consulta $q$ feita pelo usuário são representados como vetores t-dimensionais como ilustrado na Figura \ref{fig:similaridade-cosseno}. 
+    Logo, tanto o documento $d_j$ quanto uma consulta $q$ feita pelo usuário são representados como vetores t-dimensionais como ilustrado na Figura \ref{fig:similaridade-cosseno}, posteriormente modulados pelos pesos associados.
     
     \input{tex/figure/cosine-sim.tex}
     
-    E então é feita a avaliação do grau de similaridade entre esses vetores, sendo esta correlação, ou a pontuação que o documento $d_j$ vai receber para a consulta $q$, quantificada pelo cosseno do ângulo entre esses dois vetores, conforme demonstra a Equação .
+    A avaliação do grau de similaridade entre esses vetores, sendo esta correlação, ou pontuação que o documento $d_j$ vai receber para a consulta $q$, quantificada pelo cosseno do ângulo entre esses dois vetores, conforme demonstra a Equação \ref{eq:pontuação-similaridade-cosseno} \cite[p.~78]{Baeza-Yates2011}.
     \begin{equation}
-    			\text{Pontuação}(\vec{d_j}, \vec{q}) = \frac{\vec{d_j} \bullet \vec{q} }{ \norm{\vec{d_j}} \times \norm{\vec{q}} }
+        \label{eq:pontuação-similaridade-cosseno}
+		\text{Pontuação}(\vec{d_j}, \vec{q}) = \frac{\vec{d_j} \bullet \vec{q} }{ \norm{\vec{d_j}} \times \norm{\vec{q}} }
     \end{equation}
 
-
-
+    % falta falar sobre as vantagens e desvantagens citadas pelos autores
+    % [falta falar sobre as vantagens e desvantagens citadas pelos autores] feito
+    
+    \citeonline[p.~79]{Baeza-Yates2011} apontam como vantagens do modelo vetorial:
+    \begin{itemize}
+        \item \textbf{Melhora da qualidade dos resultados} devido à esquemática de pesos utilizada;
+        \item Capacidade de \textbf{correspondência parcial} possibilita que documentos \textit{próximos} da consulta sejam retornado;
+        \item \textbf{Organização dos resultados pelo grau de similaridade com a consulta} devido à fórmula de ranqueamento pelo cosseno dos vetores;
+        \item Normalização dos tamanhos dos documentos embutida.
+    \end{itemize}
+    
+    E como principal desvantagem apontam a presunção de que os termos indexados são mutualmente independentes, sendo esta tarefa de considerar a dependência dos termos algo bastante complicado e que pode trazer resultados ruins caso não seja feito de modo adequado.
+    % Pontuações por Baeza, 1) a esquemática de pesos dos termos melhora a qualidade, 2) sua capacidade de correspondência parcial permite a recuperação de documentos que se aproximam das consultas, 3) o ranqueamento pelo cosseno dos vetores organiza os resultados pelo seu grau de similaridade com a consulta, 4) possui normalização dos tamanhos dos documentos embutida.
+    % desvantagem: assume que os termos indexados são mutualmente independentes (porém ele cita que considerar a dependência de termos é uma tarefa complicada que se não for feito do modo apropriado pode levar a resultados ruins).
 
 \subsubsection{Modelo probabilístico}  \label{subsubsec:Modelo-probabilístico}
-        
-    
+% Fazer resumo de como se chegou ao BM25, um método probabilístico criado pelo Kevin Spack e pelo Jones em 85 eu acho, que depois deu início ao BM11 e ao BM15, a junção dos dois deu origem ao BM25, e então o Okapi BM25 surgiu logo após com a adição de técnica de alteração dos pesos dos termos desenvolvida por Okapi.
+
+% Colocar fluxograma do BM25
