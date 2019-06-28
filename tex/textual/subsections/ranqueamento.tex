@@ -1,5 +1,5 @@
 \subsection{Ranqueamento} \label{subsec:Ranqueamento}
-Devido à limitação dos métodos booleanos de somente retornar resultados conforme a presença ou não dos termos da consulta nos documentos \cite[p.~100]{Manning2008IIR}, foi proposto em 1957 por Luhn e 1959 por Maron \textit{et al.} uma abordagem de recuperação ranqueada \cite[p.~1446]{Sanderson2012THIRR} a qual, em contraste com recuperação booleana, baseada nos termos de consulta estabelecia uma pontuação para cada artigo de modo probabilístico e retornava os artigos de modo ordenado e demonstraram que essa técnica sobressaía a recuperação booleana.
+Devido à limitação dos métodos booleanos de somente retornar resultados conforme a presença ou não dos termos da consulta nos documentos \cite[p.~100]{Manning2008IIR}, foi proposto em 1957 por Luhn e em 1959 por Maron \textit{et al.} uma abordagem de recuperação ranqueada \cite[p.~1446]{Sanderson2012THIRR} a qual, em contraste com recuperação booleana, baseada nos termos de consulta estabelecia uma pontuação para cada artigo de modo probabilístico e retornava os artigos de modo ordenado e demonstraram que essa técnica sobressaía a recuperação booleana.
 
 % Explicar o funcionamento de uma recuperação ranqueada, como é feito esse ranqueamento?
 O procedimento fundamental para ranqueamento dos documentos, conforme os termos de consulta, consiste na atribuição de pontuação aos documentos a partir da contabilização do número de aparições (chamada de frequência) de cada um dos termos no documento.
@@ -56,6 +56,7 @@ Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sob
     A modelo vetorial surge a partir das limitações do modelo Booleano, que não considera frequência dos termos, e nele são representados um conjunto de documentos num espaço vetorial comum \cite[p.~110]{Manning2008IIR}, oferecendo a possibilidade de resultados parciais por meio da atribuição de pesos não binários para os termos da consulta e também para os termos presentes nos documentos, que são utilizados para determinar o grau de similaridade entre cada documento armazenado no sistema e uma determinada consulta \cite[p.~77]{Baeza-Yates2011}.
     
     Neste modelo os resultados são apresentados em ordem decrescente de similaridade, considerando a correspondência parcial, e não obrigatoriamente total, com os termos da consulta, provendo assim uma resposta mais precisa para as necessidades de informação do usuário.
+    A similaridade nos modelos de espaço vetorial é tratada como uma noção de relevância, e a principal premissa é de que a relevância de um documento em relação a uma consulta está correlacionado com a similaridade entre o documento e consulta \cite[p.~110]{Zhai2016TDMA}.
     
     Segundo \citeonline[p.~77]{Baeza-Yates2011}, os pesos $w_{i,j}$ associados com um par termo-documento são não negativos e não binários.
     Os termos de indexação são considerados mutualmente independentes e são representados como vetores unitários de um espaço $t$-dimensional, aonde $t$ é número total de termos de indexação.
@@ -99,5 +100,23 @@ Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sob
 
 \subsubsection{Modelo probabilístico}  \label{subsubsec:Modelo-probabilístico}
 % Fazer resumo de como se chegou ao BM25, um método probabilístico criado pelo Kevin Spack e pelo Jones em 85 eu acho, que depois deu início ao BM11 e ao BM15, a junção dos dois deu origem ao BM25, e então o Okapi BM25 surgiu logo após com a adição de técnica de alteração dos pesos dos termos desenvolvida por Okapi.
-
+    Existem diferentes modelos probabilísticos para RI, como por exemplo o modelo linguístico, o modelo de divergência do aleatório (\textit{divergence from randomness}), e o Framework de Relevância Probabilística (também chamado de modelo clássico) \cite[p.~87]{Zhai2016TDMA}, que é o mais conhecido por ter dado origem à função BM25 para ranqueamento de documentos \cite[p.~334--335]{robertson_probabilistic_2010} \cite[p.~111]{Zhai2016TDMA}, a qual será nosso foco de abordagem.
+    
+    % As necessidades de informações do usuário são traduzidas em representações de consultas e os documentos de interesse são traduzidos em representações de documentos, e assim os sistemas de RI tentam determinar o quão bem os documentos satisfazem essas necessidades de informação.
+    % No entanto, dadas a representações de consulta e de documentos, os sistemas de RI possuem um tanto de incerteza sobre quais documentos tem conteúdo relevante. 
+    % Para fazer essa decisão os modelos probabilísticos baseiam-se na teoria probabilística que fundamenta o raciocínio em cima de incertezas \cite[p.~201]{Manning2008IIR}.
+    
+    Como já abordado, os sistemas de RI tentam determinar o quão bem os documentos satisfazem as necessidades de informação do usuário, porém existe um grau de incerteza sobre quais documentos tem conteúdo relevante. 
+    Partindo desse princípio da existência da incerteza na relevância dos documentos temos os modelos probabilísticos, que baseiam-se na teoria probabilística que fundamenta o raciocínio em cima de incertezas \cite[p.~201]{Manning2008IIR}. 
+    
+    Nos modelos probabilísticos a função de ranqueamento é definida baseada na probabilidade que um documento $d$ é relevante para uma consulta $q$, ou que $P(R = 1| d,q)$ onde $R \in \{0, 1\}$ é uma variável binária aleatória que denota a relevância \cite[p.~111--112]{Zhai2016TDMA}, sendo esta a base para o princípio do ranqueamento probabilístico (PRP) \cite[p.~203]{Manning2008IIR}.
+    
+    O Framework de Relevância Probabilística deu origem ao modelo de independência binária (BIM), aos modelos de \textit{feedback} de relevância, ao nosso caso de interesse, o BM25, e também a diversas variações do BM25 \cite{robertson_probabilistic_2010}. 
+    
+    O BIM faz a implementação do princípio de ranqueamento probabilístico com documentos e consultas sendo representados por vetores binários de incidência dos termos, podendo assim ser comparado ao modelo Booleano \cite[p.~204]{Manning2008IIR}.
+    A evolução das implementações dos modelos probabilísticos clássicos levou à função de recuperação conhecida como \textbf{Okapi BM25}, ou simplesmente BM25, que integra os conceitos do modelo vetorial apresentado na Subsubseção \ref{subsubsec:Modelo-espaço-vetorial}, como frequência dos termos, normalização de tamanho, e correspondência parcial.
+    Devido à similaridade da função BM25 com os modelos vetoriais, alguns autores como \citeonline[p.~111]{Zhai2016TDMA}, apresentam esta função junto à dos modelos vetoriais.
+    
+    
+% Probability theory provides a principled foundation for such reasoning under uncertainty
 % Colocar fluxograma do BM25
