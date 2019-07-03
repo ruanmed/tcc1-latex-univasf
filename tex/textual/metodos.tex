@@ -2,12 +2,39 @@
 % Este arquivo contém a sua metodologia
 %--------------------------------------------------------------------------------------
 \chapter{Materiais e Métodos} \label{ch:MateriaisMétodos} %Uma label é como você referencia uma seção no texto com a tag \ref{}
-Neste capítulo será apresentado como será feita a avaliação do desempenho das funções de ranqueamento na mineração de texto.
+    Neste capítulo será apresentado como será feita a avaliação do desempenho das funções de ranqueamento na Mineração de Texto.
+    
+    Para utilização da função de ranqueamento BM25 como variável em tarefas de mineração de texto é necessário efetuar o armazenamento e a indexação dos textos do conjunto de treinamento, e para esta tarefa serão utilizadas ferramentas de armazenamento em banco de dados (não relacionais?) que fornecem implementações do BM25 para consulta, estas serão apresentadas na Seção \ref{sec:Armazenamento-e-indexação}.
+    
+    Se faz necessário também definir métricas para avaliação do ganho de desempenho com as variáveis de RI, assim como elencar as bases de dados que vão servir para efetuar essa avaliação, disposto logo mais nas Seções \ref{sec:Métricas-de-desempenho-para-avaliação} e \ref{sec:Bancos-de-dados-para-teste}.
 
-Para utilização da função de ranqueamento BM25
+\section{Armazenamento e indexação} \label{sec:Armazenamento-e-indexação}
 
-\section{Seção de exemplo 1} 
-% Metologia:
+    Para armazenar e indexar os bancos de dados das tarefas de Mineração de Textos, e possibilitar assim o cálculo da função BM25 para cada exemplo, serão utilizadas as seguintes tecnologias que fazem implementações do BM25:
+    \begin{itemize}
+        \item Elasticsearch % https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-similarity.html
+        % https://www.elastic.co/pt/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables
+        \item ArangoDB
+        % https://www.arangodb.com/docs/stable/aql/views-arango-search.html#bm25
+        % https://www.arangodb.com/news/introducing-arangodb-3-4/
+        \item Zettair
+        % http://www.seg.rmit.edu.au/zettair/doc/Readme.html
+        \item Apache Spark
+    \end{itemize}
+    
+    
+\section{Bancos de dados para teste}  \label{sec:Bancos-de-dados-para-teste}
+    Os banco de dados de teste selecionados para avaliação são os utilizados na PanCLEF 2019 % necessário citar a PanCLEF anteriormente
+
+    \begin{itemize}
+        \item Bots and Gender Profiling PAN @ CLEF 2019
+        % https://pan.webis.de/clef19/pan19-web/author-profiling.html
+        \item Hyperpartisan News Detection - PAN @ SemEval 2019
+        %  https://pan.webis.de/semeval19/semeval19-web/index.html
+    \end{itemize}
+    
+ 
+% Metodologia:
 
 % Vão ser elencadas as tecnologias para armazenamento e indexação dos dados por meio do BM25:
 % * Elasticsearch
@@ -21,7 +48,31 @@ Para utilização da função de ranqueamento BM25
 % * A definir
 % * Bots and Gender Profilin % PAN @ CLEF 2019 
 
+\section{Variáveis de RI sugeridas}  \label{sec:Variáveis-de-RI-sugeridas}
+    
+%  Por exemplo, para a classificação binária do PANCLEF 2019 Hyperpartisan podem ser criadas as variáveis a seguir:
+% * avg_0 
+% * count_0
+% * sum_0
+% * avg_1
+% * count_1
+% * sum_1
 
+
+\section{Métricas de desempenho para avaliação}  \label{sec:Métricas-de-desempenho-para-avaliação}
+    Será avaliado o desempenho das ferramentas utilizadas para indexação e consulta, por meio da avaliação temporal do desempenho computacional, e também o ganho de desempenho propiciado pelo uso das variáveis de RI em termos das métricas de classificadores de Mineração de Texto. % Essas métricas tem que ser citadas no referencial teórico.
+    
+    \subsection{Desempenho computacional}  \label{sec:Desempenho-computacional}
+        Para avaliar o desempenho das ferramentas de armazenamento e indexação utilizaremos duas métricas temporais:
+        \begin{itemize}
+            \item \textbf{TIME\_TRAIN}: Tempo de execução para indexar o conjunto de treinamento de cada um dos banco de dados de teste elencados na Seção \ref{sec:Bancos-de-dados-para-teste}. Dadas as quatro diferentes ferramentas de indexação e os dois banco de dados selecionados, serão computadas 8 TIME\_TRAIN para comparação;
+            
+            \item \textbf{TIME\_QUERY}: Tempo para consulta de cada exemplo do conjunto de teste e geração das variáveis sugeridas na Seção \ref{sec:Variáveis-de-RI-sugeridas} para o item específico. Dadas as 12 variáveis sugeridas para criação distribuídas nos dois banco de dados selecionados, e dadas as 4 ferramentas de indexação, 48 TIME\_QUERY serão computadas.  
+        \end{itemize}
+        
+        Essas variáveis serão computadas para cada uma das 4 ferramentas selecionadas sendo executadas no mesmo sistema computacional a fim de oferecer maior confiança aos números obtidos. 
+        O sistema computacional a ser utilizado para efetuar o experimento ainda não está definido, mas será especificado nos resultados.
+    
 % O teste de desempenho será feito comparando as ferramentas de indexação, tempo para indexar o treino de cada banco (TIME_TRN) em cada ferramenta.
 
 % O tempo para consultar para cada linha do teste as variáveis a serem criadas (no caso de classificação binária iremos definir agregações do tipo count, sum e avg). Por exemplo, para a classificação binária do PANCLEF 2019 Hyperpartisan podem ser criadas as variáveis a seguir:
@@ -31,12 +82,21 @@ Para utilização da função de ranqueamento BM25
 % * avg_1
 % * count_1
 % * sum_1
-
+    \subsection{Desempenho de classificador}  \label{sec:Desempenho-de-classificador}
+    O ganho de desempenho propiciado pelas variáveis de RI criadas será mensurado por métricas de desempenho de classificadores da Mineração de Dados, as mesmas da Mineração de Texto.
+    Nesse estudo serão computadas as seguintes métricas:
+    \begin{itemize}
+        \item \textbf{CLF\_ACC}: Acurácia do classificador.
+        \item \textbf{CLF\_AUC}: Área sobre a curva ROC.
+        \item \textbf{CLF\_F1}: F1-Score
+        \item \textbf{CLF\_PRE}: Precisão do classificador.
+        \item \textbf{CLF\_REC}: Revocação do classificador.
+    \end{itemize}
 % Ao final será comparado o ganho de desempenho (acurácia, precisão, recall e F1-score) nas melhores soluções dos bancos definidos a partir da adição das variáveis criadas.
 % Por exemplo para a PANCLEF 2019 Hyperpartisan será utilizada a solução que está disponível no github com melhor score e ela será executada novamente para conferir o resultado obtido de acurária que eles dizem e então será rodado novamente com a adição das variáveis de RI (BM25).
 
 
-\subsection{Subseção de exemplo 1 - Referenciando seções} \label{subsec:subsec1}
+% \subsection{Subseção de exemplo 1 - Referenciando seções} \label{subsec:subsec1}
 
 
 

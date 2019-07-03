@@ -56,7 +56,7 @@ Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sob
     A modelo vetorial surge a partir das limitações do modelo Booleano, que não considera frequência dos termos, e nele são representados um conjunto de documentos num espaço vetorial comum \cite[p.~110]{Manning2008IIR}, oferecendo a possibilidade de resultados parciais por meio da atribuição de pesos não binários para os termos da consulta e também para os termos presentes nos documentos, que são utilizados para determinar o grau de similaridade entre cada documento armazenado no sistema e uma determinada consulta \cite[p.~77]{Baeza-Yates2011}.
     
     Neste modelo os resultados são apresentados em ordem decrescente de similaridade, considerando a correspondência parcial, e não obrigatoriamente total, com os termos da consulta, provendo assim uma resposta mais precisa para as necessidades de informação do usuário.
-    A similaridade nos modelos de espaço vetorial é tratada como uma noção de relevância, e a principal premissa é de que a relevância de um documento em relação a uma consulta está correlacionado com a similaridade entre o documento e consulta \cite[p.~110]{Zhai2016TDMA}.
+    A similaridade nos modelos de espaço vetorial é tratada como uma noção de relevância, e a principal premissa é de que a relevância de um documento em relação a uma consulta está correlacionada com a similaridade entre o documento e consulta \cite[p.~110]{Zhai2016TDMA}.
     
     Segundo \citeonline[p.~77]{Baeza-Yates2011}, os pesos $w_{i,j}$ associados com um par termo-documento são não negativos e não binários.
     Os termos de indexação são considerados mutualmente independentes e são representados como vetores unitários de um espaço $t$-dimensional, aonde $t$ é número total de termos de indexação.
@@ -89,9 +89,12 @@ Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sob
     \citeonline[p.~79]{Baeza-Yates2011} apontam como vantagens do modelo vetorial:
     \begin{itemize}
         \item \textbf{Melhora da qualidade dos resultados} devido à esquemática de pesos utilizada;
-        \item Capacidade de \textbf{correspondência parcial} possibilita que documentos \textit{próximos} da consulta sejam retornado;
+        
+        \item Capacidade de \textbf{correspondência parcial} possibilita que documentos \textit{próximos} da consulta sejam retornados;
+        
         \item \textbf{Organização dos resultados pelo grau de similaridade com a consulta} devido à fórmula de ranqueamento pelo cosseno dos vetores;
-        \item Normalização dos tamanhos dos documentos embutida.
+        
+        \item \textbf{Normalização dos tamanhos dos documentos} embutida.
     \end{itemize}
     
     E como principal desvantagem apontam a presunção de que os termos indexados são mutualmente independentes, sendo esta tarefa de considerar a dependência dos termos algo bastante complicado e que pode trazer resultados ruins caso não seja feito de modo adequado.
@@ -115,7 +118,11 @@ Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sob
     
     O BIM faz a implementação do princípio de ranqueamento probabilístico com documentos e consultas sendo representados por vetores binários de incidência dos termos, podendo assim ser comparado ao modelo Booleano \cite[p.~204]{Manning2008IIR}.
     A evolução das implementações dos modelos probabilísticos clássicos levou à função de recuperação conhecida como \textbf{Okapi BM25}, ou simplesmente BM25, que integra os conceitos do modelo vetorial apresentado na Subsubseção \ref{subsubsec:Modelo-espaço-vetorial}, como frequência dos termos, normalização de tamanho, e correspondência parcial.
-    Devido à similaridade da função BM25 com os modelos vetoriais, alguns autores como \citeonline[p.~111]{Zhai2016TDMA}, apresentam esta função junto à dos modelos vetoriais.
+    Devido à sua similaridade com os modelos vetoriais, alguns autores, como \citeonline[p.~111]{Zhai2016TDMA}, apresentam a função BM25 função junto à dos modelos vetoriais.
+    
+    Toda teoria probabilística do PRP, que fundamenta os modelos do Framework de Relevância Probabilística, inclusive o BM25, é extensa e portanto não vamos desenvolvê-la detalhadamente aqui.
+    
+     necessário citar que o BIM
     
     
 % Probability theory provides a principled foundation for such reasoning under uncertainty
