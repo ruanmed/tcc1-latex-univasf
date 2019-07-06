@@ -8,11 +8,14 @@ Quanto mais um termo aparece na coleção menos relevante ele é, e este valor d
 Segundo \citeonline[p.~108]{Manning2008IIR} este valor da relevância é calculado do seguinte modo:
 
 \begin{equation}
-    \text{idf}_{\text{\textit{t}}} = \log{\frac{N}{\text{df}_{\text{\textit{t}}}}}.
+    \label{eq:inverse-document-frequency}
+    \text{idf}_{\text{\textit{t}}} = \log{\frac{N}{\text{df}_{\text{\textit{t}}}}},
 \end{equation}
+Onde $N$ é o número total de documentos na coleção, e $\text{df}_{\text{\textit{t}}}$ é a contagem de ocorrências do termo $t$ em toda coleção de documentos.
 
 O valor resultante da relação entre a frequência do termo e o inverso da frequência nos documentos é chamado de $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ (\textit{term frequency-inverse document frequency}), sendo este valor um dos pesos mais utilizados para ranqueamento \cite[p.~107--110]{Manning2008IIR}, e é calculado  como segue:
 \begin{equation}
+    \label{eq:tf-idf}
     \text{tf-idf}_{\text{\textit{t},\textit{d}}}  = \text{tf}_{\text{\textit{t},\textit{d}}} \times \text{idf}_{\text{\textit{t}}}.
 \end{equation}
 
@@ -70,7 +73,7 @@ Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sob
 		\vec{q} = (w_{1,q}, w_{2,q}, \cdots , w_{t,q})
     \end{equation}
     
-    O valor $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ (apresentado na Subseção \ref{subsec:Ranqueamento}) é um dos padrões de pesos mais comuns utilizados, sendo aplicado diretamente para os pesos de cada termo do documento $d_j$.
+    O valor $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ (apresentado na Subseção \ref{subsec:Ranqueamento}) é um dos padrões de pesos mais comumente utilizados, sendo aplicado diretamente para os pesos de cada termo do documento $d_j$.
     E como $w_{i,q}$ é o peso associado com o par termo-consulta $(k_i, q)$, a aplicação do $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ vira $\text{tf-idf}_{k_i\text{,}\textit{q}}$ para os pesos associados à consulta $q$ \cite[p.~77--78]{Baeza-Yates2011}.
     
     Logo, tanto o documento $d_j$ quanto uma consulta $q$ feita pelo usuário são representados como vetores t-dimensionais como ilustrado na Figura \ref{fig:similaridade-cosseno}, posteriormente modulados pelos pesos associados.
@@ -80,7 +83,7 @@ Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sob
     A avaliação do grau de similaridade entre esses vetores, sendo esta correlação, ou pontuação que o documento $d_j$ vai receber para a consulta $q$, quantificada pelo cosseno do ângulo entre esses dois vetores, conforme demonstra a Equação \ref{eq:pontuação-similaridade-cosseno} \cite[p.~78]{Baeza-Yates2011}.
     \begin{equation}
         \label{eq:pontuação-similaridade-cosseno}
-		\text{Pontuação}(\vec{d_j}, \vec{q}) = \frac{\vec{d_j} \bullet \vec{q} }{ \norm{\vec{d_j}} \times \norm{\vec{q}} }
+		\text{Pontuação\_COS}(\vec{d_j}, \vec{q}) = \frac{\vec{d_j} \bullet \vec{q} }{ \norm{\vec{d_j}} \times \norm{\vec{q}} }
     \end{equation}
 
     % falta falar sobre as vantagens e desvantagens citadas pelos autores
@@ -120,10 +123,28 @@ Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sob
     A evolução das implementações dos modelos probabilísticos clássicos levou à função de recuperação conhecida como \textbf{Okapi BM25}, ou simplesmente BM25, que integra os conceitos do modelo vetorial apresentado na Subsubseção \ref{subsubsec:Modelo-espaço-vetorial}, como frequência dos termos, normalização de tamanho, e correspondência parcial.
     Devido à sua similaridade com os modelos vetoriais, alguns autores, como \citeonline[p.~111]{Zhai2016TDMA}, apresentam a função BM25 função junto à dos modelos vetoriais.
     
-    Toda teoria probabilística do PRP, que fundamenta os modelos do Framework de Relevância Probabilística, inclusive o BM25, é extensa e portanto não vamos desenvolvê-la detalhadamente aqui.
+    Toda teoria probabilística do PRP, que fundamenta os modelos do Framework de Relevância Probabilística, inclusive o BM25, é extensa e portanto ela não será  desenvolvida detalhadamente aqui.
+    Abaixo, na Equação \ref{eq:okapi-bm25}, está demonstrada a fórmula do Okapi BM25 similar às fórmulas apresentadas por \citeonline[p.~213--215]{Manning2008IIR} e por \citeonline[p.~107--108]{Zhai2016TDMA}.
     
-     necessário citar que o BIM
+    \begin{equation}
+        \label{eq:okapi-bm25}
+		\text{Pontuação\_BM25}(d_j, q) = \sum_{t \in q} \text{idf}_{\text{\textit{t}}} \frac{(k + 1) \text{tf}_{t,d}}{k((1-b)+b \times (\frac{L_d}{L_{\text{avg}}})) + \text{tf}_{t,d}} 
+    \end{equation}
+
+    A fórmula apresentada possui termos já apresentados, como os pesos $\text{tf}_{t,d}$ e $\text{idf}_{\text{\textit{t}}}$, ambos apresentados na Subseção \ref{subsec:Ranqueamento}.
+    O termo $\text{tf}_{t,d}$ tem o mesmo significado aqui, é uma contagem do número de ocorrências do termo $t$ no documento $d$, no entanto o termo $\text{idf}_{\text{\textit{t}}}$ na fórmula original do BM25 é conhecido como o peso de Robertson/Spark Jones e pode ser simplificada para a fórmula apresentada na Equação \ref{eq:peso-rsj-adaptado} \cite[p.~347--349]{robertson_probabilistic_2010}.
+    \begin{equation}
+        \label{eq:peso-rsj-adaptado}
+		\text{idf}_{\text{\textit{t}}} = \log{\frac{N-\text{df}_{\text{\textit{t}}}+\frac{1}{2}}{\text{df}_{\text{\textit{t}}} + \frac{1}{2} }}.
+    \end{equation}
     
+    É necessário dizer que este termo $\text{tf}_{t,d}$ pode ser incrementado por outras considerações feitas pelo modelo probabilístico, e também simplificado pela demanda da implementação a ser feita, alguns autores como \citeonline[p.~214]{Manning2008IIR} e \citeonline[p.~108]{Zhai2016TDMA} apresentam este termo como o inverso da frequência do termo $t$ demonstrado na Equação \ref{eq:inverse-document-frequency}.
     
+    A fórmula do BM25 tem dois parâmetros de refinamento, os termos $b$ e $k$. 
+    O parâmetro $b$ ($0 \leq b \leq 1$) é utilizado para controlar o grau de normalização por tamanho de documento, onde $b=1$ significa uma escalonamento completo e $b=0$ corresponde a não realizá-lo. 
+    Este refinamento toma como ponto de referência o tamanho médio dos documentos na coleção inteira, $L_{\text{avg}}$, em relação ao termo $L_d$ que representa o tamanho do documento $d$.
+    Já o termo $k$ ($0 \leq k \leq \infty$) calibra o efeito da correção de frequência dos termos presente na fórmula, $k=0$ significa que não haverá consideração da frequência dos termos, e valores elevados fazem com a fórmula se aproxime da utilização pura do $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ vista na Equação \ref{eq:tf-idf} \cite[p.~214]{Manning2008IIR}.
+    %  Here, tftd is the frequency of term t in document d, and L d and L ave are the length of document d and the average document length for the whole collection. The variable k1 is a positive tuning parameter that calibrates the document term frequency scaling. A k 1 value of 0 corresponds to a binary model (no term frequency), and a large value corresponds to using raw term frequency. b is another tuning parameter (0 ≤ b ≤ 1) that determines the scaling by document length: b = 1 corresponds to fully scaling the term weight by the document length, whereas b = 0 corresponds to no length normalization.
+
 % Probability theory provides a principled foundation for such reasoning under uncertainty
 % Colocar fluxograma do BM25

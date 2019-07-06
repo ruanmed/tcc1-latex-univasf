@@ -21,7 +21,9 @@
         % http://www.seg.rmit.edu.au/zettair/doc/Readme.html
         \item Apache Spark
     \end{itemize}
-    
+    % Links dos sites das ferramentas como notas de rodapé.
+    % Citar a versão de cada ferramenta que vai ser utilizada.
+    % 
     
 \section{Bancos de dados para teste}  \label{sec:Bancos-de-dados-para-teste}
     Os banco de dados de teste selecionados para avaliação são os utilizados na PanCLEF 2019 % necessário citar a PanCLEF anteriormente
@@ -32,7 +34,8 @@
         \item Hyperpartisan News Detection - PAN @ SemEval 2019
         %  https://pan.webis.de/semeval19/semeval19-web/index.html
     \end{itemize}
-    
+    % Descreuioes a partir da tarefa no site
+    % Definir as soluçcoes disponiveis que vou utilizar (Nao pode ter RI)
  
 % Metodologia:
 
@@ -58,14 +61,16 @@
 % * count_1
 % * sum_1
 
+% baseadas no weren (2014)
 
-\section{Métricas de desempenho para avaliação}  \label{sec:Métricas-de-desempenho-para-avaliação}
+
+\section{Métricas para avaliação de desempenho}  \label{sec:Métricas-para-avaliação-de-desempenho}
     Será avaliado o desempenho das ferramentas utilizadas para indexação e consulta, por meio da avaliação temporal do desempenho computacional, e também o ganho de desempenho propiciado pelo uso das variáveis de RI em termos das métricas de classificadores de Mineração de Texto. % Essas métricas tem que ser citadas no referencial teórico.
     
-    \subsection{Desempenho computacional}  \label{sec:Desempenho-computacional}
+    \subsection{Desempenho computacional das ferramentas}  \label{sec:Desempenho-computacional}
         Para avaliar o desempenho das ferramentas de armazenamento e indexação utilizaremos duas métricas temporais:
         \begin{itemize}
-            \item \textbf{TIME\_TRAIN}: Tempo de execução para indexar o conjunto de treinamento de cada um dos banco de dados de teste elencados na Seção \ref{sec:Bancos-de-dados-para-teste}. Dadas as quatro diferentes ferramentas de indexação e os dois banco de dados selecionados, serão computadas 8 TIME\_TRAIN para comparação;
+            \item \textbf{TIME\_INDEX}: Tempo de execução para indexar o conjunto de treinamento de cada um dos banco de dados de teste elencados na Seção \ref{sec:Bancos-de-dados-para-teste}. Dadas as quatro diferentes ferramentas de indexação e os dois banco de dados selecionados, serão computadas 8 TIME\_INDEX para comparação;
             
             \item \textbf{TIME\_QUERY}: Tempo para consulta de cada exemplo do conjunto de teste e geração das variáveis sugeridas na Seção \ref{sec:Variáveis-de-RI-sugeridas} para o item específico. Dadas as 12 variáveis sugeridas para criação distribuídas nos dois banco de dados selecionados, e dadas as 4 ferramentas de indexação, 48 TIME\_QUERY serão computadas.  
         \end{itemize}
@@ -94,6 +99,9 @@
     \end{itemize}
 % Ao final será comparado o ganho de desempenho (acurácia, precisão, recall e F1-score) nas melhores soluções dos bancos definidos a partir da adição das variáveis criadas.
 % Por exemplo para a PANCLEF 2019 Hyperpartisan será utilizada a solução que está disponível no github com melhor score e ela será executada novamente para conferir o resultado obtido de acurária que eles dizem e então será rodado novamente com a adição das variáveis de RI (BM25).
+
+
+ADICIONAR IMAGEM DE VISÃO GERAL DA METODOLOGIA
 
 
 % \subsection{Subseção de exemplo 1 - Referenciando seções} \label{subsec:subsec1}
