@@ -2,11 +2,41 @@
 % Este arquivo contém a sua metodologia
 %--------------------------------------------------------------------------------------
 \chapter{Materiais e Métodos} \label{ch:MateriaisMétodos} %Uma label é como você referencia uma seção no texto com a tag \ref{}
-    Neste capítulo será apresentado como será feita a avaliação do desempenho das funções de ranqueamento na Mineração de Texto.
+    % Neste capítulo será apresentado como será feita a avaliação do desempenho das funções de ranqueamento na Mineração de Texto.
+    Neste capítulo será apresentado como será feita a avaliação do desempenho da função de ranqueamento BM25 como atributo em Mineração de Texto.
+    A metodologia proposta está ilustrada na Figura \ref{fig:diagrama-da-metodologia} e o processo é detalhado a seguir.
     
-    Para utilização da função de ranqueamento BM25 como variável em tarefas de mineração de texto é necessário efetuar o armazenamento e a indexação dos textos do conjunto de treinamento, e para esta tarefa serão utilizadas ferramentas de armazenamento em banco de dados (não relacionais?) que fornecem implementações do BM25 para consulta, estas serão apresentadas na Seção \ref{sec:Armazenamento-e-indexação}.
+    \input{tex/figure/diagrama-metodologia.tex}
     
-    Se faz necessário também definir métricas para avaliação do ganho de desempenho com as variáveis de RI, assim como elencar as bases de dados que vão servir para efetuar essa avaliação, disposto logo mais nas Seções \ref{sec:Métricas-para-avaliação-de-desempenho} e \ref{sec:Bancos-de-dados-para-teste}.
+    Inicialmente é necessário selecionar os \textbf{(1) Banco de Dados para Avaliação} que servirão para efetuar as avaliações de desempenho, e, caso essas bases de dados ainda não estejam segmentados em exemplos para treinamento e exemplos para validação, será feita essa separação com o método de \textit{holdout} de $\frac{2}{3}$ para treinamento e $\frac{1}{3}$ para validação.
+    
+    Em seguida, o conjunto de treinamento passará pela fase de RI, aonde será feito o \textbf{(2) Armazenamento e Indexação em  SGBD NoSQL} por meio das ferramentas apresentadas na Seção  \ref{sec:Armazenamento-e-indexação}, sendo mensurado o tempo necessário para concluir essa operação em cada um dos Sistemas Gerenciadores de Banco de Dados (SGBD) NoSQL selecionados.
+    
+    O processo de Mineração de Texto pode ser segmentado em 7 etapas, conforme ressaltado anteriormente na Seção \ref{sec:MineraçãoTexto}.
+    E, na metodologia proposta aqui, a fase de MT assume que as 3 etapas iniciais de limpeza, integração, e seleção dos dados, já foram realizadas no banco de dados de teste, assim os conjuntos divididos em treinamento e validação passarão diretamente pela etapa seguinte que é a \textbf{(3) Transformação dos dados com adição dos atributos de RI}.
+    Nesta etapa serão feitas consultas ao banco de dados NoSQL que foi indexado com a utilização das funções de ranqueamento baseadas no BM25 que cada ferramente implementa, sendo mensurado o tempo para efetuar cada consulta e gerar os novos atributos sugeridos adiante na Seção \ref{sec:Atributos-de-RI-sugeridos}.
+    
+    O processo de Mineração dos Dados será feito por reprodução de soluções dos bancos de dados para avaliação selecionados e que possuam seus códigos fonte disponíveis, sendo então reproduzida a solução sem nenhuma alteração e então a mesma será reproduzida com os novos atributos sugeridos.
+    Esse processo gerará dois modelos de classificador, o primeiro criado sem atributos de RI e o segundo com esses atributos.
+    A etapa de \textbf{(4) Avaliação do Modelo} permitirá que, para cada modelo, sejam geradas métricas da literatura de MT (detalhadas logo mais na Subseção \ref{subsec:Desempenho-de-classificador}) a partir do teste com o conjunto de validação, permitindo a comparação do ganho de desempenho de classificador com/sem atributos de RI.
+    % Na fase de Mineração de Texto os conjuntos de treinamento e de validação passarão pela \textbf{(3) Transformação dos dados com adição dos atributos de RI} onde 
+    
+    
+    % Para utilização da função de ranqueamento BM25 como variável em tarefas de mineração de texto é necessário efetuar o armazenamento e a indexação dos textos do conjunto de treinamento, e para esta tarefa serão utilizadas ferramentas de armazenamento em banco de dados (não relacionais?) que fornecem implementações do BM25 para consulta, estas serão apresentadas na Seção \ref{sec:Armazenamento-e-indexação}.
+    
+    % Se faz necessário também definir métricas para avaliação do ganho de desempenho com as variáveis de RI, assim como elencar as bases de dados que vão servir para efetuar essa avaliação, disposto logo mais nas Seções \ref{sec:Métricas-para-avaliação-de-desempenho} e \ref{sec:Bancos-de-dados-para-avaliação}.
+
+\section{Bancos de dados para avaliação}  \label{sec:Bancos-de-dados-para-avaliação}
+    Os banco de dados de teste selecionados para avaliação são os utilizados na PanCLEF 2019 % necessário citar a PanCLEF anteriormente
+
+    \begin{itemize}
+        \item Bots and Gender Profiling PAN @ CLEF 2019
+        % https://pan.webis.de/clef19/pan19-web/author-profiling.html
+        \item Hyperpartisan News Detection - PAN @ SemEval 2019
+        %  https://pan.webis.de/semeval19/semeval19-web/index.html
+    \end{itemize}
+    % Descreuioes a partir da tarefa no site
+    % Definir as soluçcoes disponiveis que vou utilizar (Nao pode ter RI)
 
 \section{Armazenamento e indexação} \label{sec:Armazenamento-e-indexação}
 
@@ -19,23 +49,14 @@
         % https://www.arangodb.com/news/introducing-arangodb-3-4/
         \item Zettair
         % http://www.seg.rmit.edu.au/zettair/doc/Readme.html
-        \item Apache Spark
+        % \item Apache Spark
+        % COmentado pois o Spark não implementa o BM25.
     \end{itemize}
     % Links dos sites das ferramentas como notas de rodapé.
     % Citar a versão de cada ferramenta que vai ser utilizada.
     % 
     
-\section{Bancos de dados para teste}  \label{sec:Bancos-de-dados-para-teste}
-    Os banco de dados de teste selecionados para avaliação são os utilizados na PanCLEF 2019 % necessário citar a PanCLEF anteriormente
 
-    \begin{itemize}
-        \item Bots and Gender Profiling PAN @ CLEF 2019
-        % https://pan.webis.de/clef19/pan19-web/author-profiling.html
-        \item Hyperpartisan News Detection - PAN @ SemEval 2019
-        %  https://pan.webis.de/semeval19/semeval19-web/index.html
-    \end{itemize}
-    % Descreuioes a partir da tarefa no site
-    % Definir as soluçcoes disponiveis que vou utilizar (Nao pode ter RI)
  
 % Metodologia:
 
@@ -51,7 +72,7 @@
 % * A definir
 % * Bots and Gender Profilin % PAN @ CLEF 2019 
 
-\section{Variáveis de RI sugeridas}  \label{sec:Variáveis-de-RI-sugeridas}
+\section{Atributos de RI sugeridos}  \label{sec:Atributos-de-RI-sugeridos}
     
 %  Por exemplo, para a classificação binária do PANCLEF 2019 Hyperpartisan podem ser criadas as variáveis a seguir:
 % * avg_0 
@@ -67,7 +88,7 @@
 \section{Métricas para avaliação de desempenho}  \label{sec:Métricas-para-avaliação-de-desempenho}
     Será avaliado o desempenho das ferramentas utilizadas para indexação e consulta, por meio da avaliação temporal do desempenho computacional, e também o ganho de desempenho propiciado pelo uso das variáveis de RI em termos das métricas de classificadores de Mineração de Texto. % Essas métricas tem que ser citadas no referencial teórico.
     
-    \subsection{Desempenho computacional das ferramentas}  \label{sec:Desempenho-computacional}
+    \subsection{Desempenho computacional das ferramentas}  \label{subsec:Desempenho-computacional}
         Para avaliar o desempenho das ferramentas de armazenamento e indexação utilizaremos duas métricas temporais:
         \begin{itemize}
             \item \textbf{TIME\_INDEX}: Tempo de execução para indexar o conjunto de treinamento de cada um dos banco de dados de teste elencados na Seção \ref{sec:Bancos-de-dados-para-teste}. Dadas as quatro diferentes ferramentas de indexação e os dois banco de dados selecionados, serão computadas 8 TIME\_INDEX para comparação;
@@ -87,8 +108,8 @@
 % * avg_1
 % * count_1
 % * sum_1
-    \subsection{Desempenho de classificador}  \label{sec:Desempenho-de-classificador}
-    O ganho de desempenho propiciado pelas variáveis de RI criadas será mensurado por métricas de desempenho de classificadores da Mineração de Dados, as mesmas da Mineração de Texto.
+    \subsection{Desempenho de classificador}  \label{subsec:Desempenho-de-classificador}
+    O ganho de desempenho propiciado pelas variáveis de RI criadas será mensurado por métricas de desempenho de classificadores da literatura de Mineração de Dados, as mesmas da Mineração de Texto.
     Nesse estudo serão computadas as seguintes métricas:
     \begin{itemize}
         \item \textbf{CLF\_ACC}: Acurácia do classificador.
