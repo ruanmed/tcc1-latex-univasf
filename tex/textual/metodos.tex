@@ -3,22 +3,22 @@
 %--------------------------------------------------------------------------------------
 \chapter{Materiais e Métodos} \label{ch:MateriaisMétodos} %Uma label é como você referencia uma seção no texto com a tag \ref{}
     % Neste capítulo será apresentado como será feita a avaliação do desempenho das funções de ranqueamento na Mineração de Texto.
-    Neste capítulo será apresentado como será feita a avaliação do desempenho da função de ranqueamento BM25 como atributo em Mineração de Texto.
+    Neste capítulo será apresentado como será feita a avaliação do desempenho dos atributos gerados a partir da função de ranqueamento BM25 em Mineração de Texto.
     A metodologia proposta está ilustrada na Figura \ref{fig:diagrama-da-metodologia} e o processo é detalhado a seguir.
     
     \input{tex/figure/diagrama-metodologia.tex}
     
-    Inicialmente é necessário selecionar os \textbf{(1) Banco de Dados para Avaliação} que servirão para efetuar as avaliações de desempenho, e, caso essas bases de dados ainda não estejam segmentados em exemplos para treinamento e exemplos para validação, será feita essa separação com o método de \textit{holdout} de $\frac{2}{3}$ para treinamento e $\frac{1}{3}$ para validação.
+    Inicialmente é necessário selecionar os \textbf{(1) Banco de Dados para Avaliação} que servirão para efetuar as avaliações de desempenho, e, caso essas bases de dados ainda não estejam segmentados em exemplos para treinamento e exemplos para validação, será feita essa separação com o método de \textit{holdout}\footnote{Particionamento aleatório do dados em dois conjuntos independentes, geralmente chamados de treinamento e teste. O conjunto de treinamento é utilizado para derivar o modelo e o de teste para estimar a sua acurácia. \cite[p.~370]{Han:2011:DMC:1972541}.} de $\frac{2}{3}$ para treinamento e $\frac{1}{3}$ para validação.
     
     Em seguida, o conjunto de treinamento passará pela fase de RI, aonde será feito o \textbf{(2) Armazenamento e Indexação em  SGBD NoSQL} por meio das ferramentas apresentadas na Seção  \ref{sec:Armazenamento-e-indexação}, sendo mensurado o tempo necessário para concluir essa operação em cada um dos Sistemas Gerenciadores de Banco de Dados (SGBD) NoSQL selecionados.
     
     O processo de Mineração de Texto pode ser segmentado em 7 etapas, conforme ressaltado anteriormente na Seção \ref{sec:MineraçãoTexto}.
     E, na metodologia proposta aqui, a fase de MT assume que as 3 etapas iniciais de limpeza, integração, e seleção dos dados, já foram realizadas no banco de dados de teste, assim os conjuntos divididos em treinamento e validação passarão diretamente pela etapa seguinte que é a \textbf{(3) Transformação dos dados com adição dos atributos de RI}.
-    Nesta etapa serão feitas consultas ao banco de dados NoSQL que foi indexado com a utilização das funções de ranqueamento baseadas no BM25 que cada ferramente implementa, sendo mensurado o tempo para efetuar cada consulta e gerar os novos atributos sugeridos adiante na Seção \ref{sec:Atributos-de-RI-sugeridos}.
+    Nesta etapa os banco de dados NoSQL indexados receberão consultas com a utilização das funções de ranqueamento baseadas no BM25 que cada ferramenta implementa, sendo mensurado o tempo para efetuar cada consulta e gerar os novos atributos sugeridos adiante na Seção \ref{sec:Atributos-de-RI-sugeridos}.
     
-    O processo de Mineração dos Dados será feito por reprodução de soluções dos bancos de dados para avaliação selecionados e que possuam seus códigos fonte disponíveis, sendo então reproduzida a solução sem nenhuma alteração e então a mesma será reproduzida com os novos atributos sugeridos.
+    O processo de Mineração dos Dados será feito por reprodução de soluções dos bancos de dados para avaliação selecionados e que possuam seus códigos fonte disponíveis, sendo então reproduzida a solução sem nenhuma alteração e então a mesma será reproduzida com adição dos novos atributos sugeridos.
     Esse processo gerará dois modelos de classificador, o primeiro criado sem atributos de RI e o segundo com esses atributos.
-    A etapa de \textbf{(4) Avaliação do Modelo} permitirá que, para cada modelo, sejam geradas métricas da literatura de MT (detalhadas logo mais na Subseção \ref{subsec:Desempenho-de-classificador}) a partir do teste com o conjunto de validação, permitindo a comparação do ganho de desempenho de classificador com/sem atributos de RI.
+    A etapa de \textbf{(4) Avaliação do Modelo} permitirá que para cada modelo sejam geradas métricas da literatura de MT, detalhadas logo mais na Subseção \ref{subsec:Desempenho-de-classificador}, a partir do teste com o conjunto de validação, possibilitando a comparação do ganho de desempenho de classificador com/sem atributos de RI.
     % Na fase de Mineração de Texto os conjuntos de treinamento e de validação passarão pela \textbf{(3) Transformação dos dados com adição dos atributos de RI} onde 
     
     
@@ -27,27 +27,115 @@
     % Se faz necessário também definir métricas para avaliação do ganho de desempenho com as variáveis de RI, assim como elencar as bases de dados que vão servir para efetuar essa avaliação, disposto logo mais nas Seções \ref{sec:Métricas-para-avaliação-de-desempenho} e \ref{sec:Bancos-de-dados-para-avaliação}.
 
 \section{Bancos de dados para avaliação}  \label{sec:Bancos-de-dados-para-avaliação}
-    Os banco de dados de teste selecionados para avaliação são os utilizados na PanCLEF 2019 % necessário citar a PanCLEF anteriormente
-
+    Foram definidos dois banco de dados de competições promovidas pela PAN, sigla da organização que se originou do \textit{International Workshop on Plagiarism Analysis, Authorship Identification, and Near-Duplicate Detection} em 2007 \cite{PAN_Workshop_2007}, sendo estes bancos de dados descritos a seguir:% https://web.archive.org/web/20190711212207/https://www.uni-weimar.de/medien/webis/events/pan-07/pan07-web/
+    
+    % Os banco de dados de teste selecionados para avaliação são os utilizados na PanCLEF 2019 % necessário citar a PanCLEF anteriormente
     \begin{itemize}
-        \item Bots and Gender Profiling PAN @ CLEF 2019
+    % Author Profiling - PAN @ CLEF 2018
+    % Soluções disponíveis:
+    % 2. daneshvar18 - https://github.com/SamanDaneshvar/pan18ap
+    %  https://pan.webis.de/downloads/publications/papers/daneshvar_2018.pdf
+    % 4. laporte18 - https://github.com/arthur-sultan-info/PAN2018-AP
+    % https://pan.webis.de/downloads/publications/papers/ciccone_2018.pdf
+    % 12. gouravdas18 - https://github.com/brajagopalcse/PAN2018
+    % https://pan.webis.de/downloads/publications/papers/gopalpatra_2018.pdf
+    % 16. schaetti18 - https://github.com/nschaetti/PAN18-Author-Profiling
+    %  https://pan.webis.de/downloads/publications/papers/schaetti_2018a.pdf
+    % 21. raiyani18 - https://github.com/kraiyani/author-profiling-pan-clef-2018 
+    % https://pan.webis.de/downloads/publications/papers/raiyani_2018.pdf
+    % 23. jucikarlgreen - https://github.com/jussikarlgren/pan18
+    % https://pan.webis.de/downloads/publications/papers/karlgren_2018.pdf
+        \item \textbf{DB\_AUTHORPROF - \textit{Author Profiling - PAN @ CLEF 2018}:} Uma tarefa da competição \textit{CLEF 2018} promovida pela PAN na classe de análise de autoria, a qual foca na identificação de gênero no Twitter em três linguagens distintas, inglês, espanhol, e árabe \cite{PAN_APCLEF_2018}.
+        
+        Os dados consistem de 100 \textit{tweets}\footnote{Termo utilizado para designar as publicações feitas na rede social do Twitter.} e 10 imagens para cada autor, sendo que o conjunto de treinamento possui \begin{enumerate*}[label=(\alph*)]
+            \item 3000 autores em inglês, \item 3000 autores em espanhol, e \item 1500 autores em árabe,
+        \end{enumerate*}
+        e o conjunto de validação possui
+        \begin{enumerate*}[label=(\alph*)]
+            \item 1900 autores em inglês, \item 2200 autores em espanhol, e \item 1000 autores em árabe
+        \end{enumerate*}
+        \cite{rangel2018overview}.
+        
+        Segundo \citeonline{rangel2018overview} esse banco de dados da \textit{CLEF 2018} com um total de 12600 autores é um subconjunto da tarefa de \textit{Author Profiling} da \textit{CLEF 2017} e eles foram classificados em dois passos,
+        \begin{enumerate*}[label=(\roman*)]
+            \item automaticamente com a ajuda de um dicionário de nomes próprios, e\item manualmente verificando a foto, descrição e outros elementos de cada perfil
+        \end{enumerate*}
+          \cite{rangel2017overview}.
+        
+        % \item \textbf{DB\_BOTGENDER - \textit{Bots and Gender Profiling PAN @ CLEF 2019}:}
         % https://pan.webis.de/clef19/pan19-web/author-profiling.html
-        \item Hyperpartisan News Detection - PAN @ SemEval 2019
+        % 7 - Ipsas & Popescu - https://github.com/adiIspas/Bots-Gender-Profiling
+        % 10 - Goubin - https://github.com/pan-webis-de/goubin19
+        % 11 - Polignana & de Pinto - https://github.com/pan-webis-de/polignano19
+        % 23. De La Peña & Prieto - https://github.com/JoseRPrietoF/autoria
+        % 30. Rahgoyu - https://github.com/HamedBabaei/PAN2019_bots_gender_profiling
+        % 32 Pryzybyla Przybyła - https://github.com/pan-webis-de/przybyla19
+        
+        \item \textbf{DB\_HYPARTISAN - \textit{Hyperpartisan News Detection - PAN @ SemEval 2019 Task 4}:} Esta tarefa da competição \textit{SemEval 2019} promovida pela PAN consiste em, dada uma notícia, avaliar se esta segue uma argumentação hiperpartidária, que significa verificar se ela possui fidelidade cega, preconceituosa, ou irracional a um partido, grupo, causa, ou pessoa \cite{PAN_HND_2019}.
+        
+        Os dados consistem em artigos de notícias divididos em múltiplos arquivos onde cada arquivo com parte inicial ``articles-'' consiste em uma notícia e a classificação real da notícia está presente em um arquivo com inicial ``ground-truth-''. 
+        Além disso os dados estão divididos em duas partes, a primeira composta de 750 mil artigos está classificada pelo enviesamento geral do editor, onde metade está classificada como hiperpartidária e a outra metade não. 
+        Dessa parte, 80\% (600 mil artigos) estão no conjunto de treinamento e 20\% (150 mil) estão no conjunto de validação, sendo que nenhum editor de artigos do conjunto de treinamento se repete no conjunto de validação \cite{johannes_kiesel_2018_1489920}.
+        
+        A segunda parte dos dados foi rotulada através de \textit{crowdsourcing}\footnote{Obter entrada para uma tarefa ou projeto específico contando com os serviços de um número de pessoas, pagas ou não, tipicamente através da Internet.}. 
+        Essa parte dos dados contêm um total de 645 artigos, sendo estes apenas artigos para os quais existia um consenso entre os trabalhadores de crowdsourcing. 
+        Destes, 238 (37\%) são hiperpartidários e 407 (63\%) não são \cite{johannes_kiesel_2018_1489920}. 
+        
+        % The data is split into multiple files. The articles are contained in the files with names starting with "articles-" (which validate against the XML schema article.xsd). The ground-truth information is contained in the files with names starting with "ground-truth-" (which validate against the XML schema ground-truth.xsd).
         %  https://pan.webis.de/semeval19/semeval19-web/index.html
+        % https://web.archive.org/web/20190711214328/https://zenodo.org/record/1489920
     \end{itemize}
     % Descreuioes a partir da tarefa no site
     % Definir as soluçcoes disponiveis que vou utilizar (Nao pode ter RI)
+    Os dois bancos de dados selecionados possuem soluções de participantes nas competições da PAN que tem seu código fonte aberto e disponível em repositórios online.
+    Das equipes participantes na competição do banco DB\_AUTHORPROF foram localizadas em repositórios de código aberto no GitHub\footnote{Plataforma de hospedagem de código-fonte com controle de versão usando o Git.} as seguintes supostas soluções ordenadas pela classificação disponível na parte de resultados da página da competição \cite{PAN_APCLEF_2018}:
+    \begin{enumerate}[label=\Roman*.]
+        \item 2. daneshvar18 - Disponível em \url{https://github.com/SamanDaneshvar/pan18ap}
+        
+        \item 4. laporte18 - Disponível em \url{https://github.com/arthur-sultan-info/PAN2018-AP}
+        
+        \item 12. gouravdas18 - Disponível em \url{https://github.com/brajagopalcse/PAN2018}
+        
+        \item 16. schaetti18 - Disponível em \url{https://github.com/nschaetti/PAN18-Author-Profiling}
+        
+        \item 21. raiyani18 - Disponível em \url{https://github.com/kraiyani/author-profiling-pan-clef-2018}
+        
+        \item 23. karlgreen18 - Disponível em \url{ https://github.com/jussikarlgren/pan18}
+    \end{enumerate}
 
+    Quanto à competição referente ao banco de dados DB\_HYPARTISAN foram encontrados os seguintes repositórios disponíveis na ordem de classificação da página da competição \cite{PAN_HND_2019}:
+    \begin{enumerate}[label=\Roman*.]
+        \item 1. bertha-von-suttner - Disponível em \url{https://github.com/GateNLP/semeval2019-hyperpartisan-bertha-von-suttner/}
+        
+        \item 4. tom-jumbo-grumbo - Disponível em \url{https://github.com/chialun-yeh/SemEval2019/}
+        
+        \item 10. clint-buchanan - Disponível em \url{https://github.com/hmc-cs159-fall2018/final-project-team-mvp-10000/}
+        
+        \item 13. paparazzo - Disponível em \url{https://github.com/ngannlt/semeval2019-hyperpartisan-paparazzo/}
+        
+        \item 17. spider-jerusalem - Disponível em \url{https://github.com/amal994/hyperpartisan-detection-task/}
+        
+        \item 19. doris-martin - Disponível em \url{https://github.com/ixa-ehu/ixa-pipe-doc/}
+    \end{enumerate}
+
+    As soluções com código fonte encontradas serão analisadas para garantir que já não utilizem da criação de atributos baseados em RI.
+    Então, no mínimo 1 solução de cada BD será executada para verificação das pontuações obtidas na competição e obtenção das métricas de desempenho de classificador, ver a Subseção \ref{subsec:Desempenho-de-classificador}.
+    Em seguida será executado o processo completo da Figura \ref{fig:diagrama-da-metodologia} para mensurar o desempenho computacional das ferramentas de armazenamento e indexação e, por último, mensurar o desempenho do classificador com os atributos de RI.
+    
+    
 \section{Armazenamento e indexação} \label{sec:Armazenamento-e-indexação}
 
-    Para armazenar e indexar os bancos de dados das tarefas de Mineração de Textos, e possibilitar assim o cálculo da função BM25 para cada exemplo, serão utilizadas as seguintes tecnologias que fazem implementações do BM25:
+    Para armazenar e indexar os bancos de dados das tarefas de Mineração de Textos, e possibilitar assim o cálculo da função BM25 para que sejam gerados os atributos sugeridos na Seção \ref{sec:Atributos-de-RI-sugeridos} para cada exemplo, serão utilizadas as seguintes tecnologias que fazem implementações do BM25:
     \begin{itemize}
-        \item Elasticsearch % https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-similarity.html
+        \item \textbf{TOOL\_ELASTIC}: Elasticsearch 7.2 é o mecanismo distribuído de análise e busca baseado no Apache Lucene\footnote{Biblioteca de software livre e de código aberto para ferramentas de buscas em texto, escrita originalmente em Java \cite{LUCENE_DOCUMENTATION_2019}}, desenvolvido em Java e possui código aberto sobre diversas licenças sendo a principal a Licença Apache\footnote{Licença de software livre permissiva de autoria da Apache Software Foundation (ASF).} \cite{ELASTIC_GitHub_2019, ELASTIC_REFERENCE_INTRO_2019}.  % https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-similarity.html
         % https://www.elastic.co/pt/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables
-        \item ArangoDB
+        
+        O Elasticsearch possui diversas APIs que possibilitam sua integração fácil com variadas linguagens de programação \cite{ELASTIC_GitHub_2019}, e dentre suas funções de indexação possui um módulo de similaridade (\textit{similarity module}) que é responsável pela implementação de funções para ranqueamento de documentos fazendo a implementação da função BM25 como sua função padrão para cálculo de similaridade sobre o nome de \textit{BM25 similarity} \cite{ELASTIC_REFERENCE_SIMILARITY_2019}.
+        
+        \item \textbf{TOOL\_ARANGO}: ArangoDB
         % https://www.arangodb.com/docs/stable/aql/views-arango-search.html#bm25
         % https://www.arangodb.com/news/introducing-arangodb-3-4/
-        \item Zettair
+        \item \textbf{TOOL\_ZETTAIR}: Zettair
         % http://www.seg.rmit.edu.au/zettair/doc/Readme.html
         % \item Apache Spark
         % COmentado pois o Spark não implementa o BM25.
@@ -89,11 +177,11 @@
     Será avaliado o desempenho das ferramentas utilizadas para indexação e consulta, por meio da avaliação temporal do desempenho computacional, e também o ganho de desempenho propiciado pelo uso das variáveis de RI em termos das métricas de classificadores de Mineração de Texto. % Essas métricas tem que ser citadas no referencial teórico.
     
     \subsection{Desempenho computacional das ferramentas}  \label{subsec:Desempenho-computacional}
-        Para avaliar o desempenho das ferramentas de armazenamento e indexação utilizaremos duas métricas temporais:
+        Para avaliar o desempenho das ferramentas de armazenamento e indexação serão utilizadas duas métricas temporais:
         \begin{itemize}
-            \item \textbf{TIME\_INDEX}: Tempo de execução para indexar o conjunto de treinamento de cada um dos banco de dados de teste elencados na Seção \ref{sec:Bancos-de-dados-para-teste}. Dadas as quatro diferentes ferramentas de indexação e os dois banco de dados selecionados, serão computadas 8 TIME\_INDEX para comparação;
+            \item \textbf{TIME\_INDEX}: Tempo de execução para indexar o conjunto de treinamento de cada um dos banco de dados de teste elencados na Seção \ref{sec:Bancos-de-dados-para-avaliação}. Dadas as quatro diferentes ferramentas de indexação e os dois banco de dados selecionados, serão computadas 8 TIME\_INDEX para comparação;
             
-            \item \textbf{TIME\_QUERY}: Tempo para consulta de cada exemplo do conjunto de teste e geração das variáveis sugeridas na Seção \ref{sec:Variáveis-de-RI-sugeridas} para o item específico. Dadas as 12 variáveis sugeridas para criação distribuídas nos dois banco de dados selecionados, e dadas as 4 ferramentas de indexação, 48 TIME\_QUERY serão computadas.  
+            \item \textbf{TIME\_QUERY}: Tempo para consulta de cada exemplo do conjunto de teste e geração das variáveis sugeridas na Seção \ref{sec:Atributos-de-RI-sugeridos} para o item específico. Dadas as 12 variáveis sugeridas para criação distribuídas nos dois banco de dados selecionados, e dadas as 4 ferramentas de indexação, 48 TIME\_QUERY serão computadas.  
         \end{itemize}
         
         Essas variáveis serão computadas para cada uma das 4 ferramentas selecionadas sendo executadas no mesmo sistema computacional a fim de oferecer maior confiança aos números obtidos. 
@@ -109,7 +197,7 @@
 % * count_1
 % * sum_1
     \subsection{Desempenho de classificador}  \label{subsec:Desempenho-de-classificador}
-    O ganho de desempenho propiciado pelas variáveis de RI criadas será mensurado por métricas de desempenho de classificadores da literatura de Mineração de Dados, as mesmas da Mineração de Texto.
+    O ganho de desempenho propiciado pelos atributos de RI criados será mensurado por métricas de desempenho de classificadores da literatura de Mineração de Dados, as mesmas da Mineração de Texto.
     Nesse estudo serão computadas as seguintes métricas:
     \begin{itemize}
         \item \textbf{CLF\_ACC}: Acurácia do classificador.
@@ -120,10 +208,6 @@
     \end{itemize}
 % Ao final será comparado o ganho de desempenho (acurácia, precisão, recall e F1-score) nas melhores soluções dos bancos definidos a partir da adição das variáveis criadas.
 % Por exemplo para a PANCLEF 2019 Hyperpartisan será utilizada a solução que está disponível no github com melhor score e ela será executada novamente para conferir o resultado obtido de acurária que eles dizem e então será rodado novamente com a adição das variáveis de RI (BM25).
-
-
-ADICIONAR IMAGEM DE VISÃO GERAL DA METODOLOGIA
-
 
 % \subsection{Subseção de exemplo 1 - Referenciando seções} \label{subsec:subsec1}
 
