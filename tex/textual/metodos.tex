@@ -8,13 +8,14 @@
     
     \input{tex/figure/diagrama-metodologia.tex}
     
-    Inicialmente é necessário selecionar os \textbf{(1) Corpus para Avaliação} que servirão para efetuar as avaliações de desempenho, e, caso essas bases de dados ainda não estejam segmentados em exemplos para treinamento e exemplos para validação, será feita essa separação com o método de \textit{holdout}\footnote{Particionamento aleatório do dados em dois conjuntos independentes, geralmente chamados de treinamento e teste. O conjunto de treinamento é utilizado para derivar o modelo e o de teste para estimar a sua acurácia. \cite[p.~370]{Han:2011:DMC:1972541}.} de $\frac{2}{3}$ para treinamento e $\frac{1}{3}$ para validação.
+    Inicialmente é necessário selecionar os \textbf{(1) Corpus para Avaliação} que servirão para efetuar as avaliações de desempenho, e, caso esses corpus ainda não estejam segmentados em exemplos para treinamento e exemplos para validação, será feita essa separação com o método de \textit{holdout}\footnote{Particionamento aleatório do dados em dois conjuntos independentes, geralmente chamados de treinamento e teste. O conjunto de treinamento é utilizado para derivar o modelo e o de teste para estimar a sua acurácia. \cite[p.~370]{Han:2011:DMC:1972541}.} de $\frac{2}{3}$ para treinamento e $\frac{1}{3}$ para validação.
     
     Em seguida, o conjunto de treinamento passará pela fase de RI, aonde será feito o \textbf{(2) Armazenamento e Indexação em  SGBD NoSQL} por meio das ferramentas apresentadas na Seção  \ref{sec:Armazenamento-e-indexação}, sendo mensurado o tempo necessário para concluir essa operação em cada um dos Sistemas Gerenciadores de Banco de Dados (SGBD) NoSQL selecionados.
     
     O processo de Mineração de Texto pode ser segmentado em 7 etapas, conforme ressaltado anteriormente na Seção \ref{sec:MineraçãoTexto}.
     E, na metodologia proposta aqui, a fase de MT assume que as 3 etapas iniciais de limpeza, integração, e seleção dos dados, já foram realizadas no banco de dados de teste, assim os conjuntos divididos em treinamento e validação passarão diretamente pela etapa seguinte que é a \textbf{(3) Transformação dos dados com adição dos atributos de RI}.
     Nesta etapa, os banco de dados NoSQL indexados receberão consultas com a utilização das funções de ranqueamento baseadas no BM25 que cada ferramenta implementa, sendo mensurado o tempo para efetuar cada consulta e gerar os novos atributos sugeridos adiante na Seção \ref{sec:Atributos-de-RI-sugeridos}.
+    % Será feita uma consulta para cada exemplo dos conjuntos, e a resposta dessas consultas servirá para criar os atributos de RI detalhados logo mais na Seção \ref{sec:Atributos-de-RI-sugeridos}.
     
     O processo de Mineração dos Dados será feito por meio da réplica de soluções dos bancos de dados para avaliação selecionados, que possuam seus códigos-fonte disponíveis, sendo então reproduzida cada solução 
     \begin{enumerate*}[label=(\alph*)]
@@ -158,9 +159,9 @@
         
         Os arquivos de índices invertidos construídos pelo Zettair podem então ser consultados utilizando duas métricas diferentes \cite{ZETTAIR_USAGE_2009}:
         \begin{itemize}
-            \item \textbf{--cosine}: uma implementação da métrica da similaridade do cosseno vista na Subsubseção \ref{subsubsec:Modelo-espaço-vetorial}; e
+            \item \textbf{--cosine}: Uma implementação da métrica da similaridade do cosseno vista na Subsubseção \ref{subsubsec:Modelo-espaço-vetorial}; e
             
-            \item \textbf{--okapi}: implementação da função BM25, também chamada de Okapi BM25, como apresentada na Subsubseção \ref{subsubsec:Modelo-probabilístico}.
+            \item \textbf{--okapi}: Implementação da função BM25, também chamada de Okapi BM25, como apresentada na Subsubseção \ref{subsubsec:Modelo-probabilístico}.
         \end{itemize}
         
         % \item Apache Spark
@@ -187,6 +188,33 @@
 % * Bots and Gender Profilin % PAN @ CLEF 2019 
 
 \section{Atributos de RI sugeridos}  \label{sec:Atributos-de-RI-sugeridos}
+    Os atributos baseados em Recuperação de Informação sugeridos para esse estudo são fundamentados na investigação de \citeonline{WEREN_MESTRADO_2014}, derivada de seus trabalhos anteriores \cite{WEREN_CLEF_2014,WEREN_ARTIGO_2014}, os quais mostram resultados positivos da utilização de atributos derivados de RI numa tarefa de Mineração de Texto.
+    Nesses trabalhos, para identificação de autoria, são utilizados grupos de atributos derivados de RI, os quais representam a seguinte hipótese: os autores de um mesmo grupo de gênero ou idade tendem a usar termos semelhantes, e que a distribuição desses termos difere entre os grupos \cite[p.~20]{WEREN_MESTRADO_2014}.
+    
+    Esse mesmo pressuposto, da investigação feita por \citeonline{WEREN_MESTRADO_2014}, é assumido aqui, sendo generalizado para outras classes de identificação de autoria, como por exemplo que autores de artigos hiperpartidários tendem a usar termos semelhantes, e a distribuição desses termos difere de autores não hiperpartidários.
+    
+    Cada exemplo do corpus a ser classificado será usado como consulta ao banco de dados NoSQL indexado, e cada uma destas consultas terá como resultado uma lista dos \textit{top-$k$} exemplos presentes no banco de dados, ordenada por pontuação de similaridade da função BM25, sendo esta pontuação calculada pela ferramenta de armazenamento indexação.
+    
+    [IMAGEM-DO-CONSULTA-E-GERACAO-ATRI-RI]
+    
+    O cálculo dos novos atributos será feito a partir da lista retornada dos \textit{top-$k$} exemplos, onde serão utilizadas as três funções de agregação sugeridas por \citeonline[p.~21--23]{WEREN_MESTRADO_2014}:
+    \begin{enumerate*}[label=(\alph*)]
+        \item média,
+        \item soma, e
+        \item contagem
+    \end{enumerate*}, 
+    levando em conta a classe binária da tarefa de classificação.
+    Assim, serão geradas os seguintes atributos:
+    \begin{itemize}
+        \item \textbf{CLASS\_0\_BM25\_AVG:} Média aritmética das pontuações dos resultados retornados pela consulta, que não fazem parte da classe da tarefa.
+        \item \textbf{CLASS\_0\_BM25\_COUNT:} Contagem do número de resultados retornados pela consulta, que não fazem parte da classe da tarefa.
+        \item \textbf{CLASS\_0\_BM25\_SUM:} Soma das pontuações dos resultados retornados pela consulta, que não fazem parte da classe da tarefa.        
+        \item \textbf{CLASS\_1\_BM25\_AVG:} Média aritmética das pontuações dos resultados retornados pela consulta, que fazem parte da classe da tarefa.
+        \item \textbf{CLASS\_1\_BM25\_COUNT:} Contagem do número de resultados retornados pela consulta, que fazem parte da classe da tarefa.
+        \item \textbf{CLASS\_1\_BM25\_SUM:} Soma das pontuações dos resultados retornados pela consulta, que fazem parte da classe da tarefa.
+    \end{itemize}
+    
+    
     
 %  Por exemplo, para a classificação binária do PANCLEF 2019 Hyperpartisan podem ser criadas as variáveis a seguir:
 % * avg_0 
@@ -227,10 +255,12 @@
     Nesse estudo serão computadas as seguintes métricas:
     \begin{itemize}
         \item \textbf{CLF\_ACC}: Acurácia do classificador.
-        \item \textbf{CLF\_AUC}: Área sobre a curva ROC.
-        \item \textbf{CLF\_F1}: F1-Score
-        \item \textbf{CLF\_PRE}: Precisão do classificador.
-        \item \textbf{CLF\_REC}: Revocação do classificador.
+        \item \textbf{CLF\_AUC}: Área sob a curva ROC.
+
+        % Comentadas pois Rosalvo disse para ficar somente com acurácia (utilizada nas competições) e a área sob a curva ROC.
+        % \item \textbf{CLF\_F1}: F1-Score
+        % \item \textbf{CLF\_PRE}: Precisão do classificador.
+        % \item \textbf{CLF\_REC}: Revocação do classificador.
     \end{itemize}
 % Ao final será comparado o ganho de desempenho (acurácia, precisão, recall e F1-score) nas melhores soluções dos bancos definidos a partir da adição das variáveis criadas.
 % Por exemplo para a PANCLEF 2019 Hyperpartisan será utilizada a solução que está disponível no github com melhor score e ela será executada novamente para conferir o resultado obtido de acurária que eles dizem e então será rodado novamente com a adição das variáveis de RI (BM25).
