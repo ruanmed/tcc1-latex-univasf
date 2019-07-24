@@ -1,12 +1,25 @@
 \begin{table}[h]
     \centering
-    \begin{tabular}{|l|r|r|r|r|r|r|r|r|}\hline
-         \multicolumn{3}{|c|}{\diagbox{Termo}{\raisebox{-1.87cm}{\rotatebox{90}{\parbox{1.6cm}{\centering Documento}}}}} & \multicolumn{2}{|c|}{D\textsubscript{1}} & \multicolumn{2}{|c|}{D\textsubscript{2}} & \multicolumn{2}{|c|}{D\textsubscript{3}} \\ \hline
-                    & $\text{df}_{\text{\textit{t}}}$ & $\text{idf}_{\text{\textit{t}}}$ & $\text{tf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ \\ \hline
-         car        & 18165 & 1,65 & 27 & 44,55 & 4 & 6,6 & 24 & 39,6 \\
-         auto       & 6723 & 2,08 & 3 & 6,24 & 33 & 68,64 & 0 & 0 \\
-         insurance  & 19241 & 1,62 & 0 & 0 & 33 & 54,46 & 29 & 46,98 \\
-         best       & 25235 & 1,5 & 14 & 21 & 0 & 0 & 17 & 25,5
+    \begin{tabular}{|l|r|r|r|r|r|r|r|r|}
+        \hline
+        \multicolumn{3}{|l|}{
+            \diagbox[width=4.75cm, height=2.55cm]{Termo}{
+                \raisebox{-1.87cm}{
+                    \rotatebox{90}{
+                        \parbox{1.6cm}{\centering Documento}
+                    }
+                }
+            }
+        } 
+        & \multicolumn{2}{|c|}{D\textsubscript{1}} 
+        & \multicolumn{2}{|c|}{D\textsubscript{2}} 
+        & \multicolumn{2}{|c|}{D\textsubscript{3}} 
+        \\ \hline
+        & $\text{df}_{\text{\textit{t}}}$ & $\text{idf}_{\text{\textit{t}}}$ & $\text{tf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf}_{\text{\textit{t},\textit{d}}}$ & $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ \\ \hline
+        car        & 18165 & 1,65 & 27 & 44,55 & 4 & 6,6 & 24 & 39,6 \\
+        auto       & 6723  & 2,08 & 3  & 6,24 & 33 & 68,64 & 0 & 0 \\
+        insurance  & 19241 & 1,62 & 0  & 0 & 33 & 54,46 & 29 & 46,98 \\
+        best       & 25235 & 1,5  & 14 & 21 & 0 & 0 & 17 & 25,5
     \end{tabular}
     \caption{Exemplo de cálculo do valor de tf-idf baseado nas tabelas disponível em \citeonline[p.~109--110]{Manning2008IIR}.}
     \label{tab:exemplo-tf-idf}

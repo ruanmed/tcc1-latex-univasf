@@ -17,7 +17,7 @@
     Nesta etapa, os banco de dados NoSQL indexados receberão consultas com a utilização das funções de ranqueamento baseadas no BM25 que cada ferramenta implementa, sendo mensurado o tempo para efetuar cada consulta e gerar os novos atributos sugeridos adiante na Seção \ref{sec:Atributos-de-RI-sugeridos}.
     % Será feita uma consulta para cada exemplo dos conjuntos, e a resposta dessas consultas servirá para criar os atributos de RI detalhados logo mais na Seção \ref{sec:Atributos-de-RI-sugeridos}.
     
-    O processo de Mineração dos Dados será feito por meio da réplica de soluções dos bancos de dados para avaliação selecionados, que possuam seus códigos-fonte disponíveis, sendo então reproduzida cada solução 
+    O processo de Mineração dos Dados será feito por meio da réplica de soluções dos corpus para avaliação selecionados, que possuam seus códigos-fonte disponíveis, sendo então reproduzida cada solução 
     \begin{enumerate*}[label=(\alph*)]
         \item sem nenhuma alteração, e 
         \item com adição dos novos atributos sugeridos.
@@ -129,8 +129,8 @@
     \end{enumerate}
 
     As soluções com código fonte encontradas serão analisadas para garantir que já não façam uso da criação de atributos baseados em RI.
-    Então, no mínimo 1 solução de cada BD será executada para verificação das pontuações obtidas na competição e obtenção das métricas de desempenho de classificador, ver a Subseção \ref{subsec:Desempenho-de-classificador}.
-    Em seguida, será executado o processo completo da metodologia apresentada na Figura \ref{fig:diagrama-da-metodologia}, para mensurar o desempenho computacional das ferramentas de armazenamento e indexação, e, por último, mensurar o desempenho do classificador com os atributos de RI.
+    Então, no mínimo uma solução de cada BD será executada para verificação das pontuações obtidas na competição e obtenção das métricas de desempenho de classificador (ver a Subseção \ref{subsec:Desempenho-de-classificador}).
+    Em seguida, será executado o processo completo da metodologia apresentada na Figura \ref{fig:diagrama-da-metodologia}, para mensurar o desempenho computacional das ferramentas de armazenamento e indexação, e o desempenho do classificador com os atributos de RI.
     
     
 \section{Armazenamento e indexação} \label{sec:Armazenamento-e-indexação}
@@ -188,7 +188,7 @@
 % * Bots and Gender Profilin % PAN @ CLEF 2019 
 
 \section{Atributos de RI sugeridos}  \label{sec:Atributos-de-RI-sugeridos}
-    Os atributos baseados em Recuperação de Informação sugeridos para esse estudo são fundamentados na investigação de \citeonline{WEREN_MESTRADO_2014}, derivada de seus trabalhos anteriores \cite{WEREN_CLEF_2014,WEREN_ARTIGO_2014}, os quais mostram resultados positivos da utilização de atributos derivados de RI numa tarefa de Mineração de Texto.
+    Os atributos baseados em Recuperação de Informação sugeridos para a presente pesquisa são fundamentados na investigação de \citeonline{WEREN_MESTRADO_2014}, derivada de seus trabalhos anteriores \cite{WEREN_CLEF_2014,WEREN_ARTIGO_2014}, os quais mostram resultados positivos da utilização de atributos derivados de RI numa tarefa de Mineração de Texto.
     Nesses trabalhos, para identificação de autoria, são utilizados grupos de atributos derivados de RI, os quais representam a seguinte hipótese: os autores de um mesmo grupo de gênero ou idade tendem a usar termos semelhantes, e que a distribuição desses termos difere entre os grupos \cite[p.~20]{WEREN_MESTRADO_2014}.
     
     Esse mesmo pressuposto, da investigação feita por \citeonline{WEREN_MESTRADO_2014}, é assumido aqui, sendo generalizado para outras classes de identificação de autoria, como por exemplo que autores de artigos hiperpartidários tendem a usar termos semelhantes, e a distribuição desses termos difere de autores não hiperpartidários.
@@ -203,16 +203,19 @@
         \item soma, e
         \item contagem
     \end{enumerate*}, 
-    levando em conta a classe binária da tarefa de classificação.
-    Assim, serão geradas os seguintes atributos:
-    \begin{itemize}
-        \item \textbf{CLASS\_0\_BM25\_AVG:} Média aritmética das pontuações dos resultados retornados pela consulta, que não fazem parte da classe da tarefa.
-        \item \textbf{CLASS\_0\_BM25\_COUNT:} Contagem do número de resultados retornados pela consulta, que não fazem parte da classe da tarefa.
-        \item \textbf{CLASS\_0\_BM25\_SUM:} Soma das pontuações dos resultados retornados pela consulta, que não fazem parte da classe da tarefa.        
-        \item \textbf{CLASS\_1\_BM25\_AVG:} Média aritmética das pontuações dos resultados retornados pela consulta, que fazem parte da classe da tarefa.
-        \item \textbf{CLASS\_1\_BM25\_COUNT:} Contagem do número de resultados retornados pela consulta, que fazem parte da classe da tarefa.
-        \item \textbf{CLASS\_1\_BM25\_SUM:} Soma das pontuações dos resultados retornados pela consulta, que fazem parte da classe da tarefa.
-    \end{itemize}
+    levando em conta a classe binária da tarefa de classificação. 
+    Assim, serão gerados os atributos apresentados na Tabela \ref{tab:lista-atributos-sugeridos}.
+    
+    \input{tex/table/lista-atributos-sugeridos.tex}
+    % Assim, serão geradas os seguintes atributos:
+    % \begin{itemize}
+    %     \item \textbf{CLASS\_0\_BM25\_AVG:} Média aritmética das pontuações dos resultados retornados pela consulta, que não fazem parte da classe da tarefa.
+    %     \item \textbf{CLASS\_0\_BM25\_COUNT:} Contagem do número de resultados retornados pela consulta, que não fazem parte da classe da tarefa.
+    %     \item \textbf{CLASS\_0\_BM25\_SUM:} Soma das pontuações dos resultados retornados pela consulta, que não fazem parte da classe da tarefa.        
+    %     \item \textbf{CLASS\_1\_BM25\_AVG:} Média aritmética das pontuações dos resultados retornados pela consulta, que fazem parte da classe da tarefa.
+    %     \item \textbf{CLASS\_1\_BM25\_COUNT:} Contagem do número de resultados retornados pela consulta, que fazem parte da classe da tarefa.
+    %     \item \textbf{CLASS\_1\_BM25\_SUM:} Soma das pontuações dos resultados retornados pela consulta, que fazem parte da classe da tarefa.
+    % \end{itemize}
     
     
     
@@ -228,7 +231,11 @@
 
 
 \section{Métricas para avaliação de desempenho}  \label{sec:Métricas-para-avaliação-de-desempenho}
-    Será avaliado o desempenho das ferramentas utilizadas para indexação e consulta, por meio da avaliação temporal do desempenho computacional, e também o ganho de desempenho propiciado pelo uso das variáveis de RI em termos das métricas de classificadores de Mineração de Texto. % Essas métricas tem que ser citadas no referencial teórico.
+    Serão avaliados
+    \begin{enumerate*}[label=(\alph*)]
+        \item o desempenho das ferramentas utilizadas para indexação e consulta, por meio da avaliação temporal do desempenho computacional, e também
+        \item o ganho de desempenho propiciado pelo uso das variáveis de RI em termos das métricas de classificadores de Mineração de Texto. % Essas métricas tem que ser citadas no referencial teórico.
+    \end{enumerate*} 
     
     \subsection{Desempenho computacional das ferramentas}  \label{subsec:Desempenho-computacional}
         Para avaliar o desempenho das ferramentas de armazenamento e indexação serão utilizadas duas métricas temporais:
@@ -254,7 +261,7 @@
     O ganho de desempenho propiciado pelos atributos de RI criados será mensurado por métricas de desempenho de classificadores da literatura de Mineração de Dados, as mesmas da Mineração de Texto.
     Nesse estudo serão computadas as seguintes métricas:
     \begin{itemize}
-        \item \textbf{CLF\_ACC}: Acurácia do classificador.
+        \item \textbf{CLF\_ACC}: Acurácia do classificador no conjunto de validação.
         \item \textbf{CLF\_AUC}: Área sob a curva ROC.
 
         % Comentadas pois Rosalvo disse para ficar somente com acurácia (utilizada nas competições) e a área sob a curva ROC.
@@ -262,6 +269,8 @@
         % \item \textbf{CLF\_PRE}: Precisão do classificador.
         % \item \textbf{CLF\_REC}: Revocação do classificador.
     \end{itemize}
+    A acurácia de um classificador é a razão entre o número de exemplos classificados corretamente, e o número total de exemplos, no caso em questão, a variável \textbf{CLF\_ACC} a ser computada é referente ao conjunto de validação.
+    
 % Ao final será comparado o ganho de desempenho (acurácia, precisão, recall e F1-score) nas melhores soluções dos bancos definidos a partir da adição das variáveis criadas.
 % Por exemplo para a PANCLEF 2019 Hyperpartisan será utilizada a solução que está disponível no github com melhor score e ela será executada novamente para conferir o resultado obtido de acurária que eles dizem e então será rodado novamente com a adição das variáveis de RI (BM25).
 
@@ -276,4 +285,4 @@
 % Insere a seção de cronograma
 % Está comentada porque só é necessária no TCC I
 %--------------------------------------------------------------------------------------
-% \input{tex/textual/cronograma.tex}
+\input{tex/textual/cronograma.tex}
