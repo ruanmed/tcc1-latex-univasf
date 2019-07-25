@@ -17,7 +17,7 @@
     % - RI em equipamentos eletromecânicos no início do século 20
     % -- O que fez surgir esses sistemas, a necessidade
     
-    Esses sistemas de classificação manual se mostram ineficazes devido ao surgimento crescente e constante de novas informações \cite[p.~6]{Baeza-Yates1999} desde o início do século 20. 
+    Os sistemas de classificação manual se mostram ineficazes devido ao surgimento crescente e constante de novas informações \cite[p.~6]{Baeza-Yates1999} desde o início do século 20. 
     Desta maneira, além da imensidão de novas pesquisas científicas sendo publicadas, livros surgindo, entre outros registro históricos, que precisam ser classificados, existe também o problema da classificação não poder abranger todo tipo de necessidade que tal material pode satisfazer \cite[p.~1444]{Sanderson2012THIRR}. 
     A preocupação com sistemas que possam indexar todo esse material e fornecer um acesso rápido às necessidades de informação de uma pessoa surgiu também no início do século 20 \cite{Bush:1979:WMT:1113634.1113638}, onde sistemas mecânicos de recuperação de informação foram visionados.
     
@@ -42,20 +42,18 @@
     Logo no início do seu desenvolvimento as técnicas de RI buscaram se basear em sistemas existentes já consolidados no campo bibliotecário para indexar coleções de itens, tendo como uma técnica de abordagem clássica atribuir códigos numéricos a essas coleções, como por exemplo o feito pelo sistema de Classificação Decimal de Dewey \cite[p.~1446]{Sanderson2012THIRR}.
     No entanto foi demonstrado por \citeonline{Cleverdon1959TESUIR} que um sistema baseado em palavras, como o sistema Uniterm proposto por \citeonline{Taube1952UTCI}, era tão bom e até melhor que outras abordagens clássicas, sendo a indexação por palavras posteriormente adotada pelos sistemas de RI \cite[p.~1446]{Sanderson2012THIRR}.
     
+    Um exemplo do funcionamento de um sistema moderno de RI pode ser visto na Figura \ref{fig:diagrama-baeza2013-fig1-3}, onde está apresentado um fluxograma dos processos de indexação, recuperação, e ranqueamento de documentos. 
+    Sendo o ranqueamento feito por sistemas de RI o interesse deste trabalho, alguns dos termos apresentados nessa figura serão abordados logo mais.
+    
     \input{tex/figure/baeza2013-figura-1.3.tex}
     
-    Um exemplo do funcionamento de um sistema moderno de RI pode ser visto na Figura \ref{fig:diagrama-baeza2013-fig1-3}, onde está apresentado um fluxograma dos processos de indexação, recuperação, e ranqueamento de documentos. 
-    Sendo o ranqueamento de sistemas de RI o nosso interesse neste trabalho, alguns dos termos apresentados nessa Figura serão abordados logo mais.
+    Segundo \citeonline[p.~7]{Baeza-Yates2011} a arquitetura de funcionamento de um \textit{software} de RI inicia com o processo de indexação executado \textit{offline}, antes do sistema estar pronto para processar consultas, e a estrutura de indexação mais popular é a chamada de índice invertido.
+    Após a indexação da coleção de documentos, então o sistema está preparado para o processo de recuperação, onde o usuário especifica sua consulta, a qual é modificada pelo sistema para ficar mais próxima do sistema de indexação utilizado.
+    A consulta modificada é utilizada para obter o conjunto de documentos recuperados, os quais, idealmente, satisfazem as necessidades de informação do usuário.
+    Por fim, os documentos recuperados são ranqueados pela sua pertinencia de relevância para o usuário.
     
     \input{tex/textual/subsections/metodos-booleanos.tex}
     
     % -- A pesquisa de RI sendo desenvolvida, citar sistemas rankeados
     \input{tex/textual/subsections/ranqueamento.tex}
 
-% TESTE DE SIGLAS
-\nomenclature{Fig.}{Figura TTTTT}
-\nomenclature{$A_i$}{Area of the $i^{th}$ component}
-\nomenclature{456}{Isto éum número}
-\nomenclature{123}{Isto éoutro número}
-\nomenclature{a}{primeira letra do alfabeto}
-\nomenclature{lauro}{este émeu nome}
