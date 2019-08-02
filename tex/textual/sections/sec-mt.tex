@@ -3,8 +3,8 @@
     % - Falar de IA?
     % -- Surgimento do processo de KDD
     % -- É um subramo do KDD, KDT
-    A Mineração de Textos (MT) é definida como o processo de extrair conhecimento implícito de dados textuais \cite{Jo2018TMCIBDC,Feldman:2006:TMH:1076381} e por isso é às vezes tratada como \textit{knowledge discovery in text} (livremente traduzido para descoberta de conhecimento em texto) \cite{Kodratoff:1999:KDT:646358.689959, Feldman:1995:KDT:3001335.3001354}, sendo análogo ao termo \textit{knowledge discovery in data} (KDD) que se refere à Mineração de Dados, ramo da Inteligência Artificial que dá suporte a MT. 
-    Apesar de haver um uso sinônimo entre Mineração de Dados e KDD, alguns autores tratam a Mineração de Dados como somente uma parte desse processo de descoberta de conhecimento \cite[p.~6]{Han:2011:DMC:1972541}, sendo este um processo iterativo composto pelas seguintes fases (ou etapas) segundo \citeonline[p.~6--7]{Han:2011:DMC:1972541}:
+    A Mineração de Textos (MT) é definida como o processo de extrair conhecimento implícito de dados textuais \cite{Jo2018TMCIBDC,Feldman:2006:TMH:1076381} e por isso é às vezes tratada como \textit{knowledge discovery in text} (livremente traduzido para descoberta de conhecimento em texto) \cite{Kodratoff:1999:KDT:646358.689959, Feldman:1995:KDT:3001335.3001354}, sendo análogo ao termo \textit{knowledge discovery in data} (KDD) que se refere à Mineração de Dados, ramo da Inteligência Artificial que dá suporte à MT. 
+    Apesar de haver um uso sinônimo entre Mineração de Dados e KDD, alguns autores tratam a Mineração de Dados como somente uma parte desse processo de descoberta de conhecimento \cite[p.~6]{Han:2011:DMC:1972541}, sendo este um processo iterativo, conforme ilustrado na Figura \ref{fig:diagrama-mineração-texto-han}, composto pelas seguintes fases (ou etapas) segundo \citeonline[p.~6--7]{Han:2011:DMC:1972541}:
     % - Passos da MT
     % 1. Data cleaning (to remove noise and inconsistent data)
     % 2. Data integration (where multiple data sources may be combined)3
@@ -24,6 +24,8 @@
     \end{enumerate}
     % Certainly, text mining derives much of its inspiration and direction from seminal research on data mining. Therefore, it is not surprising to find that text mining and data mining systems evince many high-level architectural similarities. 
     
+    \input{tex/figure/han2011-figure-1-4-mineracao-dados.tex}
+    
     É importante notar essas 7 etapas de desenvolvimento de Mineração de Dados para abordamos a definição de MT, pois esta deriva muitas técnicas desenvolvidas na pesquisa do campo de Mineração de Dados para seu campo de aplicação, logo sistemas baseados em ambas áreas vão apresentar similaridades arquiteturais \cite[p.~1]{Feldman:2006:TMH:1076381}. 
     
     % Text mining can be broadly defined as a knowledge-intensive process in which a user interacts with a document collection over time by using a suite of analysis tools. In a manner analogous to data mining, text mining seeks to extract useful information from data sources through the identification and exploration of interesting patterns.
@@ -40,13 +42,37 @@
     % -- Utiliza das técnicas de RI para indexar os textos em algumas de suas aplicações
     % Text mining preprocessing operations include a variety of different types of techniques culled and adapted from information retrieval, information extraction, and computational linguistics research that transform raw, unstructured, original-format content (like that which can be downloaded from PubMed) into a carefully structured, intermediate data format. Knowledge discovery operations, in turn, are operated against this specially structured intermediate representation of the original document collection.
     
-    As operações de pré-processamento para MT utilizam de várias técnicas adaptadas dos campos de Recuperação de Informação, extração de informação e linguística computacional para transformar as coleções de documentos desestruturados em dados intermediários cuidadosamente estruturados \cite[p.2--3]{Feldman:2006:TMH:1076381}. 
-    Essa estrutura intermediária é definida por um modelo representacional dos documentos de texto composto por um conjunto de \textit{features}, atributos, sendo sempre preferidos os modelos com menor número de variáveis significativas para a representação.
+    As operações de pré-processamento para MT utilizam de várias técnicas adaptadas dos campos de Recuperação de Informação, extração de informação e linguística computacional para transformar as coleções de documentos desestruturados em dados intermediários cuidadosamente estruturados \cite[p.~2--3]{Feldman:2006:TMH:1076381}. 
+    Essa estrutura intermediária é definida por um modelo representacional dos documentos de texto composto por um conjunto de atributos, sendo sempre preferidos os modelos com menor número de variáveis significativas para a representação \cite[p.~4]{Feldman:2006:TMH:1076381}.
+    
+    % Ressaltar denovo o suporte que a RI dá à MT, e então apresentar a diferenciação que Jo2018 faz na tabela 1.1 pag 4, e talvez a perspectiva do usuário apresentada por Zhai2016 a qual diferencia a Recuperação de Informação como Acesso dando poder de Selecionar Informação, e Mineração de Texto como Mineração possibilitando Criar Conhecimento, ele ainda apresenta a parte da Clusterização como Organização possibilitando Adicionar Estruturas/Marcações
     
     % Pensei em aqui contextualizar um pouco sobre os diversos campos que dão suporte ao KDD (Mineração de Dados) e à MT e colocar uma imagem parecida com a do \cite{Han:2011:DMC:1972541} na página 23 para mostrar os campos que dão suporte a MT
     
-    A definição dos atributos para MT busca tirar proveito dos mais variados elementos presentes em um documento escrito em linguagem natural, no entanto é necessário um cuidado pois existe um grande número de palavras, frases e outros artefatos que podem comprometer o desempenho de um sistema de Mineração de Texto ou tornar a tarefa infactível %(NECESSITA DE FONTES?)
-    , por isso a necessidade de identificar as melhores variáveis, que trazem mais informação sobre o texto. 
-    Nesse ponto que a MT se auxilia de técnicas de RI para incrementar seu grupo de variáveis, sendo alguns, como por exemplo o BM25 para RI ranqueada, utilizadas em competições de determinação de perfil de autores (CITAR Weren2014EMFAP e procurar outros).
+    A definição dos atributos para MT busca tirar proveito dos mais variados elementos presentes em um documento escrito em linguagem natural, no entanto é necessário um cuidado pois existe um grande número de palavras, frases e outros artefatos que podem comprometer o desempenho de um sistema de Mineração de Texto ou tornar a tarefa infactível \cite[p.~4]{Feldman:2006:TMH:1076381}, por isso a necessidade de identificar os melhores atributos, que trazem mais informação sobre o texto. 
+    Nesse ponto que a MT pode se auxiliar de técnicas de RI para incrementar seu grupo de atributos, sendo alguns, como por exemplo o BM25 para RI ranqueada, utilizadas em competições de identificação de perfil de autores \cite{WEREN_MESTRADO_2014,WEREN_CLEF_2014,WEREN_ARTIGO_2014}. % procurar outros!!!!!.
     
     % -- Já devo diferenciar aqui
+    
+    % Falta falar de:
+    % * Corpus
+    % * Classificação binária
+    % * Outros tipos de tarefas? clusterização?
+    % * Feature Engineering
+    %  ---> Falar da definição mais ampla, feature selection, extraction, etc.
+    % * Métricas de avaliação
+    
+    \subsection{Corpus} \label{subsec:Corpus}
+    % Jo2018 - página 6 TEXT FORMATS
+        Uma coleção de
+    
+    \subsection{Tarefas} \label{subsec:Tarefas}
+    
+    \subsection{Engenharia de Atributos} \label{subsec:Engenharia-de-Atributos}
+        % Falar do sentido amplo da feature engineering, abrangindo feature extraction, creation, selection, etc.
+        
+        \subsubsection{Atributos comuns para documentos} \label{subsubsec:Atributos-comuns-documentos}
+            % Feldman2006 apresenta esses atributos básicos nas páginas 4--7
+        
+    \subsection{Métricas de avaliação} \label{subsec:Métricas-de-avaliação}
+    % Jo2018 - página 157 são algumas, pegar de Han2011 a parte de avaliação de modelo página 364

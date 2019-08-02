@@ -28,7 +28,7 @@
     A partir da criação de sistemas computacionais na década de 1940, foi vista a possibilidade de criação de sistemas que armazenassem informações e possibilitassem essa consulta rápida sobre as informações armazenadas, sendo necessários estabelecer algoritmos que retornassem informação relevante ao que o usuário do sistema procura. 
     Tendo então nesse momento o início do campo científico de Recuperação de Informação (RI, do inglês \textit{Information Retrieval}) que é encontrar material (geralmente documentos) de natureza desestruturada (geralmente texto) que satisfaça uma necessidade de informação dentro de grandes acervos (geralmente armazenados em computadores) \cite[p.~1]{Manning2008IIR}.
     
-    A lei de Moore diz que o crescimento da velocidade de processamento é contínuo, e similarmente existe uma duplicação constante da capacidade de armazenamento digital a cada dois anos. % CARECE DE FONTES - Preciso procurar
+    A lei de Moore diz que o crescimento da velocidade de processamento é contínuo \cite{Moore1975}, e similarmente existe uma duplicação constante da capacidade de armazenamento digital a cada dois anos \cite{Kryder2005}. 
     Logo, a necessidade de sistemas de Recuperação de Informação surge do crescimento exponencial das coleções de informação derivadas do crescimento de armazenamento, e consequente inabilidade das técnicas tradicionais de catalogação de lidar com isso \cite{Sanderson2012THIRR}.
     Ter um amontoado de conhecimento, informação, e não poder acessar o que é relevante de modo rápido não é interessante pois assim o desenvolvimento de pesquisas, por exemplo, fica comprometido e pode perder relevância \cite{Bush:1979:WMT:1113634.1113638}.
     
@@ -50,7 +50,7 @@
     Segundo \citeonline[p.~7]{Baeza-Yates2011} a arquitetura de funcionamento de um \textit{software} de RI inicia com o processo de indexação executado \textit{offline}, antes do sistema estar pronto para processar consultas, e a estrutura de indexação mais popular é a chamada de índice invertido.
     Após a indexação da coleção de documentos, então o sistema está preparado para o processo de recuperação, onde o usuário especifica sua consulta, a qual é modificada pelo sistema para ficar mais próxima do sistema de indexação utilizado.
     A consulta modificada é utilizada para obter o conjunto de documentos recuperados, os quais, idealmente, satisfazem as necessidades de informação do usuário.
-    Por fim, os documentos recuperados são ranqueados pela sua pertinencia de relevância para o usuário.
+    Por fim, os documentos recuperados são ranqueados pela sua pertinência de relevância para o usuário.
     
     \input{tex/textual/subsections/metodos-booleanos.tex}
     

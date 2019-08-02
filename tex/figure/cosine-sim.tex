@@ -1,16 +1,19 @@
 \begin{figure}[H]
     \centering
-    \begin{tikzpicture}[scale=1.25]
-        \coordinate[label=below  left:""] (A) at (-1.5cm,-1.cm);
-        \draw[-Stealth]
-            (A) to ["",sloped] ++ ({atan(2/3)}:{sqrt(4+9)})  coordinate[label=above right:$d_j$] (B);
-        \draw[-Stealth] 
-            (A) to ["" ']      ++ (0:3)                      coordinate[label=below right:q] (C);
-        \pic ["$\theta$", draw, angle radius = 12mm, angle eccentricity=1.3]     
-            {angle = C--A--B};
-    \end{tikzpicture}
-    
-    \caption{O cosseno de $\theta$ é adotado como $\text{Pontuação}(\vec{d_j},\vec{q})$. Baseada na figura disponível em \citeonline[p.~78]{Baeza-Yates2011}.}
+    \caption{O cosseno de $\theta$ é adotado como $\text{Pontuação}(\vec{d_j},\vec{q})$. }
+    \begin{center}
+        \begin{tikzpicture}[scale=1.25]
+            \coordinate[label=below  left:""] (A) at (-1.5cm,-1.cm);
+            \draw[-Stealth]
+                (A) to ["",sloped] ++ ({atan(2/3)}:{sqrt(4+9)})  coordinate[label=above right:$d_j$] (B);
+            \draw[-Stealth] 
+                (A) to ["" ']      ++ (0:3)                      coordinate[label=below right:q] (C);
+            \pic ["$\theta$", draw, angle radius = 12mm, angle eccentricity=1.3]     
+                {angle = C--A--B};
+        \end{tikzpicture}
+    \end{center}
+    \vspace{-0.5cm}
+    \legend{\ABNTEXfontereduzida \textbf{Fonte:} Baseado na figura disponível em \citeonline[p.~78]{Baeza-Yates2011}.}
     \label{fig:similaridade-cosseno}
 \end{figure}
 
