@@ -44,9 +44,19 @@
     
     As operações de pré-processamento para MT utilizam de várias técnicas adaptadas dos campos de Recuperação de Informação, extração de informação e linguística computacional para transformar as coleções de documentos desestruturados em dados intermediários cuidadosamente estruturados \cite[p.~2--3]{Feldman:2006:TMH:1076381}. 
     Essa estrutura intermediária é definida por um modelo representacional dos documentos de texto composto por um conjunto de atributos, sendo sempre preferidos os modelos com menor número de variáveis significativas para a representação \cite[p.~4]{Feldman:2006:TMH:1076381}.
+    % In Table 1.1, the differences between the mining and the retrieval are presented. The output of data mining is the implicit knowledge which is necessary directly for making decisions, whereas that of retrieval is some of data items which are relevant to the given query. For example, in the domain of stock prices, the prediction of future stock prices is a typical task of data mining, whereas taking some of past and current stock prices is that of information retrieval. Note that the perfect certainty never exists in the data mining, compared to the retrieval. The more advanced computation for making knowledge from the raw data, which is called synthesis, is required for doing the data mining tasks.
     
+    Apesar da Mineração de Texto utilizar de técnicas da Recuperação de Informação, ambos são campos independentes com objetivos diferentes conforme ressalta \citeonline[p.~4, tradução nossa]{Jo2018TMCIBDC} (apresentados de modo resumido na Tabela \ref{tab:mineração-vs-recuperação}):
+
+    \begin{citacao}
+        A saída da mineração de dados é o conhecimento implícito que é necessário diretamente para a tomada de decisões, enquanto a saída da recuperação é composta por alguns dos itens de dados que são relevantes para a consulta dada. 
+        Por exemplo, no domínio de preços de ações, a previsão dos preços futuros de ações é uma tarefa típica da mineração de dados, enquanto que obter alguns dos preços de ações passadas e atuais é tarefa da recuperação de informação. 
+        Observe que a certeza perfeita nunca existe na mineração de dados, em comparação com a recuperação. 
+        A computação mais avançada para obter conhecimento dos dados brutos, chamada de síntese, é necessária para executar as tarefas de mineração de dados.
+    \end{citacao}
+    
+    \input{tex/table/mining-vs-retrieval.tex}
     % Ressaltar denovo o suporte que a RI dá à MT, e então apresentar a diferenciação que Jo2018 faz na tabela 1.1 pag 4, e talvez a perspectiva do usuário apresentada por Zhai2016 a qual diferencia a Recuperação de Informação como Acesso dando poder de Selecionar Informação, e Mineração de Texto como Mineração possibilitando Criar Conhecimento, ele ainda apresenta a parte da Clusterização como Organização possibilitando Adicionar Estruturas/Marcações
-    
     % Pensei em aqui contextualizar um pouco sobre os diversos campos que dão suporte ao KDD (Mineração de Dados) e à MT e colocar uma imagem parecida com a do \cite{Han:2011:DMC:1972541} na página 23 para mostrar os campos que dão suporte a MT
     
     A definição dos atributos para MT busca tirar proveito dos mais variados elementos presentes em um documento escrito em linguagem natural, no entanto é necessário um cuidado pois existe um grande número de palavras, frases e outros artefatos que podem comprometer o desempenho de um sistema de Mineração de Texto ou tornar a tarefa infactível \cite[p.~4]{Feldman:2006:TMH:1076381}, por isso a necessidade de identificar os melhores atributos, que trazem mais informação sobre o texto. 
@@ -64,10 +74,69 @@
     
     \subsection{Corpus} \label{subsec:Corpus}
     % Jo2018 - página 6 TEXT FORMATS
-        Uma coleção de
+        Vários formatos de texto são utilizados para o processamento computacional de texto, segundo \citeonline[p.~6]{Jo2018TMCIBDC} os mais populares são os distribuídos pelo \textit{software} MS Office, como o arquivo padrão do MS Word com extensão ``doc'', MS PowerPoint com extensão ``ppt'', e o MS Excel com o ``xls'', e ainda para transferência entre computadores o mais utilizado é o formato PDF (\textit{Portable Documento Format}).
+        
+        \input{tex/figure/texto-simples.tex}
+        
+        O texto simples, ou texto sem formatação, é o formato mais elementar de texto que é feito por um editor de texto, exemplificado na Figura \ref{fig:exemplo-texto-simples} por um arquivo aberto no editor xed\footnote{xed é um editor de texto leve e pequeno feito para o X-Apps \cite{LinuxMintXed2019}.}.
+        Usualmente cada texto corresponde a único arquivo, sendo geralmente armazenado com a extensão ``txt'' nos sistemas operacionais Windows \cite[p.~6]{Jo2018TMCIBDC}.
+        
+        O XML (\textit{Extensive Markup Language}) pode ser considerado como outro formato de texto conforme exibido na Figura \ref{fig:exemplo-arquivo-xml}. 
+        É o formato de documento \textit{web} mais flexível e foi projetado com base no HTML, o XML 1.0 foi padronizado pela W3C (\textit{World Wide Web Consortium}) em sua primeira versão em 1998, sendo a quinta edição a mais recente publicada em novembro de 2008 \cite{XML10_5ed_2008}.
+        Atualmente o XML é utilizado como padrão para descrever itens de dados textuais de forma relacional, onde cada campo possui uma etiqueta de início e de fim, e o valor do campo fica entre estas etiquetas \cite[p.~6]{Jo2018TMCIBDC}.
+        
+        \input{tex/figure/arquivo-xml.tex}
+        
+        Uma coleção de textos simples é chamada de corpus, geralmente sendo referenciado pelo diretório que contém os arquivos de texto, e excepcionalmente um único arquivo pode também corresponder a um corpus ao invés de ser somente um único arquivo de texto \cite[p.~6]{Jo2018TMCIBDC}.
+        Num conceito mais abrangente, \citeonline[p.~9]{KwartlerTMPWR2017} considera como corpus qualquer corpo, ou conjunto, grande de texto organizado, assim um conjunto de arquivos de texto XML também é tratado como um corpus.
     
-    \subsection{Tarefas} \label{subsec:Tarefas}
+    \subsection{Tarefas de Mineração de Dados} \label{subsec:Tarefas-de-Mineração-de-Dados}
+        As tarefas de Mineração de Dados podem ser divididas em duas categorias, segundo \citeonline[p.~7]{TanIDM2014} e \citeonline[p.~15]{Han:2011:DMC:1972541}: 
+        \begin{itemize}
+            \item \textbf{Descritivas}: tem como objetivo caracterizar propriedades dos dados no conjunto objetivo por meio da derivação de padrões que resumem as relações nos dados; e
+            
+            \item \textbf{Preditivas}: realizam uma indução nos dados presentes objetivando prever valores de um atributo em particular, sendo este atributo a ser previsto chamado de objetivo. 
+        \end{itemize}
+        
+        Quanto às tarefas em si, na mineração de dados tem-se tarefas de agrupamento, associação, classificação, descrição, detecção de anomalias, e de regressão, as quatro principais estão ilustradas na Figura \ref{fig:tarefas-principais-mineração-dados}.
+        As tarefas de classificação e de regressão entram na categoria de tarefas preditivas, e são às vezes referidas como tarefas de modelagem preditiva. Ainda, tarefas de classificação trabalham com atributos objetivos discretos, enquanto que tarefas de regressão tem seus atributos objetivos como variáveis contínuas \citeonline[p.~7--8]{TanIDM2014}, e ambas focam na análise de conjuntos de dados rotulados, os chamados de conjuntos de treinamento \cite[p.~19]{Han:2011:DMC:1972541}.
+        Na Mineração de Textos uma tarefa de classificação normalmente recebe o nome de \textbf{categorização de texto} \cite[p.~6]{TurchiATPUKM2009} \cite[p.~61]{Feldman:2006:TMH:1076381}.
+        
+        \input{tex/figure/tarefas-principais-mineracao-dados.tex}
+        
+        Segundo os autores \citeonline[p.~15--21]{Han:2011:DMC:1972541}, \citeonline[p.~8--11]{TanIDM2014} e \citeonline[p.~8--14]{LaroseDKD2014} as demais tarefas da mineração de dados são descritivas e podem ser caracterizadas como segue:
+        \begin{itemize}
+            \item \textbf{Agrupamento}: consiste numa análise dos dados sem consulta à rótulos de classe, podendo estes até não estarem presentes, e este tipo de tarefa é utilizado para gerar rótulos de classes para grupos de dados. Na literatura é mais comum se referir ao termo em língua inglesa, \textit{clustering};
+            
+            \item \textbf{Associação}: são descobertos relacionamentos mais frequentes entre os atributos, utilizada para descoberta de padrões, geralmente por meio de regras de implicação;
+            
+            \item \textbf{Descrição}: os dados são associados com conceitos, consistindo da caracterização dos dados, onde é feita o resumo das características gerais de uma classe objetivo; ou da discriminação dos dados, onde é feita a comparação, contraste, dos atributos de uma classe objetivo com um conjunto de outras classes;
+            
+            \item \textbf{Detecção de anomalias}: também chamado de detecção de dados discrepantes (\textit{outliers}), foca na identificação de exemplos dos dados que possuem características significativamente diferentes do restante. Muitos métodos de mineração de dados descartam os \textit{outliers} por considerarem estes como ruídos nos dados.
+        \end{itemize}
     
+        \subsubsection{Classificação binária} \label{subsubsec:Classificação-binária}
+            O problema da classificação consiste na aprendizagem da estrutura dos exemplos do conjunto de dados, os quais estão classificados em grupos chamados de categorias ou classes \cite[p.~285]{Aggarwal_DMTT_2015}.
+            A entrada consiste de uma coleção de registros, conhecidos como exemplos, cada um caracterizado pela tupla $(\textbf{x},y)$ onde $\textbf{x}$ é um conjunto de atributos e \textit{y} é o atributo chamado de rótulo da classe.
+            \citeonline[p.~146, tradução nossa]{TanIDM2014} dizem que ``classificação é a tarefa de aprender uma função objetivo $f$ que mapeia cada conjunto de atributos $x$ a um rótulo de classe predefinido $y$''.
+        % Definition 4.1 (Classification). Classification is the task of learning a target function f that maps each attribute set x to one of the predefined class labels y.
+        % The target function is also known informally as a classification model. A classification model is useful for the following purposes.
+        
+            O aprendizado da função objetivo é feito com um modelo, chamado de modelo de treinamento, pois este é baseado no conjunto de treinamento. 
+            Então, este modelo de treinamento é utilizado para prever a classe de exemplos não vistos anteriormente, isso quer dizer que estes exemplos não fazem parte do conjunto de treinamento.
+            Segundo \citeonline[p.~286, tradução nossa]{Aggarwal_DMTT_2015}, então, a maior parte dos algoritmos de classificação possui duas fases:
+            \begin{enumerate}
+                \item \textbf{Fase de treinamento}: nesta fase um modelo de treinamento é construído a parte das instâncias de treinamento. Isto pode ser entendido, intuitivamente, como um resumo do modelo matemático dos grupos rotulados no conjunto de dados de treinamento;
+                
+                \item \textbf{Fase de teste}: nesta fase o modelo de treinamento é utilizado para determinar os rótulos de classe (ou identificadores de grupos) de uma ou mais instâncias não vistas.
+            \end{enumerate}
+                
+            A tarefa de classificação é também chamada de aprendizado supervisionado porque exemplos dos dados são utilizados para aprender as estruturas de agrupamento das classes \cite[p.~285]{Aggarwal_DMTT_2015}.
+            Técnicas de classificação são mais apropriadas para dados com categorias binárias ou nominais, não sendo indicados para categorias com significado ordinal, pois a tarefa de classificação não considera a ordem implícita entre as categorias \cite[p.~147]{TanIDM2014}.
+            A tarefa de categorização dos dados pode ser com rótulo único ou com múltiplos rótulos, onde na categorização com múltiplos rótulos as categorias se sobrepõem, e já na categorização com rótulo único cada exemplo de dado pertence a exatamente uma categoria \cite[p.~67]{Feldman:2006:TMH:1076381} \cite[p.~306]{TanIDM2014}.
+            
+            A classificação binária é um caso especial da categorização de rótulo único na qual quantidade de categorias é dois, sendo este o caso mais simples das tarefas de classificação, pois nele só existem duas possibilidades de rótulo de classe \cite[p.~67]{Feldman:2006:TMH:1076381}
+        
     \subsection{Engenharia de Atributos} \label{subsec:Engenharia-de-Atributos}
         % Falar do sentido amplo da feature engineering, abrangindo feature extraction, creation, selection, etc.
         

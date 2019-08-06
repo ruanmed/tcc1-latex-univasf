@@ -13,17 +13,17 @@
     Em seguida, o conjunto de treinamento passará pela fase de RI, aonde será feito o \textbf{(2) Armazenamento e Indexação em  SGBD NoSQL} por meio das ferramentas apresentadas na Seção  \ref{sec:Armazenamento-e-indexação}, sendo mensurado o tempo necessário para concluir essa operação em cada um dos Sistemas Gerenciadores de Banco de Dados (SGBD) NoSQL selecionados.
     
     O processo de Mineração de Texto pode ser segmentado em 7 etapas, conforme ressaltado anteriormente na Seção \ref{sec:MineraçãoTexto}.
-    E, na metodologia proposta aqui, a fase de MT assume que as 3 etapas iniciais de limpeza, integração, e seleção dos dados, já foram realizadas no banco de dados de teste, assim os conjuntos divididos em treinamento e validação passarão diretamente pela etapa seguinte que é a \textbf{(3) Transformação dos dados com adição dos atributos de RI}.
-    Nesta etapa, os banco de dados NoSQL indexados receberão consultas com a utilização das funções de ranqueamento baseadas no BM25 que cada ferramenta implementa, sendo mensurado o tempo para efetuar cada consulta e gerar os novos atributos sugeridos adiante na Seção \ref{sec:Atributos-de-RI-sugeridos}.
+    Na metodologia proposta aqui a fase de MT assume que as 3 etapas iniciais de limpeza, integração, e seleção dos dados, já foram realizadas no banco de dados de teste, assim os conjuntos divididos em treinamento e validação passarão diretamente pela etapa seguinte que é a \textbf{(3) Transformação dos dados com adição dos atributos de RI}.
+    Nesta etapa, os banco de dados NoSQL indexados receberão \textbf{(3.1) Consultas} com a utilização das funções de ranqueamento baseadas no BM25 que cada ferramenta implementa, sendo mensurado o tempo para efetuar cada consulta e gerar os novos atributos sugeridos adiante na Seção \ref{sec:Atributos-de-RI-sugeridos}.
     % Será feita uma consulta para cada exemplo dos conjuntos, e a resposta dessas consultas servirá para criar os atributos de RI detalhados logo mais na Seção \ref{sec:Atributos-de-RI-sugeridos}.
     
-    O processo de Mineração dos Dados será feito por meio da réplica de soluções dos corpus para avaliação selecionados, que possuam seus códigos-fonte disponíveis, sendo então reproduzida cada solução 
+    O processo de \textbf{(4) Mineração dos Dados} será feito por meio da réplica de soluções dos corpus para avaliação selecionados, que possuam seus códigos-fonte disponíveis, sendo então reproduzida cada solução 
     \begin{enumerate*}[label=(\alph*)]
         \item sem nenhuma alteração, e 
         \item com adição dos novos atributos sugeridos.
     \end{enumerate*}
     Esse processo gerará dois modelos de classificador, o primeiro criado sem atributos de RI e o segundo com esses atributos.
-    A etapa de \textbf{(4) Avaliação do Modelo} permitirá que para cada modelo sejam geradas métricas da literatura de MT, detalhadas logo mais na Subseção \ref{subsec:Desempenho-de-classificador}, a partir do teste com o conjunto de validação, possibilitando a comparação do ganho de desempenho de classificador com/sem atributos de RI.
+    A etapa de \textbf{(5) Avaliação do Modelo} permitirá que para cada modelo sejam geradas métricas da literatura de MT, detalhadas logo mais na Subseção \ref{subsec:Desempenho-de-classificador}, a partir do teste com o conjunto de validação, possibilitando a comparação do ganho de desempenho de classificador com/sem atributos de RI.
     % Na fase de Mineração de Texto os conjuntos de treinamento e de validação passarão pela \textbf{(3) Transformação dos dados com adição dos atributos de RI} onde 
     
     
@@ -98,35 +98,42 @@
     % Definir as soluçcoes disponiveis que vou utilizar (Nao pode ter RI)
     
     Os dois corpus selecionados possuem soluções de participantes nas competições da PAN que tem seu código fonte aberto e disponível em repositórios online.
-    Das equipes participantes na competição do banco DB\_AUTHORPROF, foram localizadas em repositórios de código aberto no GitHub\footnote{Plataforma de hospedagem de código-fonte com controle de versão usando o Git.} as seguintes supostas soluções ordenadas pela classificação disponível na parte de resultados da página da competição \cite{PAN_APCLEF_2018}:
-    \begin{enumerate}[label=\Roman*.]
-        \item 2. daneshvar18 - Disponível em \url{https://github.com/SamanDaneshvar/pan18ap}
+    Das equipes participantes na competição do corpus DB\_AUTHORPROF, foram localizadas em repositórios de código aberto no GitHub\footnote{Plataforma de hospedagem de código-fonte com controle de versão usando o Git.} as supostas soluções  apresentadas na Tabela \ref{tab:soluções-authorprof}, ordenadas pela classificação disponível na parte de resultados da página da competição \citeonline{PAN_APCLEF_2018}.
+    % Das equipes participantes na competição do corpus DB\_AUTHORPROF, foram localizadas em repositórios de código aberto no GitHub\footnote{Plataforma de hospedagem de código-fonte com controle de versão usando o Git.} as seguintes supostas soluções ordenadas pela classificação disponível na parte de resultados da página da competição \cite{PAN_APCLEF_2018}:
+    % \begin{enumerate}[label=\Roman*.]
+    %     \item 2. daneshvar18 - Disponível em \url{https://github.com/SamanDaneshvar/pan18ap}
         
-        \item 4. laporte18 - Disponível em \url{https://github.com/arthur-sultan-info/PAN2018-AP}
+    %     \item 4. laporte18 - Disponível em \url{https://github.com/arthur-sultan-info/PAN2018-AP}
         
-        \item 12. gouravdas18 - Disponível em \url{https://github.com/brajagopalcse/PAN2018}
+    %     \item 12. gouravdas18 - Disponível em \url{https://github.com/brajagopalcse/PAN2018}
         
-        \item 16. schaetti18 - Disponível em \url{https://github.com/nschaetti/PAN18-Author-Profiling}
+    %     \item 16. schaetti18 - Disponível em \url{https://github.com/nschaetti/PAN18-Author-Profiling}
         
-        \item 21. raiyani18 - Disponível em \url{https://github.com/kraiyani/author-profiling-pan-clef-2018}
+    %     \item 21. raiyani18 - Disponível em \url{https://github.com/kraiyani/author-profiling-pan-clef-2018}
         
-        \item 23. karlgreen18 - Disponível em \url{ https://github.com/jussikarlgren/pan18}
-    \end{enumerate}
-
-    Quanto à competição referente ao corpus DB\_HYPARTISAN foram encontrados os seguintes repositórios disponíveis na ordem de classificação da página da competição \cite{PAN_HND_2019}:
-    \begin{enumerate}[label=\Roman*.]
-        \item 1. bertha-von-suttner - Disponível em \url{https://github.com/GateNLP/semeval2019-hyperpartisan-bertha-von-suttner/}
+    %     \item 23. karlgreen18 - Disponível em \url{ https://github.com/jussikarlgren/pan18}
+    % \end{enumerate}
+    
+    
+    \input{tex/table/solutions-authorprof.tex}
+    
+    % Quanto à competição referente ao corpus DB\_HYPARTISAN foram encontrados os seguintes repositórios disponíveis na ordem de classificação da página da competição \cite{PAN_HND_2019}:
+    % \begin{enumerate}[label=\Roman*.]
+    %     \item 1. bertha-von-suttner - Disponível em \url{https://github.com/GateNLP/semeval2019-hyperpartisan-bertha-von-suttner/}
         
-        \item 4. tom-jumbo-grumbo - Disponível em \url{https://github.com/chialun-yeh/SemEval2019/}
+    %     \item 4. tom-jumbo-grumbo - Disponível em \url{https://github.com/chialun-yeh/SemEval2019/}
         
-        \item 10. clint-buchanan - Disponível em \url{https://github.com/hmc-cs159-fall2018/final-project-team-mvp-10000/}
+    %     \item 10. clint-buchanan - Disponível em \url{https://github.com/hmc-cs159-fall2018/final-project-team-mvp-10000/}
         
-        \item 13. paparazzo - Disponível em \url{https://github.com/ngannlt/semeval2019-hyperpartisan-paparazzo/}
+    %     \item 13. paparazzo - Disponível em \url{https://github.com/ngannlt/semeval2019-hyperpartisan-paparazzo/}
         
-        \item 17. spider-jerusalem - Disponível em \url{https://github.com/amal994/hyperpartisan-detection-task/}
+    %     \item 17. spider-jerusalem - Disponível em \url{https://github.com/amal994/hyperpartisan-detection-task/}
         
-        \item 19. doris-martin - Disponível em \url{https://github.com/ixa-ehu/ixa-pipe-doc/}
-    \end{enumerate}
+    %     \item 19. doris-martin - Disponível em \url{https://github.com/ixa-ehu/ixa-pipe-doc/}
+    % \end{enumerate}
+    Quanto à competição referente ao corpus DB\_HYPARTISAN foram encontrados os repositórios disponíveis na ordem de classificação da página da competição \cite{PAN_HND_2019}, dispostos abaixo na Tabela \ref{tab:soluções-hyperpartisan}.
+    
+    \input{tex/table/solutions-hyperpartisan.tex}
 
     As soluções com código fonte encontradas serão analisadas para garantir que já não façam uso da criação de atributos baseados em RI.
     Então, no mínimo uma solução de cada BD será executada para verificação das pontuações obtidas na competição e obtenção das métricas de desempenho de classificador (ver a Subseção \ref{subsec:Desempenho-de-classificador}).
@@ -193,9 +200,9 @@
     
     Esse mesmo pressuposto, da investigação feita por \citeonline{WEREN_MESTRADO_2014}, é assumido aqui, sendo generalizado para outras classes de identificação de autoria, como por exemplo que autores de artigos hiperpartidários tendem a usar termos semelhantes, e a distribuição desses termos difere de autores não hiperpartidários.
     
-    Cada exemplo do corpus a ser classificado será usado como consulta ao banco de dados NoSQL indexado, e cada uma destas consultas terá como resultado uma lista dos \textit{top-$k$} exemplos presentes no banco de dados, ordenada por pontuação de similaridade da função BM25, sendo esta pontuação calculada pela ferramenta de armazenamento indexação.
+    Cada exemplo do corpus a ser classificado será usado como consulta ao banco de dados NoSQL indexado, e cada uma destas consultas terá como resultado uma lista dos \textit{top-$k$} exemplos presentes no banco de dados, ordenada por pontuação de similaridade da função BM25, sendo esta pontuação calculada pela ferramenta de armazenamento indexação. Este procedimento está representado na Figura \ref{fig:diagrama-cosulta-geração-atributos}.
     
-    [IMAGEM-DO-CONSULTA-E-GERACAO-ATRI-RI]
+    \input{tex/figure/diagrama-consulta-geracao-atributo.tex}
     
     O cálculo dos novos atributos será feito a partir da lista retornada dos \textit{top-$k$} exemplos, onde serão utilizadas as três funções de agregação sugeridas por \citeonline[p.~21--23]{WEREN_MESTRADO_2014}:
     \begin{enumerate*}[label=(\alph*)]
