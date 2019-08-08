@@ -65,12 +65,9 @@
     % -- Já devo diferenciar aqui
     
     % Falta falar de:
-    % * Corpus
-    % * Classificação binária
-    % * Outros tipos de tarefas? clusterização?
     % * Feature Engineering
     %  ---> Falar da definição mais ampla, feature selection, extraction, etc.
-    % * Métricas de avaliação
+    % * Medidas de avaliação
     
     \subsection{Corpus} \label{subsec:Corpus}
     % Jo2018 - página 6 TEXT FORMATS
@@ -135,7 +132,8 @@
             Técnicas de classificação são mais apropriadas para dados com categorias binárias ou nominais, não sendo indicados para categorias com significado ordinal, pois a tarefa de classificação não considera a ordem implícita entre as categorias \cite[p.~147]{TanIDM2014}.
             A tarefa de categorização dos dados pode ser com rótulo único ou com múltiplos rótulos, onde na categorização com múltiplos rótulos as categorias se sobrepõem, e já na categorização com rótulo único cada exemplo de dado pertence a exatamente uma categoria \cite[p.~67]{Feldman:2006:TMH:1076381} \cite[p.~306]{TanIDM2014}.
             
-            A classificação binária é um caso especial da categorização de rótulo único na qual quantidade de categorias é dois, sendo este o caso mais simples das tarefas de classificação, pois nele só existem duas possibilidades de rótulo de classe \cite[p.~67]{Feldman:2006:TMH:1076381}
+            A classificação binária é um caso especial da categorização de rótulo único na qual quantidade de categorias é dois, sendo este o caso mais simples das tarefas de classificação, pois nele só existem duas possibilidades de rótulo de classe e cada objeto de dados pertence, exclusivamente, a uma das classes \cite[p.~67]{Feldman:2006:TMH:1076381} \cite[p.~81]{Jo2018TMCIBDC}.
+            Um exemplo clássico de categorização binária de texto é um analisador de \textit{spam}\footnote{Conteúdo indesejado, tratado como lixo eletrônico.} para e-mails, nele só existem duas possibilidades de classificação para dado e-mail, ou \textbf{é \textit{spam}} ou \textbf{não é \textit{spam}}.
         
     \subsection{Engenharia de Atributos} \label{subsec:Engenharia-de-Atributos}
         % Falar do sentido amplo da feature engineering, abrangindo feature extraction, creation, selection, etc.
@@ -143,5 +141,75 @@
         \subsubsection{Atributos comuns para documentos} \label{subsubsec:Atributos-comuns-documentos}
             % Feldman2006 apresenta esses atributos básicos nas páginas 4--7
         
-    \subsection{Métricas de avaliação} \label{subsec:Métricas-de-avaliação}
+    \subsection{Medidas de avaliação de classificadores} \label{subsec:Medidas-de-avaliação-de-classificadores}
     % Jo2018 - página 157 são algumas, pegar de Han2011 a parte de avaliação de modelo página 364
+        Tarefas de classificação (categorização) de texto produzem modelos de classificadores, os quais tem efetividade avaliada em termos de suas medidas de \textbf{precisão} e de \textbf{revocação}\footnote{As medidas na língua inglesa são chamadas de \textit{precision} e \textit{recall}.} \cite[p.~48]{Berry2010TMAT}, e também há uma preocupação grande com a \textbf{acurácia} do classificador \cite[p.~313]{Zhai2016TDMA}.
+        As medidas de avaliação de um modelo de classificador devem ser calculadas com base na aplicação do modelo num conjunto de teste, consistindo de tuplas não utilizadas para treinar o modelo \cite[p.~364]{Han:2011:DMC:1972541}.
+        
+        Antes de descrever as medidas, é necessário abordar o conceito de exemplos positivos (ou tuplas positivas) e de exemplos negativos (ou tuplas negativas) nos dados a serem classificados. 
+        Os exemplos positivos são aqueles da classe de maior interesse, e os exemplos negativos são todos o restante \cite[p.~364]{Han:2011:DMC:1972541}.
+        Considerando uma classificação binária, pode-se ter os exemplos positivos referentes a \textit{spam = sim} e os negativos \textit{spam = não}.
+        Seguindo, como descrito por \cite[p.~364--365]{Han:2011:DMC:1972541}, ao construir um modelo de classificador treinado com exemplos deste tipo, e então ao testá-lo em um conjunto com a classe objetivo conhecida, serão previstas as classes desse conjunto.
+        Sendo $P`$ o número de exemplos classificados positivamente, e $N`$ o número de exemplos classificados negativamente. 
+        Cada exemplo pode então ter a classe prevista comparada com as classes objetivos já conhecidas, gerando a matriz de confusão da Tabela \ref{tab:matriz-confusão} como um sumário das previsões corretas e incorretas.
+                % falar que a matriz de confusão pode ter mais linhas e colunas
+
+
+        \input{tex/table/matriz-confusao.tex}
+        
+        A matriz de confusão tem tamanho $n \times n$, onde $n$ é o número de classes (sempre maior ou igual a 2).
+        Cada entrada ${MC}_{i,j}$ da matriz corresponde ao número de exemplos da classe $i$ rotulado pelo classificador como pertecente à classe $j$.
+        A terminologia utiliza na Tabela \ref{tab:matriz-confusão}, caso específico para classificação binária, possui o seguinte significado:
+        \begin{itemize}
+            \item \textbf{Verdadeiros positivos} (\textit{TP}): referente ao número de exemplos positivos rotulados corretamente;
+            
+            \item \textbf{Verdadeiros negativos} (\textit{TN}): número de exemplos negativos rotulados corretamente;
+            
+            \item \textbf{Falsos positivos} (\textit{FP}): número de exemplos positivos rotulados incorretamente, a classe real na verdade era negativa, no entanto o modelo de classificação rotulou como a classe positiva;
+            
+            \item \textbf{Falsos negativos} (\textit{FN}): número de exemplos negativos rotulados incorretamente, por exemplo a rotulação de um exemplo como \textit{spam = não} sendo que sua classe real na verdade é \textit{spam = sim}.
+        \end{itemize}
+        A adição de totais à matriz de confusão é comum \cite[p.~366]{Han:2011:DMC:1972541}, na matriz apresentada na Tabela \ref{tab:matriz-confusão} estão apresentados os totais $P`$ e $N`$, respectivamente o número total de exemplos rotulados como positivos ($\textit{TP} + \textit{FP}$) e o número de exemplos rotulados como negativos ($\textit{TN} + \textit{FN}$).
+        $P$ é o número de exemplos com classe real positiva ($\textit{TP} + \textit{FN}$) e $N$ é o número de exemplos com classe real negativa ($\textit{FP} + \textit{TN}$).
+        
+        A razão entre o número de classificações verdadeiras positivas e o número classificações positivas dá a precisão ($p$) do classificador, conforme mostra a Equação \ref{eq:medida-precisão}, e segundo \citeonline[p.~368, tradução nossa]{Han:2011:DMC:1972541} ``precisão pode ser pensada como uma medida de exatidão''.
+        
+        \begin{equation}
+            \label{eq:medida-precisão}
+    		p = 
+    		\frac{\textit{TP}}{\textit{TP} + \textit{FP}}
+    		= \frac{\textit{TP}}{P`}
+        \end{equation}
+        
+        A revocação ($r$) é dada pela Equação \ref{eq:medida-revocação}, que é a razão entre o número o número de classificações verdadeiras positivas e o número de exemplos positivos da classe real, e também é chamada de sensitividade \cite[p.~364--365]{Han:2011:DMC:1972541}.
+        Ainda, segundo  \citeonline[p.~368, tradução nossa]{Han:2011:DMC:1972541} ``revocação é uma medida de completude''.
+
+        \begin{equation}
+            \label{eq:medida-revocação}
+    		r = 
+    		\frac{\textit{TP}}{\textit{TP} + \textit{FN}}
+    		= \frac{\textit{TP}}{P}
+        \end{equation}
+        
+        As medidas de precisão e revocação podem ser combinadas em uma única medida chamada de $F$ (também conhecida como $F$-\textit{score} ou pontuação ${F_1}$), que é a média harmônica entre elas, definida como disposto na Equação \ref{eq:medida-f-score}.
+        
+        \begin{equation}
+            \label{eq:medida-f-score}
+    		F = 
+    		\frac{2 \times p \times r}{p + r}
+        \end{equation}
+        
+        O nível geral de reconhecimento do classificador é medido pela acurácia ($acc$), que é definida pela Equação \ref{eq:medida-acurácia}, representando a razão de exemplos do conjunto de teste que foram classificados corretamente.
+        \begin{equation}
+            \label{eq:medida-acurácia}
+    		acc = 
+    		\frac{\textit{TP} + \textit{TN}}{P + N}
+        \end{equation}
+        
+        Apesar das medidas $F$, precisão, revocação e acurácia serem bastante úteis na medida de efetividade de classificadores, \citeonline[p.~48]{Berry2010TMAT} afirmam que elas não consideram o custo da classificação errônea em problemas com classes desbalanceadas, e então sugere um critério de acurácia ponderada e similarmente \citeonline[p.~369]{Han:2011:DMC:1972541} sugerem o uso da medida $F_\beta{}$ definida como descrito na Equação \ref{eq:medida-f-beta}.        \begin{equation}
+            \label{eq:medida-f-beta}
+    		F_\beta{} = 
+    		\frac{(1 + \beta{}^2) \times p \times r}{\beta{}^2 \times p + r}
+        \end{equation}
+        
+        As medidas de avaliação de classificadores possibilitam a comparação de diferentes modelos de classificadores e assim é possível efetuar a seleção do modelo, que é a escolha do melhor classificador dentre os modelos gerados para um problema específico \cite[p.~364]{Han:2011:DMC:1972541}.

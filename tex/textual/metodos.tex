@@ -23,13 +23,13 @@
         \item com adição dos novos atributos sugeridos.
     \end{enumerate*}
     Esse processo gerará dois modelos de classificador, o primeiro criado sem atributos de RI e o segundo com esses atributos.
-    A etapa de \textbf{(5) Avaliação do Modelo} permitirá que para cada modelo sejam geradas métricas da literatura de MT, detalhadas logo mais na Subseção \ref{subsec:Desempenho-de-classificador}, a partir do teste com o conjunto de validação, possibilitando a comparação do ganho de desempenho de classificador com/sem atributos de RI.
+    A etapa de \textbf{(5) Avaliação do Modelo} permitirá que para cada modelo sejam geradas medidas da literatura de MT, detalhadas logo mais na Subseção \ref{subsec:Desempenho-de-classificador}, a partir do teste com o conjunto de validação, possibilitando a comparação do ganho de desempenho de classificador com/sem atributos de RI.
     % Na fase de Mineração de Texto os conjuntos de treinamento e de validação passarão pela \textbf{(3) Transformação dos dados com adição dos atributos de RI} onde 
     
     
     % Para utilização da função de ranqueamento BM25 como variável em tarefas de mineração de texto é necessário efetuar o armazenamento e a indexação dos textos do conjunto de treinamento, e para esta tarefa serão utilizadas ferramentas de armazenamento em banco de dados (não relacionais?) que fornecem implementações do BM25 para consulta, estas serão apresentadas na Seção \ref{sec:Armazenamento-e-indexação}.
     
-    % Se faz necessário também definir métricas para avaliação do ganho de desempenho com as variáveis de RI, assim como elencar as bases de dados que vão servir para efetuar essa avaliação, disposto logo mais nas Seções \ref{sec:Métricas-para-avaliação-de-desempenho} e \ref{sec:Corpus-para-avaliação}.
+    % Se faz necessário também definir medidas para avaliação do ganho de desempenho com as variáveis de RI, assim como elencar as bases de dados que vão servir para efetuar essa avaliação, disposto logo mais nas Seções \ref{sec:Medidas-para-avaliação-de-desempenho} e \ref{sec:Corpus-para-avaliação}.
 
 \section{Corpus para avaliação}  \label{sec:Corpus-para-avaliação}
     Foram definidos dois corpus de competições promovidas pela PAN, sigla da organização que se originou do \textit{International Workshop on Plagiarism Analysis, Authorship Identification, and Near-Duplicate Detection} em 2007 \cite{PAN_Workshop_2007}, sendo estes descritos a seguir:% https://web.archive.org/web/20190711212207/https://www.uni-weimar.de/medien/webis/events/pan-07/pan07-web/
@@ -136,7 +136,7 @@
     \input{tex/table/solutions-hyperpartisan.tex}
 
     As soluções com código fonte encontradas serão analisadas para garantir que já não façam uso da criação de atributos baseados em RI.
-    Então, no mínimo uma solução de cada BD será executada para verificação das pontuações obtidas na competição e obtenção das métricas de desempenho de classificador (ver a Subseção \ref{subsec:Desempenho-de-classificador}).
+    Então, no mínimo uma solução de cada BD será executada para verificação das pontuações obtidas na competição e obtenção das medidas de desempenho de classificador (ver a Subseção \ref{subsec:Desempenho-de-classificador}).
     Em seguida, será executado o processo completo da metodologia apresentada na Figura \ref{fig:diagrama-da-metodologia}, para mensurar o desempenho computacional das ferramentas de armazenamento e indexação, e o desempenho do classificador com os atributos de RI.
     
     
@@ -164,9 +164,9 @@
         % http://www.seg.rmit.edu.au/zettair/doc/Readme.html
         O Zettair permite que coleções no formato HTML ou TREC sejam indexadas para busca, e possui como característica principal a habilidade de lidar com grandes quantidades de texto, ele constrói índices invertidos por meio da análise feita no seu modo de construção de índex \cite{ZETTAIR_INDEX_2009}.
         
-        Os arquivos de índices invertidos construídos pelo Zettair podem então ser consultados utilizando duas métricas diferentes \cite{ZETTAIR_USAGE_2009}:
+        Os arquivos de índices invertidos construídos pelo Zettair podem então ser consultados utilizando duas medidas diferentes \cite{ZETTAIR_USAGE_2009}:
         \begin{itemize}
-            \item \textbf{--cosine}: Uma implementação da métrica da similaridade do cosseno vista na Subsubseção \ref{subsubsec:Modelo-espaço-vetorial}; e
+            \item \textbf{--cosine}: Uma implementação da medida da similaridade do cosseno vista na Subsubseção \ref{subsubsec:Modelo-espaço-vetorial}; e
             
             \item \textbf{--okapi}: Implementação da função BM25, também chamada de Okapi BM25, como apresentada na Subsubseção \ref{subsubsec:Modelo-probabilístico}.
         \end{itemize}
@@ -200,9 +200,9 @@
     
     Esse mesmo pressuposto, da investigação feita por \citeonline{WEREN_MESTRADO_2014}, é assumido aqui, sendo generalizado para outras classes de identificação de autoria, como por exemplo que autores de artigos hiperpartidários tendem a usar termos semelhantes, e a distribuição desses termos difere de autores não hiperpartidários.
     
-    Cada exemplo do corpus a ser classificado será usado como consulta ao banco de dados NoSQL indexado, e cada uma destas consultas terá como resultado uma lista dos \textit{top-$k$} exemplos presentes no banco de dados, ordenada por pontuação de similaridade da função BM25, sendo esta pontuação calculada pela ferramenta de armazenamento indexação. Este procedimento está representado na Figura \ref{fig:diagrama-cosulta-geração-atributos}.
-    
     \input{tex/figure/diagrama-consulta-geracao-atributo.tex}
+    
+    Cada exemplo do corpus a ser classificado será usado como consulta ao banco de dados NoSQL indexado, e cada uma destas consultas terá como resultado uma lista dos \textit{top-$k$} exemplos presentes no banco de dados, ordenada por pontuação de similaridade da função BM25, sendo esta pontuação calculada pela ferramenta de armazenamento indexação. Este procedimento está representado na Figura \ref{fig:diagrama-cosulta-geração-atributos}.
     
     O cálculo dos novos atributos será feito a partir da lista retornada dos \textit{top-$k$} exemplos, onde serão utilizadas as três funções de agregação sugeridas por \citeonline[p.~21--23]{WEREN_MESTRADO_2014}:
     \begin{enumerate*}[label=(\alph*)]
@@ -237,19 +237,19 @@
 % baseadas no weren (2014)
 
 
-\section{Métricas para avaliação de desempenho}  \label{sec:Métricas-para-avaliação-de-desempenho}
+\section{Medidas para avaliação de desempenho}  \label{sec:Medidas-para-avaliação-de-desempenho}
     Serão avaliados
     \begin{enumerate*}[label=(\alph*)]
         \item o desempenho das ferramentas utilizadas para indexação e consulta, por meio da avaliação temporal do desempenho computacional, e também
-        \item o ganho de desempenho propiciado pelo uso das variáveis de RI em termos das métricas de classificadores de Mineração de Texto. % Essas métricas tem que ser citadas no referencial teórico.
+        \item o ganho de desempenho propiciado pelo uso dos atributos de RI em termos das medidas de classificadores de Mineração de Texto. % Essas medidas tem que ser citadas no referencial teórico.
     \end{enumerate*} 
     
     \subsection{Desempenho computacional das ferramentas}  \label{subsec:Desempenho-computacional}
-        Para avaliar o desempenho das ferramentas de armazenamento e indexação serão utilizadas duas métricas temporais:
+        Para avaliar o desempenho das ferramentas de armazenamento e indexação serão utilizadas duas medidas temporais:
         \begin{itemize}
-            \item \textbf{TIME\_INDEX}: Tempo de execução para indexar o conjunto de treinamento de cada um dos banco de dados de teste elencados na Seção \ref{sec:Corpus-para-avaliação}. Dadas as quatro diferentes ferramentas de indexação e os dois banco de dados selecionados, serão computadas 8 TIME\_INDEX para comparação;
+            \item \textbf{TIME\_INDEX}: Tempo de execução para indexar o conjunto de treinamento de cada um dos corpus para avaliação elencados na Seção \ref{sec:Corpus-para-avaliação}. Dadas as quatro diferentes ferramentas de indexação e os dois corpus selecionados, serão computadas 8 TIME\_INDEX para comparação;
             
-            \item \textbf{TIME\_QUERY}: Tempo para consulta de cada exemplo do conjunto de teste e geração das variáveis sugeridas na Seção \ref{sec:Atributos-de-RI-sugeridos} para o item específico. Dadas as 12 variáveis sugeridas para criação distribuídas nos dois banco de dados selecionados, e dadas as 4 ferramentas de indexação, 48 TIME\_QUERY serão computadas.  
+            \item \textbf{TIME\_QUERY}: Tempo para consulta de cada exemplo do conjunto de teste e geração dos atributos sugeridos na Seção \ref{sec:Atributos-de-RI-sugeridos} para o item específico. Dadas os 12 atributos sugeridos para criação distribuídas nos dois banco de dados selecionados, e dadas as 4 ferramentas de indexação, 48 TIME\_QUERY serão computadas.  
         \end{itemize}
         
         Essas variáveis serão computadas para cada uma das 4 ferramentas selecionadas sendo executadas no mesmo sistema computacional a fim de oferecer maior confiança aos números obtidos. 
@@ -265,8 +265,8 @@
 % * count_1
 % * sum_1
     \subsection{Desempenho de classificador}  \label{subsec:Desempenho-de-classificador}
-    O ganho de desempenho propiciado pelos atributos de RI criados será mensurado por métricas de desempenho de classificadores da literatura de Mineração de Dados, as mesmas da Mineração de Texto.
-    Nesse estudo serão computadas as seguintes métricas:
+    O ganho de desempenho propiciado pelos atributos de RI criados será mensurado por medidas de desempenho de classificadores da literatura de Mineração de Dados, as mesmas da Mineração de Texto.
+    Nesse estudo serão computadas as seguintes medidas:
     \begin{itemize}
         \item \textbf{CLF\_ACC}: Acurácia do classificador no conjunto de validação.
         \item \textbf{CLF\_AUC}: Área sob a curva ROC.
