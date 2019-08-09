@@ -157,7 +157,7 @@
         % https://www.arangodb.com/docs/stable/aql/views-arango-search.html#bm25
         % https://www.arangodb.com/news/introducing-arangodb-3-4/
         
-        Utiliza da linguagem de consulta AQL (\textit{ArangoDB Query Language}) para recuperar e modificar dados, que, por meio das \textit{views}\footnote{EXPLICAR O QUE É UMA VIEW DE BANCO DE DADOS.} do tipo arangosearch, introduz uma camada de integração com a biblioteca IResearch\footnote{Biblioteca de mecanismo de busca orientada a documentos, multiplataforma, e de alto desempenho, escrita inteiramente em C++, com o foco em uma conectividade de diferentes modelos de ranqueamento/similaridade \cite{IRESEARCH_GITHUB_2019}.}.
+        Utiliza da linguagem de consulta AQL (\textit{ArangoDB Query Language}) para recuperar e modificar dados, que, por meio das \textit{views}\footnote{``Uma \textit{view} (visão) em terminologia SQL é uma única tabela que é derivada de outras tabelas [$\cdots$]  é considerada uma tabela virtual'' \cite[p.~88]{ElmasriSBD2010}. } do tipo arangosearch, introduz uma camada de integração com a biblioteca IResearch\footnote{Biblioteca de mecanismo de busca orientada a documentos, multiplataforma, e de alto desempenho, escrita inteiramente em C++, com o foco em uma conectividade de diferentes modelos de ranqueamento/similaridade \cite{IRESEARCH_GITHUB_2019}.}.
         Assim, por meio da AQL integrada ao IResearch, o ArangoDB fornece funções de ordenação de documentos mediante uma consulta, e, dentre elas, a função BM25() faz uma implementação do algoritmo da função de ranqueamento BM25 \cite{ARANGODB_SEARCHVIEWS_2019}.
         
         \item \textbf{TOOL\_ZETTAIR}: Zettair v0.9.3 é um mecanismo de busca de código-fonte aberto escrito na linguagem C, projetado para ser compacto e pesquisar rapidamente em texto, desenvolvido pelo Grupo de Mecanismos de Busca do Instituto Real de Tecnologia de Melbourne em 2009 \cite{ZETTAIR_HOME_2009}.
@@ -265,18 +265,24 @@
 % * count_1
 % * sum_1
     \subsection{Desempenho de classificador}  \label{subsec:Desempenho-de-classificador}
-    O ganho de desempenho propiciado pelos atributos de RI criados será mensurado por medidas de desempenho de classificadores da literatura de Mineração de Dados, as mesmas da Mineração de Texto.
-    Nesse estudo serão computadas as seguintes medidas:
-    \begin{itemize}
-        \item \textbf{CLF\_ACC}: Acurácia do classificador no conjunto de validação.
-        \item \textbf{CLF\_AUC}: Área sob a curva ROC.
-
-        % Comentadas pois Rosalvo disse para ficar somente com acurácia (utilizada nas competições) e a área sob a curva ROC.
-        % \item \textbf{CLF\_F1}: F1-Score
-        % \item \textbf{CLF\_PRE}: Precisão do classificador.
-        % \item \textbf{CLF\_REC}: Revocação do classificador.
-    \end{itemize}
-    A acurácia de um classificador é a razão entre o número de exemplos classificados corretamente, e o número total de exemplos, no caso em questão, a variável \textbf{CLF\_ACC} a ser computada é referente ao conjunto de validação.
+        O ganho de desempenho propiciado pelos atributos de RI criados será mensurado por medidas de desempenho de classificadores da literatura de mineração de dados, as mesmas também utilizadas na Mineração de Texto.
+        Nesse estudo serão computadas as seguintes medidas:
+        \begin{itemize}
+            \item \textbf{CLF\_ACC}: Acurácia do classificador no conjunto de validação.
+            \item \textbf{CLF\_F1}: $F_1$-score do classificador no conjunto de validação.
+            
+            % \item \textbf{CLF\_AUC}: Área sob a curva ROC.
+    
+            % Comentadas pois Rosalvo disse para ficar somente com acurácia (utilizada nas competições) e a área sob a curva ROC.
+            % \item \textbf{CLF\_F1}: F1-Score
+            % \item \textbf{CLF\_PRE}: Precisão do classificador.
+            % \item \textbf{CLF\_REC}: Revocação do classificador.
+        \end{itemize}
+        A acurácia de um classificador, conforme apresentada na Subseção \ref{subsec:Medidas-de-avaliação-de-classificadores} definida pela Equação \ref{eq:medida-acurácia}, é a razão entre o número de exemplos classificados corretamente, e o número total de exemplos, no caso em questão, a variável \textbf{CLF\_ACC} a ser computada é referente ao conjunto de validação.
+        O $F_1$-score é uma medida de classificador que engloba a precisão e revocação (ou sensitividade), e conforme apresentado na Subseção \ref{subsec:Medidas-de-avaliação-de-classificadores}, é uma boa medida da efetividade de classificadores em termos comparação pois engloba mais informação do que a acurácia. 
+        É calculado conforme a definição dada pela Equação \ref{eq:medida-f-score} da Subseção \ref{subsec:Medidas-de-avaliação-de-classificadores}.
+        
+        
     
 % Ao final será comparado o ganho de desempenho (acurácia, precisão, recall e F1-score) nas melhores soluções dos bancos definidos a partir da adição das variáveis criadas.
 % Por exemplo para a PANCLEF 2019 Hyperpartisan será utilizada a solução que está disponível no github com melhor score e ela será executada novamente para conferir o resultado obtido de acurária que eles dizem e então será rodado novamente com a adição das variáveis de RI (BM25).

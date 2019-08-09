@@ -135,11 +135,61 @@
             A classificação binária é um caso especial da categorização de rótulo único na qual quantidade de categorias é dois, sendo este o caso mais simples das tarefas de classificação, pois nele só existem duas possibilidades de rótulo de classe e cada objeto de dados pertence, exclusivamente, a uma das classes \cite[p.~67]{Feldman:2006:TMH:1076381} \cite[p.~81]{Jo2018TMCIBDC}.
             Um exemplo clássico de categorização binária de texto é um analisador de \textit{spam}\footnote{Conteúdo indesejado, tratado como lixo eletrônico.} para e-mails, nele só existem duas possibilidades de classificação para dado e-mail, ou \textbf{é \textit{spam}} ou \textbf{não é \textit{spam}}.
         
-    \subsection{Engenharia de Atributos} \label{subsec:Engenharia-de-Atributos}
+    \subsection{Engenharia de atributos} \label{subsec:Engenharia-de-atributos}
         % Falar do sentido amplo da feature engineering, abrangindo feature extraction, creation, selection, etc.
+        O processo para extrair atributos passíveis de serem utilizados por classificadores da mineração de dados é chamado por \citeonline{ZhengFEML2018} de \textit{feature engineering}, que em uma tradução livre tentando preservar o contexto pode ser chamado de \textit{manejo de atributos}.
+        Num conceito mais generalista, \citeonline[p.~3, tradução nossa]{DongFEMLDA2018} define \textit{feature engineering} como uma área que abrange ``os tópicos de transformação de atributos, geração de atributos, extração de atributos, seleção de atributos, análise e avaliação de atributos, metodologias de manejo generalista e automatizado de atributos, e aplicações do manejo de atributos'', sendo esta a definição de engenharia de atributos no processo de KDD.
         
+        Cada um dos tópicos da engenharia de atributos é definido por \citeonline[p.~3]{DongFEMLDA2018} como segue:
+        \begin{itemize}
+            \item \textbf{Transformação de atributos}: construção de novos atributos a partir de atributos existentes, frequentemente feito por meio de mapeamentos matemáticos;
+            
+            \item \textbf{Geração de atributos}: também chamado de criação de atributos ou de extração de atributos, é  a geração de novos atributos que não são resultados de transformações. Por exemplo, atributos derivados de padrões e de técnicas de domínio específico se encontram na categoria de geração de atributos;
+            
+            \item \textbf{Seleção de atributos}: selecionar um pequeno conjunto de atributos dentre um montante, com objetivo de reduzir o conjunto de atributos para tornar a tarefa de classificação computacionalmente viável. A seleção de atributos também pode visar medição de atributos úteis e a melhora do desempenho por meio da escolha do melhor subconjunto;
+            
+            \item \textbf{Metodologias de manejo generalista e automatizado de atributos}: abordagens para geração automática de uma grande quantidade de atributos e seleção de um subconjunto dentre os atributos gerados;
+            
+            \item \textbf{Aplicações do manejo de atributos}: a utilização das técnicas de engenharia de atributos para resolver outras tarefas de análise de dados.
+        \end{itemize}
+
         \subsubsection{Atributos comuns para documentos} \label{subsubsec:Atributos-comuns-documentos}
             % Feldman2006 apresenta esses atributos básicos nas páginas 4--7
+            Ao atacar um problema de MT em uma coleção de documentos é de suma importância a definição dos atributos a serem utilizados na tarefa, e mesmo em pequenas coleções o problema da alta dimensionalidade dos atributos aparece.
+            \citeonline[p.~4, tradução nossa]{Feldman:2006:TMH:1076381} exemplificam que até mesmo ``em uma coleção extremamente pequena de 15 mil documentos selecionados de notícias da Reuters, podem ser identificadas mais de 25 mil raízes de palavras não triviais''.
+            
+            A alta dimensionalidade dos atributos pode se tornar um empecilho computacional para a realização da MT, por tornar os cálculos necessários muito mais demorados em alguns casos tornando este um problema computacionalmente inviável.
+            Então, a identificação e escolha de um modelo representacional, um bom conjunto de atributos, para representar os documento é algo de suma importância \cite[p.~4]{Feldman:2006:TMH:1076381}.
+            
+            Os tipos de atributos mais utilizados para representar documentos, segundo  \citeonline[p.~5--7]{Feldman:2006:TMH:1076381}:
+            \begin{itemize}
+                \item \textbf{Caracteres}: são as letras, números, e caracteres especiais presentes nos documentos utilizados para construir a semântica do mesmo;
+                
+                \item \textbf{Palavras}: são símbolos linguísticos nativos do espaço de atributos de um documento. 
+                Atributos a nível de palavra geralmente são palavras únicas selecionadas de um documento nativo, e também é possível que sejam utilizados todas as palavras de um documento para representá-lo;
+                
+                \item \textbf{Termos}: são palavras únicas e frases com mais de uma palavra selecionadas de um corpus de documentos nativos por meio de técnicas específicas para extração de termos;
+                
+                \item \textbf{Conceitos}: são os atributos gerados de modo manual, baseado em regras, ou via categorização híbrida feita no pré-processamento. 
+                Por exemplo, um documento sobre carros esportivos pode não incluir a palavra ``automóvel'', mas este conceito pode ser utilizado para identificar e representar esse documento.
+            \end{itemize}
+            
+            
+       \subsubsection{Criação de atributos} \label{subsubsec:Criação-de-atributos} 
+            A criação de atributos também é referida como geração de atributos, e consiste em derivar novos conjuntos de atributos que capturem, de forma mais efetiva, a informação carregada pelos dados \cite[p.~55]{TanIDM2014}.
+            
+            Algumas metodologias de criação de atributos são apresentadas por \citeonline[p.~55--57]{TanIDM2014}:
+            \begin{itemize}
+                \item \textbf{Extração de atributos}: a criação de um novo conjunto de atributos a partir dos dados brutos.
+                Por exemplo, no domínio da classificação de imagens os dados brutos são os \textit{pixels}, que não são apropriados para tarefas de classificação, no entanto os dados podem ser processados para fornecer informações de presença de contornos, que podem então ser utilizados por técnicas de classificação para identificar rostos;
+                
+                \item \textbf{Mapeamento dos dados para um novo espaço}: mudar completamente a visualização dos dados.
+                Considerando uma série temporal, por exemplo, os dados podem ser transformados na informação de frequência dessa série por meio da transformada de Fourier;
+                
+                \item \textbf{Construção de atributos}: os atributos presentes nos dados possuem a informação necessária para o processo de mineração, mas não estão na forma adequada, assim novos atributos podem ser construídos na forma adequada. 
+                Um exemplo é numa tarefa de classificação que os dados contém informação de volume e massa de itens, pode ser construído o atributo de densidade.
+            \end{itemize}
+            
         
     \subsection{Medidas de avaliação de classificadores} \label{subsec:Medidas-de-avaliação-de-classificadores}
     % Jo2018 - página 157 são algumas, pegar de Han2011 a parte de avaliação de modelo página 364
@@ -174,37 +224,48 @@
         
         A razão entre o número de classificações verdadeiras positivas e o número classificações positivas dá a precisão ($p$) do classificador, conforme mostra a Equação \ref{eq:medida-precisão}, e segundo \citeonline[p.~368, tradução nossa]{Han:2011:DMC:1972541} ``precisão pode ser pensada como uma medida de exatidão''.
         
-        \begin{equation}
-            \label{eq:medida-precisão}
-    		p = 
-    		\frac{\textit{TP}}{\textit{TP} + \textit{FP}}
-    		= \frac{\textit{TP}}{P`}
-        \end{equation}
-        
         A revocação ($r$) é dada pela Equação \ref{eq:medida-revocação}, que é a razão entre o número o número de classificações verdadeiras positivas e o número de exemplos positivos da classe real, e também é chamada de sensitividade \cite[p.~364--365]{Han:2011:DMC:1972541}.
         Ainda, segundo  \citeonline[p.~368, tradução nossa]{Han:2011:DMC:1972541} ``revocação é uma medida de completude''.
-
-        \begin{equation}
-            \label{eq:medida-revocação}
-    		r = 
-    		\frac{\textit{TP}}{\textit{TP} + \textit{FN}}
-    		= \frac{\textit{TP}}{P}
-        \end{equation}
+        
+        \vspace{\parskip}
+        \noindent\begin{minipage}{.5\textwidth}
+            \begin{equation}
+                \label{eq:medida-precisão}
+        		p = 
+        		\frac{\textit{TP}}{\textit{TP} + \textit{FP}}
+        		= \frac{\textit{TP}}{P`}
+            \end{equation}
+        \end{minipage}
+        \begin{minipage}{.5\textwidth}
+            \begin{equation}
+                \label{eq:medida-revocação}
+        		r = 
+        		\frac{\textit{TP}}{\textit{TP} + \textit{FN}}
+        		= \frac{\textit{TP}}{P}
+            \end{equation}
+        \end{minipage}
+        \vspace{\parskip}
         
         As medidas de precisão e revocação podem ser combinadas em uma única medida chamada de $F$ (também conhecida como $F$-\textit{score} ou pontuação ${F_1}$), que é a média harmônica entre elas, definida como disposto na Equação \ref{eq:medida-f-score}.
-        
-        \begin{equation}
-            \label{eq:medida-f-score}
-    		F = 
-    		\frac{2 \times p \times r}{p + r}
-        \end{equation}
-        
+
         O nível geral de reconhecimento do classificador é medido pela acurácia ($acc$), que é definida pela Equação \ref{eq:medida-acurácia}, representando a razão de exemplos do conjunto de teste que foram classificados corretamente.
-        \begin{equation}
-            \label{eq:medida-acurácia}
-    		acc = 
-    		\frac{\textit{TP} + \textit{TN}}{P + N}
-        \end{equation}
+        
+        \vspace{\parskip}
+        \noindent\begin{minipage}{.5\textwidth}
+            \begin{equation}
+                \label{eq:medida-f-score}
+        		F = 
+        		\frac{2 \times p \times r}{p + r}
+            \end{equation}
+        \end{minipage}
+        \begin{minipage}{.5\textwidth}
+            \begin{equation}
+                \label{eq:medida-acurácia}
+        		acc = 
+        		\frac{\textit{TP} + \textit{TN}}{P + N}
+            \end{equation}
+        \end{minipage}
+        \vspace{\parskip}
         
         Apesar das medidas $F$, precisão, revocação e acurácia serem bastante úteis na medida de efetividade de classificadores, \citeonline[p.~48]{Berry2010TMAT} afirmam que elas não consideram o custo da classificação errônea em problemas com classes desbalanceadas, e então sugere um critério de acurácia ponderada e similarmente \citeonline[p.~369]{Han:2011:DMC:1972541} sugerem o uso da medida $F_\beta{}$ definida como descrito na Equação \ref{eq:medida-f-beta}.        \begin{equation}
             \label{eq:medida-f-beta}
