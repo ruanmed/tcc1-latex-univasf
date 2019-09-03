@@ -1,7 +1,8 @@
 \begin{table}[H]
     \centering
     \caption{Matriz de confusão para uma tarefa de classificação binária, exibida com os totais para exemplos positivos e negativos.}
-    \begin{tabular}{l|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}}
+    \begin{adjustbox}{max width={\textwidth},keepaspectratio}%
+    \begin{tabular}{p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}}
         \multicolumn{2}{c}{} 
         & \multicolumn{2}{c}{\textbf{Classe prevista}} 
         \\ \cline{3-4}
@@ -11,10 +12,8 @@
         & \makecell[c]{Total}
         \\ \cline{2-4}
         \multirow{2}{1.2cm}{
-            \raisebox{0.0cm}{
-                \rotatebox{90}{
-                    \parbox{1.0cm}{\centering \textbf{Classe real}}
-                }
+            \rotatebox{90}{
+                \parbox{1.4cm}{\centering \textbf{Classe real}}
             }
         }
         & \makecell[c]{\textit{sim}} 
@@ -35,6 +34,7 @@
         & \multicolumn{1}{c}{$P + N$}
         \\
     \end{tabular}
+    \end{adjustbox}
     \legend{\ABNTEXfontereduzida \textbf{Fonte:} Tabela disponível em \citeonline[p.~366]{Han:2011:DMC:1972541}.}
     \label{tab:matriz-confusão}
 \end{table}

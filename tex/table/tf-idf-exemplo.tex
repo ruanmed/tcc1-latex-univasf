@@ -1,13 +1,14 @@
 \begin{table}[h]
     \centering
     \caption{Exemplo de cálculo do valor de tf-idf.}
+    \begin{adjustbox}{max width={\textwidth},keepaspectratio}%
     \begin{tabular}{|l|r|r|r|r|r|r|r|r|}
         \hline
         \multicolumn{3}{|l|}{
-            \diagbox[width=4.75cm, height=2.55cm]{Termo}{
-                \raisebox{-1.87cm}{
+            \diagbox[width=4.75cm, height=2.60cm]{Termo}{
+                \raisebox{-1.30cm}{
                     \rotatebox{90}{
-                        \parbox{1.6cm}{\centering Documento}
+                        \parbox{2.25cm}{\centering Documento}
                     }
                 }
             }
@@ -21,7 +22,8 @@
         auto       & 6723  & 2,08 & 3  & 6,24 & 33 & 68,64 & 0 & 0 \\
         insurance  & 19241 & 1,62 & 0  & 0 & 33 & 54,46 & 29 & 46,98 \\
         best       & 25235 & 1,5  & 14 & 21 & 0 & 0 & 17 & 25,5
-    \end{tabular}
+    \end{tabular}%
+    \end{adjustbox}%
     \legend{\ABNTEXfontereduzida \textbf{Fonte:} Tabelas disponíveis em \citeonline[p.~109--110]{Manning2008IIR}.}
     \label{tab:exemplo-tf-idf}
 \end{table}

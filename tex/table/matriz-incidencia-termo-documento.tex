@@ -1,6 +1,7 @@
 \begin{table}[H]
     \centering
     \caption{Matriz de incidência de termo-documento do livro \textit{Shakespeare’s Collected Works}. Cada elemento (i, j) da matriz é 1 se a peça de teatro na coluna j contém a palavra na linha i, caso contrário o elemento é 0.}
+    \begin{adjustbox}{max width={\textwidth},keepaspectratio}%
     \begin{tabular}{|c|c|c|c|c|c|c|c}
         \hline
         \diagbox{Palavra}{
@@ -27,6 +28,7 @@
         worser     & 1 & 0 & 1 & 1 & 1 & 0 & \\
         ...        & & & & & & & 
     \end{tabular}
+    \end{adjustbox}
     \legend{\ABNTEXfontereduzida \textbf{Fonte:} Tabela adaptada de \citeonline[p.~4]{Manning2008IIR}.}
     \label{tab:matriz-incidência-termo-documento}
 \end{table}

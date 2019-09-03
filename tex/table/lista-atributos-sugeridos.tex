@@ -1,17 +1,18 @@
 \begin{table}[H]
     \centering
     \caption{Atributos derivados de RI sugeridos.}
-    \begin{tabular}{|p{4.0cm}|l|l|}
+    \begin{adjustbox}{max width={\textwidth},keepaspectratio}%
+    \begin{tabular}{|p{4.0cm}|p{4.5cm}|p{4.5cm}|}
         \hline
         \diagbox[width=4.4cm, height=2.0cm]{Agregação}{
             \raisebox{-1.3cm}{
                 \rotatebox{90}{
-                    \parbox{1.2cm}{\centering Exemplo}
+                    \parbox{1.5cm}{\centering Exemplo}
                 }
             }
         }  
-        & \makecell[l]{Não faz parte da \\ classe da tarefa}
-        & \makecell[l]{Faz parte da \\ classe da tarefa}
+        & \makecell[l]{\parbox{4.0cm}{Não faz parte da \\ classe da tarefa}}
+        & \makecell[l]{\parbox{4.0cm}{Faz parte da \\ classe da tarefa}}
         \\ \hline
         \makecell[l]{Média aritmética \\ das pontuações}
         & \textbf{CLASS\_0\_BM25\_AVG} 
@@ -26,7 +27,8 @@
         & \textbf{CLASS\_1\_BM25\_SUM}  
         \\ 
         \hline
-    \end{tabular}
+    \end{tabular}%
+    \end{adjustbox}%
     \legend{\ABNTEXfontereduzida \textbf{Fonte:} O autor.}
     \label{tab:lista-atributos-sugeridos}
 \end{table}
