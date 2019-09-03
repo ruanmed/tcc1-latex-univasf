@@ -38,6 +38,8 @@
 \usepackage{footnote}
 \usepackage{pdfpages}
 \usepackage[skip=0pt]{caption} % Configurado para não ter espaço extra após o rótulo da figura
+% \setlength{\abovecaptionskip}{0pt plus 0pt minus 0pt} % https://tex.stackexchange.com/questions/45990/how-can-i-modify-vertical-space-between-figure-and-caption
+% \setlength{\belowcaptionskip}{0pt plus 0pt minus 0pt}
 % \usepackage{caption}
 
 % -----------------------------------------------------------------------------
@@ -302,7 +304,7 @@
 % Outros pacotes adicionais para Siglas - by @ruanmed
 %--------------------------------------------------------------------------------
 \usepackage{nomencl}
-\makenomenclature
+	\makenomenclature
 
 % Pacote para fazer listas enumeradas na mesma linha
 % http://www.texnia.com/archive/enumitem.pdf
@@ -327,3 +329,4 @@
 % Gráficos
 \usepackage{tikz}
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
