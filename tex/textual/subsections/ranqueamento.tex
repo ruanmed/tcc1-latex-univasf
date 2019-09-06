@@ -1,5 +1,5 @@
 \subsection{Ranqueamento} \label{subsec:Ranqueamento}
-    Devido à limitação dos métodos booleanos de somente retornar resultados conforme a presença ou não dos termos da consulta nos documentos \cite[p.~100]{Manning2008IIR}, foi proposto em 1957 por Luhn e em 1959 por Maron \textit{et al.} uma abordagem de recuperação ranqueada \cite[p.~1446]{Sanderson2012THIRR} a qual, em contraste com recuperação booleana, baseada nos termos de consulta estabelecia uma pontuação para cada artigo de modo probabilístico e retornava os artigos de modo ordenado e demonstraram que essa técnica sobressaía a recuperação booleana.
+    Devido à limitação dos métodos booleanos de somente retornar resultados conforme a presença ou não dos termos da consulta nos documentos \cite[p.~100]{Manning2008IIR}, foi proposto em 1957 por Luhn e em 1959 por Maron \textit{et al.} uma abordagem de recuperação ranqueada \cite[p.~1446]{Sanderson2012THIRR} a qual, em contraste com recuperação booleana, baseada nos termos de consulta estabelecia uma pontuação para cada artigo de modo probabilístico e retornava os artigos de modo ordenado e demonstraram que essa técnica superava a recuperação booleana.
     
     % Explicar o funcionamento de uma recuperação ranqueada, como é feito esse ranqueamento?
     O procedimento fundamental para ranqueamento dos documentos, conforme os termos de consulta, consiste na atribuição de pontuação aos documentos a partir da contabilização do número de aparições (chamada de frequência) de cada um dos termos no documento.
@@ -101,7 +101,7 @@
             \item \textbf{Normalização dos tamanhos dos documentos} embutida.
         \end{itemize}
         
-        E como principal desvantagem apontam a presunção de que os termos indexados são mutualmente independentes, sendo esta tarefa de considerar a dependência dos termos algo bastante complicado e que pode trazer resultados ruins caso não seja feito de modo adequado.
+        Os mesmos autores ainda apontam que a principal desvantagem é a presunção de que os termos indexados são mutualmente independentes, e ressaltam que a tarefa de considerar a dependência dos termos é algo bastante complicado e geram resultados ruins caso não seja feita de modo adequado.
         % Pontuações por Baeza, 1) a esquemática de pesos dos termos melhora a qualidade, 2) sua capacidade de correspondência parcial permite a recuperação de documentos que se aproximam das consultas, 3) o ranqueamento pelo cosseno dos vetores organiza os resultados pelo seu grau de similaridade com a consulta, 4) possui normalização dos tamanhos dos documentos embutida.
         % desvantagem: assume que os termos indexados são mutualmente independentes (porém ele cita que considerar a dependência de termos é uma tarefa complicada que se não for feito do modo apropriado pode levar a resultados ruins).
     

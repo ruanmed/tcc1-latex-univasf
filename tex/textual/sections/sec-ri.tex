@@ -18,22 +18,22 @@
     % -- O que fez surgir esses sistemas, a necessidade
     
     Os sistemas de classificação manual se mostram ineficazes devido ao surgimento crescente e constante de novas informações \cite[p.~6]{Baeza-Yates1999} desde o início do século 20. 
-    Desta maneira, além da imensidão de novas pesquisas científicas sendo publicadas, livros surgindo, entre outros registro históricos, que precisam ser classificados, existe também o problema da classificação não poder abranger todo tipo de necessidade que tal material pode satisfazer \cite[p.~1444]{Sanderson2012THIRR}. 
-    A preocupação com sistemas que possam indexar todo esse material e fornecer um acesso rápido às necessidades de informação de uma pessoa surgiu também no início do século 20 \cite{Bush:1979:WMT:1113634.1113638}, onde sistemas mecânicos de recuperação de informação foram visionados.
+    Desta maneira, além da grande quantidade de novas pesquisas científicas sendo publicadas e livros surgindo, entre outros registro históricos, os quais precisam ser classificados, existe também o problema da classificação não poder abranger todo tipo de necessidade que tal material pode satisfazer \cite[p.~1444]{Sanderson2012THIRR}. 
+    A preocupação com sistemas que possam indexar todo esse material e fornecer um acesso rápido às necessidades de informação de uma pessoa surgiu também no início do século 20 \cite{Bush:1979:WMT:1113634.1113638}, onde sistemas mecânicos de recuperação de informação foram vislumbrados.
     
     
     % - A área de pesquisa de RI que surgiu com a utilização de computadores para indexar informação
     % -- A utilização de computadores para fazer o serviço de RI
     
-    A partir da criação de sistemas computacionais na década de 1940, foi vista a possibilidade de criação de sistemas que armazenassem informações e possibilitassem essa consulta rápida sobre as informações armazenadas, sendo necessários estabelecer algoritmos que retornassem informação relevante ao que o usuário do sistema procura. 
-    Tendo então nesse momento o início do campo científico de Recuperação de Informação (RI, do inglês \textit{Information Retrieval}) que é encontrar material (geralmente documentos) de natureza desestruturada (geralmente texto) que satisfaça uma necessidade de informação dentro de grandes acervos (geralmente armazenados em computadores) \cite[p.~1]{Manning2008IIR}.
+    A partir da criação de sistemas computacionais na década de 1940, foi vista a possibilidade de criação de sistemas que armazenassem informações e possibilitassem essa consulta rápida sobre as informações armazenadas, sendo necessário estabelecer algoritmos que retornassem informação relevante ao que o usuário do sistema procura. 
+    Teve início nesse momento o campo científico da Recuperação de Informação (RI, do inglês \textit{Information Retrieval}) que envolve encontrar material (geralmente documentos) de natureza desestruturada (geralmente texto) que satisfaça uma necessidade de informação dentro de grandes acervos (geralmente armazenados em computadores) \cite[p.~1]{Manning2008IIR}.
     
-    A lei de Moore diz que o crescimento da velocidade de processamento é contínuo \cite{Moore1975}, e similarmente existe uma duplicação constante da capacidade de armazenamento digital a cada dois anos \cite{Kryder2005}. 
+    A lei de Moore diz que o crescimento da velocidade de processamento é contínuo \cite{Moore1975}, e de maneira similar existe uma duplicação constante da capacidade de armazenamento digital a cada dois anos \cite{Kryder2005}. 
     Logo, a necessidade de sistemas de Recuperação de Informação surge do crescimento exponencial das coleções de informação derivadas do crescimento de armazenamento, e consequente inabilidade das técnicas tradicionais de catalogação de lidar com isso \cite{Sanderson2012THIRR}.
     Ter um amontoado de conhecimento, informação, e não poder acessar o que é relevante de modo rápido não é interessante pois assim o desenvolvimento de pesquisas, por exemplo, fica comprometido e pode perder relevância \cite{Bush:1979:WMT:1113634.1113638}.
     
     % -- Conceitos fundamentais de RI
-    A RI como uma disciplina de pesquisa se iniciou no final da década de 50 a partir do uso de computadores na busca de referências de texto associadas com um assunto \cite[p.~3]{Sanderson2012THIRR}, as preocupações iniciais dessa área eram 
+    A RI como uma disciplina de pesquisa iniciou no final da década de 50 a partir do uso de computadores na busca de referências de texto associadas com um assunto \cite[p.~3]{Sanderson2012THIRR}, as preocupações iniciais dessa área eram 
     \begin{enumerate*}[label=(\alph*)]
     \item \textit{como indexar documentos} e \item \textit{como recuperá-los},
     \end{enumerate*}
@@ -52,6 +52,8 @@
     A consulta modificada é utilizada para obter o conjunto de documentos recuperados, os quais, idealmente, satisfazem as necessidades de informação do usuário.
     Por fim, os documentos recuperados são ranqueados pela sua pertinência de relevância para o usuário.
     
+    A arquitetura apresentada na Figura \ref{fig:diagrama-baeza2013-fig1-3} inclui o ranqueamento feito pelos sistemas de RI mordernos, que são uma expansão dos sistemas de RI booleanos, estes últimos contam com uma indexação e recuperação mais simples que os sistemas de RI ranqueados como vai ficar claro nas subseções a seguir.
+
     \input{tex/textual/subsections/metodos-booleanos.tex}
     
     % -- A pesquisa de RI sendo desenvolvida, citar sistemas rankeados
