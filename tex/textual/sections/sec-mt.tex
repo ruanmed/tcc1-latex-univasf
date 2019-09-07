@@ -96,21 +96,26 @@
             \item \textbf{Preditivas}: realizam uma indução nos dados presentes objetivando prever valores de um atributo em particular, sendo este atributo a ser previsto chamado de objetivo. 
         \end{itemize}
         
-        Quanto às tarefas em si, na mineração de dados tem-se tarefas de agrupamento, associação, classificação, descrição, detecção de anomalias, e de regressão, as quatro principais estão ilustradas na Figura \ref{fig:tarefas-principais-mineração-dados}.
-        As tarefas de classificação e de regressão entram na categoria de tarefas preditivas, e são às vezes referidas como tarefas de modelagem preditiva. Ainda, tarefas de classificação trabalham com atributos objetivos discretos, enquanto que tarefas de regressão tem seus atributos objetivos como variáveis contínuas \citeonline[p.~7--8]{TanIDM2014}, e ambas focam na análise de conjuntos de dados rotulados, os chamados de conjuntos de treinamento \cite[p.~19]{Han:2011:DMC:1972541}.
+        Quanto às tarefas em si, a mineração de dados possui tarefas de agrupamento, associação, classificação, descrição, detecção de anomalias, e de regressão.
+        As quatro principais estão ilustradas na Figura \ref{fig:tarefas-principais-mineração-dados}.
+        As tarefas de classificação e de regressão entram na categoria de tarefas preditivas, e são às vezes referidas como tarefas de modelagem preditiva. 
+        Ainda, tarefas de classificação trabalham com atributos objetivos discretos, enquanto que tarefas de regressão tem seus atributos objetivos como variáveis contínuas \citeonline[p.~7--8]{TanIDM2014}, e ambas focam na análise de conjuntos de dados rotulados, os chamados de conjuntos de treinamento \cite[p.~19]{Han:2011:DMC:1972541}.
         Na Mineração de Textos uma tarefa de classificação normalmente recebe o nome de \textbf{categorização de texto} \cite[p.~6]{TurchiATPUKM2009} \cite[p.~61]{Feldman:2006:TMH:1076381}.
         
         \input{tex/figure/tarefas-principais-mineracao-dados.tex}
         
         Segundo os autores \citeonline[p.~15--21]{Han:2011:DMC:1972541}, \citeonline[p.~8--11]{TanIDM2014} e \citeonline[p.~8--14]{LaroseDKD2014} as demais tarefas da mineração de dados são descritivas e podem ser caracterizadas como segue:
         \begin{itemize}
-            \item \textbf{Agrupamento}: consiste numa análise dos dados sem consulta à rótulos de classe, podendo estes até não estarem presentes, e este tipo de tarefa é utilizado para gerar rótulos de classes para grupos de dados. Na literatura é mais comum se referir ao termo em língua inglesa, \textit{clustering};
+            \item \textbf{Agrupamento}: consiste numa análise dos dados sem consulta à rótulos de classe, podendo estes até não estarem presentes, e este tipo de tarefa é utilizado para gerar rótulos de classes para grupos de dados. 
+            Na literatura é mais comum se referir ao termo em língua inglesa, \textit{clustering};
             
             \item \textbf{Associação}: são descobertos relacionamentos mais frequentes entre os atributos, utilizada para descoberta de padrões, geralmente por meio de regras de implicação;
             
-            \item \textbf{Descrição}: os dados são associados com conceitos, consistindo da caracterização dos dados, onde é feita o resumo das características gerais de uma classe objetivo; ou da discriminação dos dados, onde é feita a comparação, contraste, dos atributos de uma classe objetivo com um conjunto de outras classes;
+            \item \textbf{Descrição}: os dados são associados com conceitos, consistindo da caracterização dos dados, onde é feita o resumo das características gerais de uma classe objetivo; 
+            ou da discriminação dos dados, onde é feita a comparação, contraste, dos atributos de uma classe objetivo com um conjunto de outras classes;
             
-            \item \textbf{Detecção de anomalias}: também chamado de detecção de dados discrepantes (\textit{outliers}), foca na identificação de exemplos dos dados que possuem características significativamente diferentes do restante. Muitos métodos de mineração de dados descartam os \textit{outliers} por considerarem estes como ruídos nos dados.
+            \item \textbf{Detecção de anomalias}: também chamado de detecção de dados discrepantes (\textit{outliers}), foca na identificação de exemplos dos dados que possuem características significativamente diferentes do restante. 
+            Muitos métodos de mineração de dados descartam os \textit{outliers} por considerarem estes como ruídos nos dados.
         \end{itemize}
     
         \subsubsection{Classificação binária} \label{subsubsec:Classificação-binária}
@@ -145,9 +150,11 @@
         \begin{itemize}
             \item \textbf{Transformação de atributos}: construção de novos atributos a partir de atributos existentes, frequentemente feito por meio de mapeamentos matemáticos;
             
-            \item \textbf{Geração de atributos}: também chamado de criação de atributos ou de extração de atributos, é  a geração de novos atributos que não são resultados de transformações. Por exemplo, atributos derivados de padrões e de técnicas de domínio específico se encontram na categoria de geração de atributos;
+            \item \textbf{Geração de atributos}: também chamado de criação de atributos ou de extração de atributos, é  a geração de novos atributos que não são resultados de transformações. 
+            Por exemplo, atributos derivados de padrões e de técnicas de domínio específico se encontram na categoria de geração de atributos;
             
-            \item \textbf{Seleção de atributos}: selecionar um pequeno conjunto de atributos dentre um montante, com objetivo de reduzir o conjunto de atributos para tornar a tarefa de classificação computacionalmente viável. A seleção de atributos também pode visar medição de atributos úteis e a melhora do desempenho por meio da escolha do melhor subconjunto;
+            \item \textbf{Seleção de atributos}: selecionar um pequeno conjunto de atributos dentre um montante, com objetivo de reduzir o conjunto de atributos para tornar a tarefa de classificação computacionalmente viável. 
+            A seleção de atributos também pode visar medição de atributos úteis e a melhora do desempenho por meio da escolha do melhor subconjunto;
             
             \item \textbf{Metodologias de manejo generalista e automatizado de atributos}: abordagens para geração automática de uma grande quantidade de atributos e seleção de um subconjunto dentre os atributos gerados;
             
@@ -159,7 +166,7 @@
             Ao atacar um problema de MT em uma coleção de documentos é de suma importância a definição dos atributos a serem utilizados na tarefa, e mesmo em pequenas coleções o problema da alta dimensionalidade dos atributos aparece.
             \citeonline[p.~4, tradução nossa]{Feldman:2006:TMH:1076381} exemplificam que até mesmo ``em uma coleção extremamente pequena de 15 mil documentos selecionados de notícias da Reuters, podem ser identificadas mais de 25 mil raízes de palavras não triviais''.
             
-            A alta dimensionalidade dos atributos pode se tornar um empecilho computacional para a realização da MT, por tornar os cálculos necessários muito mais demorados em alguns casos tornando este um problema computacionalmente inviável.
+            A alta dimensionalidade dos atributos pode aparecer como um empecilho computacional para a realização da MT, por fazer com que os cálculos necessários sejam muito mais demorados e em alguns casos tornando-se um problema computacionalmente inviável.
             Então, a identificação e escolha de um modelo representacional, um bom conjunto de atributos, para representar os documento é algo de suma importância \cite[p.~4]{Feldman:2006:TMH:1076381}.
             
             Os tipos de atributos mais utilizados para representar documentos, segundo  \citeonline[p.~5--7]{Feldman:2006:TMH:1076381}:
@@ -185,7 +192,7 @@
                 Por exemplo, no domínio da classificação de imagens os dados brutos são os \textit{pixels}, que não são apropriados para tarefas de classificação, no entanto os dados podem ser processados para fornecer informações de presença de contornos, que podem então ser utilizados por técnicas de classificação para identificar rostos;
                 
                 \item \textbf{Mapeamento dos dados para um novo espaço}: mudar completamente a visualização dos dados.
-                Considerando uma série temporal, por exemplo, os dados podem ser transformados na informação de frequência dessa série por meio da transformada de Fourier;
+                Considerando uma série temporal, por exemplo, os dados podem ser transformados na informação de frequência dessa stem-seérie por meio da transformada de Fourier;
                 
                 \item \textbf{Construção de atributos}: os atributos presentes nos dados possuem a informação necessária para o processo de mineração, mas não estão na forma adequada, assim novos atributos podem ser construídos na forma adequada. 
                 Um exemplo é numa tarefa de classificação que os dados contém informação de volume e massa de itens, pode ser construído o atributo de densidade.
@@ -201,7 +208,7 @@
         Os exemplos positivos são aqueles da classe de maior interesse, e os exemplos negativos são todos o restante \cite[p.~364]{Han:2011:DMC:1972541}.
         Considerando uma classificação binária, pode-se ter os exemplos positivos referentes a \textit{spam = sim} e os negativos \textit{spam = não}.
         Seguindo, como descrito por \cite[p.~364--365]{Han:2011:DMC:1972541}, ao construir um modelo de classificador treinado com exemplos deste tipo, e então ao testá-lo em um conjunto com a classe objetivo conhecida, serão previstas as classes desse conjunto.
-        Sendo $P`$ o número de exemplos classificados positivamente, e $N`$ o número de exemplos classificados negativamente. 
+        Sendo $P'$ o número de exemplos classificados positivamente, e $N'$ o número de exemplos classificados negativamente. 
         Cada exemplo pode então ter a classe prevista comparada com as classes objetivos já conhecidas, gerando a matriz de confusão da Tabela \ref{tab:matriz-confusão} como um sumário das previsões corretas e incorretas.
                 % falar que a matriz de confusão pode ter mais linhas e colunas
 
@@ -220,7 +227,7 @@
             
             \item \textbf{Falsos negativos} (\textit{FN}): número de exemplos negativos rotulados incorretamente, por exemplo a rotulação de um exemplo como \textit{spam = não} sendo que sua classe real na verdade é \textit{spam = sim}.
         \end{itemize}
-        A adição de totais à matriz de confusão é comum \cite[p.~366]{Han:2011:DMC:1972541}, na matriz apresentada na Tabela \ref{tab:matriz-confusão} estão apresentados os totais $P`$ e $N`$, respectivamente o número total de exemplos rotulados como positivos ($\textit{TP} + \textit{FP}$) e o número de exemplos rotulados como negativos ($\textit{TN} + \textit{FN}$).
+        A adição de totais à matriz de confusão é comum \cite[p.~366]{Han:2011:DMC:1972541}, na matriz apresentada na Tabela \ref{tab:matriz-confusão} estão apresentados os totais $P'$ e $N'$, respectivamente o número total de exemplos rotulados como positivos ($\textit{TP} + \textit{FP}$) e o número de exemplos rotulados como negativos ($\textit{TN} + \textit{FN}$).
         $P$ é o número de exemplos com classe real positiva ($\textit{TP} + \textit{FN}$) e $N$ é o número de exemplos com classe real negativa ($\textit{FP} + \textit{TN}$).
         
         A razão entre o número de classificações verdadeiras positivas e o número classificações positivas dá a precisão ($p$) do classificador, conforme mostra a Equação \ref{eq:medida-precisão}, e segundo \citeonline[p.~368, tradução nossa]{Han:2011:DMC:1972541} ``precisão pode ser pensada como uma medida de exatidão''.
@@ -234,7 +241,7 @@
                 \label{eq:medida-precisão}
         		p = 
         		\frac{\textit{TP}}{\textit{TP} + \textit{FP}}
-        		= \frac{\textit{TP}}{P`}
+        		= \frac{\textit{TP}}{P'}
             \end{equation}
         \end{minipage}
         \begin{minipage}{.5\textwidth}
