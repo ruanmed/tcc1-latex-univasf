@@ -1,159 +1,86 @@
 \chapter{Resultados} \label{ch:Resultados}
+%  Os resultados seguem a metodologia
 
+% Definir qual o top_k utilizado
+% Verificar em Were2014 novamente
+% Padrão do zettair (se não me engano é 20)
+% Artigo de fulano não diz
 
+% Capítulo de Resultados 
 
-\section{Seção de exemplo 1 - Códigos} \label{sec:resex1}
+% -> Introdução: "Este capítulo apresenta os resultados obtidos e discute-os..." 
+Este capítula apresenta os resultados obtidos neste estudo investigativo do desempenho de atributo de RI em classificadores de Mineração de Texto.
 
-\subsection{Subseção de exemplo 1 - Inserindo trechos de códigos}
- 
-O nosso querido Leonardo Cavalcante providenciou um comando que deixa nossos trechos de códigos bonitinhos e gera um elemento pré-textual de Lista de Códigos. 
+Nas subseções a seguir primeiro é abordada a configuração experimental utilizada para realizar o estudo, e logo em seguida é apresentada uma visão geral das soluções selecionadas dos corpus DB\_AUTHORPROF e DB\_HYPERPARTISAN, onde os pré-processamento realizado e os classificadores utilizados em cada uma das soluções são descritos brevemente.
+Por fim, são apresentados os resultados mensurados por meio das medidas escolhidas para avaliação de desempenho, na subseção X estão as medidas de desempenho das ferramentas de armazenamento e indexação e na subseção são expostas as medidas de desempenho dos classificadores.
 
-Os códigos são adicionados através do comando seguinte:
+% Na subseção a seguir são abordados os resultados referentes às ferramentas de indexação.
+% Na subseção posterior são abordados os resultados referente aos desempenho das variáveis de RI em classificadores.
 
-\textbackslash sourcecode\{ Descrição \}\{Label\}\{Linguagem\}\{Arquivo com extensão\}
+\section{Configuração experimental} \label{sec:resex1}
+% 4.0 Setup experimental 
 
-Um exemplo pode ser visto no código \ref{cmd:cron} abaixo.
+	Para programação e execução dos experimentos foi utilizado o sistema computacional disponível para o autor, com a configuração disposta na Tabela 4.1.
 
-\sourcecode{Configuração do intervalo de execução no Script Agendador}{cron}{javascript}{cron.js}
+	As ferramentas de armazenamento e indexação receberam os mesmos parâmetros de refinamento na configuração de suas funções BM25, sendo estes configurados em $k_1 = 1.2$, $k_3 = 0$ e $b = 0.75$.
+	O parâmetro $k_3$, para escalonar a frequência de termos na consulda, é exclusivo para o Zettair, as demais ferramentas não implementam este parâmetro.
 
+	% Fixação do número aleatório do Python e das bibliotecas utilizadas nas soluções, quando isto não era feito originalmente, para permitir reproducibilidade exata dos resultados obtidos. 
 
-\section{Seção de exemplo 2 - Listas} \label{sec:resex2}
+\section{Visão geral das soluções selecionadas} \label{sec:resex1}
+	% Falar brevemento sobre o pré-processamento;
+	% Falar sobre o classificador utilizado; e
+	% Indicar o Notebook de cada solução para mais detalhes
+	\subsection{Soluções para o corpus DB\_HYPERPARTISAN}
 
-\subsection{Subseção de exemplo 2 - Lista de itens} 
+	\subsection{Soluções para o corpus DB\_AUTHORPROF}
 
-Existem alguns tipos de listas no Latex, iremos exemplificar a lista sem numeração (seção \ref{subsubsec:itemize}), a lista enumerada (seção \ref{subsubsec:enumerate}) e a lista mista (seção \ref{subsubsec:mista}). As listas podem ser encadeadas de diversas maneiras,
-de acordo com a necessidade do autor.
+\section{Desempenho das ferramentas de armazenamento e indexação} \label{sec:resex1}
+	Para cálculo das variáveis TIME_INDEX e TIME_QUERY, conforme sugeridas no Capítulo 3, foi utilizada a linguagem de programação Python na qual foi implementada uma classe abstraindo a indexação e cálculo das variáveis de RI nas 3 ferramentas de Indexação, chamada IndexToolManager. 
 
-\subsubsection{Subsubseção de exemplo 1 - Lista sem numeração} \label{subsubsec:itemize}
+	Esta classe foi central para todo o estudo. 
 
-Este é um exemplo de lista sem numeração.
+	\subsection{Tempo de indexação}
+		Para cálculo das variáveis TIME_INDEX foi criado um script python nomeado time_index.py, o qual utilizou da classe IndexToolManager em duas funções feitas para executar a indexação dos banco de dados, DB_AUTHORPROF e DB_HYPERPARTISAN, nas 3 ferramentas, ARANGO, ELASTIC e ZETTAIR. 
 
-\begin{itemize}
-	\item \textbf{Cadastrar usuário}
+		
 
-		\begin{itemize}
-    		\item Atores
-		    	\begin{itemize}
-    		    	\item Usuário
-		    	\end{itemize}
+		Como as ferramentas ARANGO e ELASTIC se assemelham bastante a sistemas gerenciadores de bancos de dados, preparados, inclusive, para distribuição geográfica dos dados, há de ser citada essa grande diferença deles para o ZETTAIR, este último que é somente um sistema para Indexação em lotes e consulta local dos dados, não permitindo, por exemplo, adição de novos documentos em um índice. A ação de inserção unitária é um procedimento comum em SGBDs. 
 
-	    	\item Fluxo de eventos primário
-			    \begin{itemize}
-	    		    \item o usuário deve se cadastrar informando seu nome, \textit{e-mail} e senha;
-		        	\item a API armazena os dados do usuário;
-		    	    \item o usuário é liberado para realizar o \textit{login}.
-			    \end{itemize}
+		
 
-    		\item Fluxo alternativo
-			    \begin{itemize}
-		    	   \item o usuário desiste de se cadastrar e cancela o caso de uso clicando no botão voltar.
-	    		\end{itemize}
+		A operação de indexação foi executada de dois modos, em lote e unitária, sendo que o ZETTAIR só permite a inserção em lote. 
 
-		\end{itemize}
-	
-\end{itemize}
+		
 
-\subsubsection{Subsubseção de exemplo 2 - Lista enumerada} \label{subsubsec:enumerate}
+		Na Figura 4.1 podem ser vistos os resultados do tempo para inserção em lote dos documentos dos corpus  em cada ferramenta. 
 
-Este é um exemplo de lista enumerada.
+		
 
-\begin{enumerate}
-	\item O Usuário deseja ver o histórico das variáveis climáticas, então através da interface de usuário escolhe o período ao qual o histórico se refere;
-	\item A aplicação solicita à API através de uma requisição HTTP contendo o momento de início e o momento do fim do período em seus parâmetros;     			\item A API recebe a solicitação e se comunica com a base de dados, então requere as informações quem possuem a data de leitura no intervalo escolhido;
-	\item A base de dados retorna os dados em formato Json para a API;
-	\item A API responde à requisição retornando os dados, também em formato Json, para a aplicação cliente;
-	\item A aplicação cliente renderiza os gráficos utilizando o conjunto de dados obtidos.
-\end{enumerate}
+		O ZETTAIR é a ferramenta mais rápida para completar a indexação de ambos os corpus selecionados, levando somente 2,x segundos para indexar os 300 mil documentos do corpus DB_AUTHORPROF. 
 
-\subsubsection{Subsubseção de exemplo 3 - Lista mista} \label{subsubsec:mista}
+		Dentre os SGBDs avaliados, vemos que o ELASTIC tem  melhor desempenho que o ARANGO para inserções em lote, gastando 15 segundos para indexar os 300 mil documentos. 
 
-Este é um exemplo de lista mista.
+		
 
-\begin{itemize}
-	\item \textbf{Cadastrar usuário}
+		Para operação de inserção unitária foi levado em conta o tempo total para indexação dos 300 mil documentos, inseridos em sequência, na Figura 4.2 estão dispostos os tempos totais para indexação de todos os documentos dos corpus com ambas ferramentas. 
 
-		\begin{itemize}
-    		\item Atores
-		    	\begin{itemize}
-    		    	\item Usuário
-		    	\end{itemize}
+	\subsection{Tempo de consulta}
 
-	    	\item Fluxo de eventos primário
-			    \begin{enumerate}
-	    		    \item o usuário deve se cadastrar informando seu nome, \textit{e-mail} e senha;
-		        	\item a API armazena os dados do usuário;
-		    	    \item o usuário é liberado para realizar o \textit{login}.
-			    \end{enumerate}
+\section{Desempenho dos classificadores com atributos de RI} \label{sec:resex1}
 
-    		\item Fluxo alternativo
-			    \begin{itemize}
-		    	   \item o usuário desiste de se cadastrar e cancela o caso de uso clicando no botão voltar.
-	    		\end{itemize}
+	\subsection{DB\_HYPERPARTISAN}
 
-		\end{itemize}
+	\subsection{DB\_AUTHORPROF}
 
-	\item \textbf{Visualizar dados atuais}
+% Fluxograma das alterações feitas nos códigos com exemplos de trechos alterados
+% Rosalvo disse que é para colocar no Apêndice
 
-		\begin{itemize}
-		    \item Atores
-	    		\begin{itemize}
-		    	    \item Usuário
-			    \end{itemize}
-    
-	    	\item Pré-condições
-			    \begin{itemize}
-		     	   \item o usuário deve estar autenticado
-			    \end{itemize}
+% Zettair, colocar detalhe dos modos de operação para consulta, iterativa e consulta única
 
-	    	\item Fluxo de eventos primário
-			    \begin{enumerate}
-		    	    \item o usuário deve efetuar o \textit{login} informando o \textit{e-mail} e a senha;
-	    		    \item caso o usuário não seja autenticado, o sistema informa a respeito de credenciais inválidas e encerra o caso de uso;
-		    	    \item a API autentica o usuário;
-    			    \item o usuário é liberado para visualizar os dados atuais dos sensores da estação;
-		        	\item após a visualização o usuário pode finalizar o caso de uso ou efetuar uma nova consulta se desejar.
-			    \end{enumerate}
+% ganho de informação das 6 variáveis nas soluções
 
-    		\item Fluxo alternativo
-			    \begin{itemize}
-    			   \item o usuário desiste de visualizar os dados atuais e cancela o caso de uso clicando no botão voltar.
-			    \end{itemize}
+% Citar as técnicas só de um, descrições, citar algum livro ou página
 
-		\end{itemize}
+% Criar rede neural para comparar à solução do DB_AUTHORPROF à parte 
 
-	\item \textbf{Visualizar histórico}
-
-		\begin{itemize}
-		    \item Atores
-	    		\begin{itemize}
-		    	    \item Usuário
-	    		\end{itemize}
-
-	    	\item Pré-condições
-    			\begin{itemize}
-			        \item o usuário deve estar autenticado
-			    \end{itemize}
-
-		    \item Fluxo de eventos primário
-			    \begin{enumerate}
-			        \item o usuário deve efetuar o \textit{login} informando o \textit{e-mail} e a senha;
-			        \item caso o usuário não seja autenticado, o sistema informa a respeito de credenciais inválidas e encerra o caso de uso;
-			        \item a API autentica o usuário;
-			        \item o usuário é liberado para escolher qual período cujo histórico será exibido;
-			        \item o usuário seleciona as variáveis a serem exibidas no gráficos de linhas;
-			        \item após a visualização do histórico o usuário pode finalizar o caso de uso se desejar.
-			    \end{enumerate}
-
-		    \item Fluxo alternativo
-			    \begin{enumerate}
-			        \item após a escolha do período de exibição do histórico o usuário pode voltar para a tela anterior e escolher um novo período;
-			        \item o histórico é exibido para o usuário;
-			        \item após a visualização do histórico o usuário pode finalizar o caso de uso ou efetuar uma nova consulta se desejar.
-			    \end{enumerate}
-
-		    \item Fluxo alternativo
-			    \begin{enumerate}
-			        \item o usuário desiste de visualizar o histórico e cancela o caso de uso clicando no botão voltar.
-			    \end{enumerate}
-		\end{itemize}
-\end{itemize}
