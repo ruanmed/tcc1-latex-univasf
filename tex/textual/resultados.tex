@@ -1,86 +1,135 @@
 \chapter{Resultados} \label{ch:Resultados}
-%  Os resultados seguem a metodologia
+	%  Os resultados seguem a metodologia
 
-% Definir qual o top_k utilizado
-% Verificar em Were2014 novamente
-% Padrão do zettair (se não me engano é 20)
-% Artigo de fulano não diz
+	% Definir qual o top_k utilizado
+	% Verificar em Were2014 novamente
+	% Padrão do zettair (se não me engano é 20)
+	% Artigo de fulano não diz
 
-% Capítulo de Resultados 
+	% Capítulo de Resultados 
 
-% -> Introdução: "Este capítulo apresenta os resultados obtidos e discute-os..." 
-Este capítula apresenta os resultados obtidos neste estudo investigativo do desempenho de atributo de RI em classificadores de Mineração de Texto.
+	% -> Introdução: "Este capítulo apresenta os resultados obtidos e discute-os..." 
+	Este capítula apresenta os resultados obtidos neste estudo investigativo do desempenho de atributos de RI em classificadores de Mineração de Texto.
 
-Nas subseções a seguir primeiro é abordada a configuração experimental utilizada para realizar o estudo, e logo em seguida é apresentada uma visão geral das soluções selecionadas dos corpus DB\_AUTHORPROF e DB\_HYPERPARTISAN, onde os pré-processamento realizado e os classificadores utilizados em cada uma das soluções são descritos brevemente.
-Por fim, são apresentados os resultados mensurados por meio das medidas escolhidas para avaliação de desempenho, na subseção X estão as medidas de desempenho das ferramentas de armazenamento e indexação e na subseção são expostas as medidas de desempenho dos classificadores.
+	Nas subseções a seguir primeiro é abordada a configuração experimental utilizada para realizar o estudo, e logo em seguida é apresentada uma visão geral das soluções selecionadas dos corpus DB\_AUTHORPROF e DB\_HYPERPARTISAN, onde o pré-processamento realizado e os classificadores utilizados em cada uma das soluções são descritos brevemente.
+	Por fim, são apresentados os resultados mensurados por meio das medidas escolhidas para avaliação de desempenho, na subseção X estão as medidas de desempenho das ferramentas de armazenamento e indexação, e na subseção Y são expostas as medidas de desempenho dos classificadores.
 
-% Na subseção a seguir são abordados os resultados referentes às ferramentas de indexação.
-% Na subseção posterior são abordados os resultados referente aos desempenho das variáveis de RI em classificadores.
+	% Na subseção a seguir são abordados os resultados referentes às ferramentas de indexação.
+	% Na subseção posterior são abordados os resultados referente aos desempenho das variáveis de RI em classificadores.
 
-\section{Configuração experimental} \label{sec:resex1}
-% 4.0 Setup experimental 
+	\section{Configuração experimental} \label{sec:ConfiguraçãoExperimental}
+	% 4.0 Setup experimental 
 
-	Para programação e execução dos experimentos foi utilizado o sistema computacional disponível para o autor, com a configuração disposta na Tabela 4.1.
+		Para programação e execução dos experimentos foi utilizado o sistema computacional disponível para o autor, com a configuração disposta na Tabela \ref{tab:sistema-computacional}.
 
-	As ferramentas de armazenamento e indexação receberam os mesmos parâmetros de refinamento na configuração de suas funções BM25, sendo estes configurados em $k_1 = 1.2$, $k_3 = 0$ e $b = 0.75$.
-	O parâmetro $k_3$, para escalonar a frequência de termos na consulda, é exclusivo para o Zettair, as demais ferramentas não implementam este parâmetro.
-
-	% Fixação do número aleatório do Python e das bibliotecas utilizadas nas soluções, quando isto não era feito originalmente, para permitir reproducibilidade exata dos resultados obtidos. 
-
-\section{Visão geral das soluções selecionadas} \label{sec:resex1}
-	% Falar brevemento sobre o pré-processamento;
-	% Falar sobre o classificador utilizado; e
-	% Indicar o Notebook de cada solução para mais detalhes
-	\subsection{Soluções para o corpus DB\_HYPERPARTISAN}
-
-	\subsection{Soluções para o corpus DB\_AUTHORPROF}
-
-\section{Desempenho das ferramentas de armazenamento e indexação} \label{sec:resex1}
-	Para cálculo das variáveis TIME_INDEX e TIME_QUERY, conforme sugeridas no Capítulo 3, foi utilizada a linguagem de programação Python na qual foi implementada uma classe abstraindo a indexação e cálculo das variáveis de RI nas 3 ferramentas de Indexação, chamada IndexToolManager. 
-
-	Esta classe foi central para todo o estudo. 
-
-	\subsection{Tempo de indexação}
-		Para cálculo das variáveis TIME_INDEX foi criado um script python nomeado time_index.py, o qual utilizou da classe IndexToolManager em duas funções feitas para executar a indexação dos banco de dados, DB_AUTHORPROF e DB_HYPERPARTISAN, nas 3 ferramentas, ARANGO, ELASTIC e ZETTAIR. 
-
+		\input{tex/table/sistema-computacional.tex}
 		
+		As ferramentas de armazenamento e indexação receberam os mesmos parâmetros de refinamento na configuração de suas funções BM25, sendo estes configurados em $k_1 = 1.2$, $k_3 = 0$ e $b = 0.75$.
+		O parâmetro $k_3$ (escalonar frequência de termos na consulta) é exclusivo do Zettair, as demais ferramentas não implementam este parâmetro.
 
-		Como as ferramentas ARANGO e ELASTIC se assemelham bastante a sistemas gerenciadores de bancos de dados, preparados, inclusive, para distribuição geográfica dos dados, há de ser citada essa grande diferença deles para o ZETTAIR, este último que é somente um sistema para Indexação em lotes e consulta local dos dados, não permitindo, por exemplo, adição de novos documentos em um índice. A ação de inserção unitária é um procedimento comum em SGBDs. 
+		% Fixação do número aleatório do Python e das bibliotecas utilizadas nas soluções, quando isto não era feito originalmente, para permitir reprodutibilidade exata dos resultados obtidos.
+		% [ ] FOOTNOTE DO VSCODIUM?
+		O ambiente de programação utilizado foi o VSCodium e a linguagem de programação utilizada foi o Python 3.7.5.
+		Para permitir reprodutibilidade dos resultados obtidos, o gerador de número aleatórios (RNG) do ambiente do Python, assim como os RNGs das bibliotecas utilizadas pelas soluções, tiveram as suas sementes de geração fixadas.
 
-		
+		Todo os códigos fontes dos scripts Python criados para este estudo estão disponíveis em um repositório de código online e púbilco criado pelo autor, acessível pelo seguinte link: \hyperlink{https://github.com/ruanmed/tcc-ii-ir-features-text-mining/}{https://github.com/ruanmed/tcc-ii-ir-features-text-mining/}.
 
-		A operação de indexação foi executada de dois modos, em lote e unitária, sendo que o ZETTAIR só permite a inserção em lote. 
+	\section{Visão geral das soluções selecionadas e adaptações feitas} \label{sec:VisãoSoluçõesEAdaptações}
+		% Falar brevemento sobre o pré-processamento;
+		% Falar sobre o classificador utilizado; e
+		% Indicar o Notebook de cada solução para mais detalhes
+		As soluções selecionadas para reprodução e posterior adição dos atributos de RI utilizam de diferentes técnicas para pré-processamento dos corpus e também de classificadores diferentes, tornando necessário, em alguns casos, ajustes antes da adição dos atributos de RI.
 
-		
+		Nas subseções a seguir são brevemente abordadas as soluções 1\_bertha e 4\_tom do corpus DB\_HYPARTISAN, e a solução 2\_daneshvar18 do corpus DB\_AUTHORPROF.
 
-		Na Figura 4.1 podem ser vistos os resultados do tempo para inserção em lote dos documentos dos corpus  em cada ferramenta. 
+		\subsection{Corpus DB\_HYPERPARTISAN}
+			O corpus DB\_HYPERPARTISAN possui dois conjuntos de dados, o primeiro com 750 mil artigos classificados por enviesamento do editor, e o segundo com 645 artigos rotulados como hiperpartidários ou não com consenso entre avaliadores via \textit{crowdsourcing}.
+			O objetivo da competição que utilizou esse corpus era classificar artigos como hiperpartidários ou não, e assim os participantes puderam utilizar os dois conjuntos para fazer suas avaliações. 
+			No entanto, a utilização dos 750 mil artigos classificados por enviesamento de editor não foram úteis para ajudar na classificação, e das duas soluções selecionadas nenhuma delas utilizou esses 750 mil artigos nos seus modelos finais, pois utilizar a informação de editor em conjunto reduziu o desempenho de seus classificadores \cite[p.~840]{jiang-etal-2019-team} pois segundo \citeonline[p.~1067]{yeh-etal-2019-tom} o conjunto de dados classificado por enviesamento do editor possui muito ruído.
 
-		
+			O conjunto de validação final da competição não foi disponibilizado ao público, portanto para reprodução das soluções foi necessário dividir o conjunto de 645 artigos em treinamento e validação pelo método de \textit{holdout}, ficando assim com 430 artigos para treinamento e 215 artigos para teste. 
+			Essa divisão foi feita de modo que as classes mantiveram-se com o mesmo balanceamento do conjunto original (37\% dos artigos hiperpartidário e 63\% não hiperpartidários).
 
-		O ZETTAIR é a ferramenta mais rápida para completar a indexação de ambos os corpus selecionados, levando somente 2,x segundos para indexar os 300 mil documentos do corpus DB_AUTHORPROF. 
+			Então, os 430 artigos foram indexados em todas as ferramentas de indexação permitindo a geração dos atributos de RI posteriormente.
+			A indexação foi feita com auxílio da classe IndexToolManager criada pelo autor, que é abordada com detalhes na seção de desempenho das ferramentas de armazenamento e indexação.
+			
+			\subsubsection{Solução 1\_bertha}
+				A solução da equipe Bertha von Suttner (4\_bertha) para essa tarefa da \textit{SemEval 2019} consiste em uma abordagem de classificação com uma Rede Neural Convolucional (\textit{Convolutional Neural Network}, CNN) e o pré-processamento dos documentos do corpus em uma representação destes por meio de uma Rede ESRC (\textit{ELMo Sentence Representation Convolutional Network}), uma representação sugerida e nomeada pela equipe.
 
-		Dentre os SGBDs avaliados, vemos que o ELASTIC tem  melhor desempenho que o ARANGO para inserções em lote, gastando 15 segundos para indexar os 300 mil documentos. 
+				A representação na Rede ESRC é uma alternativa a representação usual dos documentos por termos (ou \textit{tokens}).
+				Essa representação consiste no cálculo da média dos agregados ELMo para os documentos, a nível de frase, e cada documento é representado como uma sequência desses agregados, que são vetores de tamanho de 1024 \textit{floats}. 
+				Na implementação da solução cada documento é limitado a ocupar até 200 vetores de tamanho 1024, sendo então cada documento padronizado com forma 200 x 1024.
+				ELMo é uma representação de palavras com contextualização profunda, que modela características complexas de uso das palavras, como sintaxe e semântica, e o uso dessas palavras em contextos linguísticos \cite{ELMoDBLP:journals/corr/abs-1802-05365}.
 
-		
+				A CNN do classificador consiste de 5 camadas convolucionais paralelas internamente que recebem como entrada os agregados ELMo, essas 5 camadas convolucionais se conectam a camada de saída da rede neural, com função de ativação sigmoid, mais detalhes da implementação da CNN podem ser vistos em \citeonline{jiang-etal-2019-team}.
 
-		Para operação de inserção unitária foi levado em conta o tempo total para indexação dos 300 mil documentos, inseridos em sequência, na Figura 4.2 estão dispostos os tempos totais para indexação de todos os documentos dos corpus com ambas ferramentas. 
+				Para adicionar os 6 atributos de RI à rede foi embutido ao final de cada representação de documento 6 vetores de tamanho 1024, preenchidos pelo valor calculado de cada atributo para o respectivo documento, resultando em documentos com forma 206 x 1024.
+				A adaptação da solução está ilustrada na Figura .
 
-	\subsection{Tempo de consulta}
+			\subsubsection{Solução 4\_tom}
+				A solução da equipe Tom Jumbo-Grumbo (4\_tom) utilizou de dois classificadores, um de Regressão Logística e outro de Máquina de Vetores de Suporte (SVMs), sendo o utilizado no modelo final o classificador SVC (C-Support Vector Classification) da biblioteca sklearn para Python.
+				Uma SVM funciona transformando os dados de treinamento para uma dimensão maior e então executa uma busca pelo melhor limite de decisão, chamado de hiperplano, para separar as classes \cite[p.~408]{Han:2011:DMC:1972541}.
+				Em especial, o classificador SVC da biblioteca sklearn possui um parâmetro de regularização de sua função de custo (parâmetro chamado de C) que deve ser estritamente positivo, o valor padrão é definido como $C = 1.0$, no entanto a solução da equipe, conforme disposto no código fonte disponível online, utilizou $C = 0.9$ após uma análise com diferentes valores.
 
-\section{Desempenho dos classificadores com atributos de RI} \label{sec:resex1}
+				No pré-processamento, a equipe utilizou três estratégias para converter os documentos em atributos para o classificador.
+				A primeira foi de criar vetores baseados na frequência dos termos, descartando termos que apareçam em mais de 90\% dos documentos e utilizando os 50 mil termos mais frequentes dos que sobrarem, guardando o valor tf-idf para cada termo respectivo ao documento.
+				A segunda foi treinar um modelo PV-DM para gerar os atributos referentes a cada documento.
+				E a terceira foi utilizar um agregado pré-treinado em textos da Wikipédia com o algoritmo GloVe, e, similarmente aos agregados ELMo, esses agregados tentam também inferir o significado das palavras dos documentos.
 
-	\subsection{DB\_HYPERPARTISAN}
 
-	\subsection{DB\_AUTHORPROF}
 
-% Fluxograma das alterações feitas nos códigos com exemplos de trechos alterados
-% Rosalvo disse que é para colocar no Apêndice
 
-% Zettair, colocar detalhe dos modos de operação para consulta, iterativa e consulta única
+		\subsection{Corpus DB\_AUTHORPROF}
 
-% ganho de informação das 6 variáveis nas soluções
+			\subsubsection{Solução 2\_daneshvar18}
+			% baseou o seu pré-processamento em soluções das melhores equipes dos anos anteriores em tarefas da PAN CLEF
 
-% Citar as técnicas só de um, descrições, citar algum livro ou página
+	\section{Desempenho das ferramentas de armazenamento e indexação} \label{sec:resex1}
+		Para cálculo das variáveis TIME_INDEX e TIME_QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi utilizada a linguagem de programação Python na qual foi implementada uma classe chamada IndexToolManager, que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
 
-% Criar rede neural para comparar à solução do DB_AUTHORPROF à parte 
+		Esta classe foi central para todo o estudo.
+
+		\subsection{Tempo de indexação}
+			Para cálculo das variáveis TIME_INDEX foi criado um script python nomeado time_index.py, o qual utilizou da classe IndexToolManager em duas funções feitas para executar a indexação dos banco de dados, DB_AUTHORPROF e DB_HYPERPARTISAN, nas 3 ferramentas, ArangoDB, Elasticsearch e Zettair. 
+
+			
+
+			Como as ferramentas ArangoDB e Elasticsearch se assemelham bastante a sistemas gerenciadores de bancos de dados, preparados, inclusive, para distribuição geográfica dos dados, há de ser citada essa grande diferença deles para o Zettair, este último que é somente um sistema para indexação em lotes e consulta local dos dados, não permitindo, por exemplo, adição de novos documentos em um índice. A ação de inserção unitária é um procedimento comum em SGBDs. 
+
+			
+
+			A operação de indexação foi executada de dois modos, em lote e unitária, sendo que o Zettair só permite a inserção em lote. 
+
+			
+
+			Na Figura 4.1 podem ser vistos os resultados do tempo para inserção em lote dos documentos dos corpus  em cada ferramenta. 
+
+			
+
+			O Zettair é a ferramenta mais rápida para completar a indexação de ambos os corpus selecionados, levando somente 2,x segundos para indexar os 300 mil documentos do corpus DB_AUTHORPROF. 
+
+			Dentre os SGBDs avaliados, vemos que o ELASTIC tem  melhor desempenho que o ArangoDB para inserções em lote, gastando 15 segundos para indexar os 300 mil documentos. 
+
+			
+
+			Para operação de inserção unitária foi levado em conta o tempo total para indexação dos 300 mil documentos, inseridos em sequência, na Figura 4.2 estão dispostos os tempos totais para indexação de todos os documentos dos corpus com ambas ferramentas. 
+
+		\subsection{Tempo de consulta}
+
+	\section{Desempenho dos classificadores com atributos de RI} \label{sec:resex1}
+
+		\subsection{DB\_HYPERPARTISAN}
+
+		\subsection{DB\_AUTHORPROF}
+
+	% Fluxograma das alterações feitas nos códigos com exemplos de trechos alterados
+	% Rosalvo disse que é para colocar no Apêndice
+
+	% Zettair, colocar detalhe dos modos de operação para consulta, iterativa e consulta única
+
+	% ganho de informação das 6 variáveis nas soluções
+
+	% Citar as técnicas só de um, descrições, citar algum livro ou página
+
+	% Criar rede neural para comparar à solução do DB_AUTHORPROF à parte 
 
