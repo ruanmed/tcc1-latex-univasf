@@ -11,14 +11,14 @@
     
     No processo de organização desses registros físicos, é notória a função dos bibliotecários de separar os vários tipos de conhecimento que os mais diversos livros podem abrigar e, portanto, os sistemas de classificação de áreas e subáreas do conhecimento são um auxílio para as necessidades de busca por informação que uma pessoa pode ter \cite[p.~1]{Manning2008IIR} \cite[p.~1446]{Sanderson2012THIRR} \cite[p.~6]{Baeza-Yates1999}. 
     % OU  subáreas do conhecimento são uma ferramenta crucial na busca de informações.
-    Esses sistemas de classificação facilitam a localização de informações específicas a partir de uma pergunta que uma pessoa pode fazer, mas é necessário saber como o sistema de classificação funciona para que o usuário possa tentar saciar sua necessidade, ou pelo menos será necessário um especialista no sistema (o bibliotecário) para lhe guiar.
-    E mesmo assim, depois de adquirir os diversos materiais que podem responder à sua pergunta, esta pessoa ainda terá que conferir nos textos se estes satisfazem sua necessidade.
+    Esses sistemas de classificação facilitam a localização de informações específicas a partir de uma pergunta que uma pessoa pode fazer, mas é necessário saber como o sistema de classificação funciona para que o usuário possa tentar suprir sua necessidade, ou pelo menos será necessário um especialista no sistema (o bibliotecário) para lhe guiar.
+    E mesmo assim, depois de adquirir os diversos materiais que podem responder à sua pergunta, esta pessoa ainda terá que conferir nos textos se estes contêm a informação desejada.
     
     % - RI em equipamentos eletromecânicos no início do século 20
     % -- O que fez surgir esses sistemas, a necessidade
     
     Os sistemas de classificação manual se mostram ineficazes devido ao surgimento crescente e constante de novas informações \cite[p.~6]{Baeza-Yates1999} desde o início do século 20. 
-    Desta maneira, além da grande quantidade de novas pesquisas científicas sendo publicadas e livros surgindo, entre outros registro históricos, os quais precisam ser classificados, existe também o problema da classificação não poder abranger todo tipo de necessidade que tal material pode satisfazer \cite[p.~1444]{Sanderson2012THIRR}. 
+    Desta maneira, além da grande quantidade de novas pesquisas científicas sendo publicadas e livros surgindo, entre outros registros históricos, os quais precisam ser classificados, existe também o problema da classificação não poder abranger todo tipo de necessidade que tal material pode satisfazer \cite[p.~1444]{Sanderson2012THIRR}. 
     A preocupação com sistemas que possam indexar todo esse material e fornecer um acesso rápido às necessidades de informação de uma pessoa surgiu também no início do século 20 \cite{Bush:1979:WMT:1113634.1113638}, onde sistemas mecânicos de recuperação de informação foram vislumbrados.
     
     
@@ -30,7 +30,7 @@
     
     A lei de Moore diz que o crescimento da velocidade de processamento é contínuo \cite{Moore1975}, e de maneira similar existe uma duplicação constante da capacidade de armazenamento digital a cada dois anos \cite{Kryder2005}. 
     Logo, a necessidade de sistemas de Recuperação de Informação surge do crescimento exponencial das coleções de informação derivadas do crescimento de armazenamento, e consequente inabilidade das técnicas tradicionais de catalogação de lidar com isso \cite{Sanderson2012THIRR}.
-    Ter um amontoado de conhecimento, informação, e não poder acessar o que é relevante de modo rápido não é interessante pois assim o desenvolvimento de pesquisas, por exemplo, fica comprometido e pode perder relevância \cite{Bush:1979:WMT:1113634.1113638}.
+    Ter um amontoado de conhecimento, informação, e não poder acessar o que é relevante de modo rápido não é interessante pois o desenvolvimento de pesquisas, por exemplo, fica comprometido e pode perder relevância \cite{Bush:1979:WMT:1113634.1113638}.
     
     % -- Conceitos fundamentais de RI
     A RI como uma disciplina de pesquisa iniciou no final da década de 50 a partir do uso de computadores na busca de referências de texto associadas com um assunto \cite[p.~3]{Sanderson2012THIRR}, as preocupações iniciais dessa área eram 
@@ -40,7 +40,7 @@
     sendo a busca da melhor maneira de executar tais tarefas o principal objetivo da RI.
     
     Logo no início do seu desenvolvimento as técnicas de RI buscaram se basear em sistemas existentes já consolidados no campo bibliotecário para indexar coleções de itens, tendo como uma técnica de abordagem clássica atribuir códigos numéricos a essas coleções, como por exemplo o feito pelo sistema de Classificação Decimal de Dewey \cite[p.~1446]{Sanderson2012THIRR}.
-    No entanto foi demonstrado por \citeonline{Cleverdon1959TESUIR} que um sistema baseado em palavras, como o sistema Uniterm proposto por \citeonline{Taube1952UTCI}, era tão bom e até melhor que outras abordagens clássicas, sendo a indexação por palavras posteriormente adotada pelos sistemas de RI \cite[p.~1446]{Sanderson2012THIRR}.
+    No entanto, foi demonstrado por \citeonline{Cleverdon1959TESUIR} que um sistema baseado em palavras, como o sistema Uniterm proposto por \citeonline{Taube1952UTCI}, era tão bom e até melhor que outras abordagens clássicas, sendo a indexação por palavras posteriormente adotada pelos sistemas de RI \cite[p.~1446]{Sanderson2012THIRR}.
     
     Um exemplo do funcionamento de um sistema moderno de RI pode ser visto na Figura \ref{fig:diagrama-baeza2013-fig1-3}, onde está apresentado um fluxograma dos processos de indexação, recuperação, e ranqueamento de documentos. 
     Sendo o ranqueamento feito por sistemas de RI o interesse deste trabalho, alguns dos termos apresentados nessa figura serão abordados logo mais.
@@ -48,11 +48,11 @@
     \input{tex/figure/baeza2013-figura-1.3.tex}
     
     Segundo \citeonline[p.~7]{Baeza-Yates2011} a arquitetura de funcionamento de um \textit{software} de RI inicia com o processo de indexação executado \textit{offline}, antes do sistema estar pronto para processar consultas, e a estrutura de indexação mais popular é a chamada de índice invertido.
-    Após a indexação da coleção de documentos, então o sistema está preparado para o processo de recuperação, onde o usuário especifica sua consulta, a qual é modificada pelo sistema para ficar mais próxima do sistema de indexação utilizado.
+    Após a indexação da coleção de documentos, o sistema está preparado para o processo de recuperação, no qual o usuário especifica sua consulta, que é modificada pelo sistema para ficar mais próxima do sistema de indexação utilizado.
     A consulta modificada é utilizada para obter o conjunto de documentos recuperados, os quais, idealmente, satisfazem as necessidades de informação do usuário.
     Por fim, os documentos recuperados são ranqueados pela sua pertinência de relevância para o usuário.
     
-    A arquitetura apresentada na Figura \ref{fig:diagrama-baeza2013-fig1-3} inclui o ranqueamento feito pelos sistemas de RI mordernos, que são uma expansão dos sistemas de RI booleanos, estes últimos contam com uma indexação e recuperação mais simples que os sistemas de RI ranqueados como vai ficar claro nas subseções a seguir.
+    A arquitetura apresentada na Figura \ref{fig:diagrama-baeza2013-fig1-3} inclui o ranqueamento feito pelos sistemas de RI mordernos, que são uma expansão dos sistemas de RI booleanos, estes últimos contam com uma indexação e recuperação mais simples que os sistemas de RI ranqueados como será esclarecido nas subseções a seguir.
 
     \input{tex/textual/subsections/metodos-booleanos.tex}
     

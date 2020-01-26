@@ -101,20 +101,20 @@
         Quanto às tarefas em si, a mineração de dados possui tarefas de agrupamento, associação, classificação, descrição, detecção de anomalias, e de regressão.
         As quatro principais estão ilustradas na Figura \ref{fig:tarefas-principais-mineração-dados}.
         As tarefas de classificação e de regressão entram na categoria de tarefas preditivas, e são às vezes referidas como tarefas de modelagem preditiva. 
-        Ainda, tarefas de classificação trabalham com atributos objetivos discretos, enquanto que tarefas de regressão tem seus atributos objetivos como variáveis contínuas \citeonline[p.~7--8]{TanIDM2014}, e ambas focam na análise de conjuntos de dados rotulados, os chamados de conjuntos de treinamento \cite[p.~19]{Han:2011:DMC:1972541}.
+        Ainda, tarefas de classificação trabalham com atributos objetivos discretos, enquanto que tarefas de regressão tem seus atributos objetivos como variáveis contínuas \cite[p.~7--8]{TanIDM2014}, e ambas focam na análise de conjuntos de dados rotulados, os chamados de conjuntos de treinamento \cite[p.~19]{Han:2011:DMC:1972541}.
         Na Mineração de Textos uma tarefa de classificação normalmente recebe o nome de \textbf{categorização de texto} \cite[p.~6]{TurchiATPUKM2009} \cite[p.~61]{Feldman:2006:TMH:1076381}.
         
         \input{tex/figure/tarefas-principais-mineracao-dados.tex}
         
         Segundo os autores \citeonline[p.~15--21]{Han:2011:DMC:1972541}, \citeonline[p.~8--11]{TanIDM2014} e \citeonline[p.~8--14]{LaroseDKD2014} as demais tarefas da mineração de dados são descritivas e podem ser caracterizadas como segue:
         \begin{itemize}
-            \item \textbf{Agrupamento}: consiste numa análise dos dados sem consulta à rótulos de classe, podendo estes até não estarem presentes, e este tipo de tarefa é utilizado para gerar rótulos de classes para grupos de dados. 
+            \item \textbf{Agrupamento}: consiste numa análise dos dados sem consulta à rótulos de classe, podendo estes até não estarem presentes, e este tipo de tarefa é utilizada para gerar rótulos de classes para grupos de dados. 
             Na literatura é mais comum se referir ao termo em língua inglesa, \textit{clustering};
             
             \item \textbf{Associação}: são descobertos relacionamentos mais frequentes entre os atributos, utilizada para descoberta de padrões, geralmente por meio de regras de implicação;
             
-            \item \textbf{Descrição}: os dados são associados com conceitos, consistindo da caracterização dos dados, onde é feita o resumo das características gerais de uma classe objetivo; 
-            ou da discriminação dos dados, onde é feita a comparação, contraste, dos atributos de uma classe objetivo com um conjunto de outras classes;
+            \item \textbf{Descrição}: os dados são associados com conceitos, consistindo da caracterização dos dados, no qual é feito o resumo das características gerais de uma classe objetivo; 
+            ou da discriminação dos dados, na qual é feita a comparação, contraste, dos atributos de uma classe objetivo com um conjunto de outras classes;
             
             \item \textbf{Detecção de anomalias}: também chamado de detecção de dados discrepantes (\textit{outliers}), foca na identificação de exemplos dos dados que possuem características significativamente diferentes do restante. 
             Muitos métodos de mineração de dados descartam os \textit{outliers} por considerarem estes como ruídos nos dados.
@@ -131,14 +131,14 @@
             Então, este modelo de treinamento é utilizado para prever a classe de exemplos não vistos anteriormente, isso quer dizer que estes exemplos não fazem parte do conjunto de treinamento.
             Segundo \citeonline[p.~286, tradução nossa]{Aggarwal_DMTT_2015}, então, a maior parte dos algoritmos de classificação possui duas fases:
             \begin{enumerate}
-                \item \textbf{Fase de treinamento}: nesta fase um modelo de treinamento é construído a parte das instâncias de treinamento. Isto pode ser entendido, intuitivamente, como um resumo do modelo matemático dos grupos rotulados no conjunto de dados de treinamento;
+                \item \textbf{Fase de treinamento}: nesta fase um modelo de treinamento é construído à parte das instâncias de treinamento. Isto pode ser entendido, intuitivamente, como um resumo do modelo matemático dos grupos rotulados no conjunto de dados de treinamento;
                 
                 \item \textbf{Fase de teste}: nesta fase o modelo de treinamento é utilizado para determinar os rótulos de classe (ou identificadores de grupos) de uma ou mais instâncias não vistas.
             \end{enumerate}
                 
             A tarefa de classificação é também chamada de aprendizado supervisionado porque exemplos dos dados são utilizados para aprender as estruturas de agrupamento das classes \cite[p.~285]{Aggarwal_DMTT_2015}.
             Técnicas de classificação são mais apropriadas para dados com categorias binárias ou nominais, não sendo indicados para categorias com significado ordinal, pois a tarefa de classificação não considera a ordem implícita entre as categorias \cite[p.~147]{TanIDM2014}.
-            A tarefa de categorização dos dados pode ser com rótulo único ou com múltiplos rótulos, onde na categorização com múltiplos rótulos as categorias se sobrepõem, e já na categorização com rótulo único cada exemplo de dado pertence a exatamente uma categoria \cite[p.~67]{Feldman:2006:TMH:1076381} \cite[p.~306]{TanIDM2014}.
+            A tarefa de categorização dos dados pode ser com rótulo único ou com múltiplos rótulos, na categorização com múltiplos rótulos as categorias se sobrepõem, e já na categorização com rótulo único cada exemplo de dado pertence a exatamente uma categoria \cite[p.~67]{Feldman:2006:TMH:1076381} \cite[p.~306]{TanIDM2014}.
             
             A classificação binária é um caso especial da categorização de rótulo único na qual quantidade de categorias é dois, sendo este o caso mais simples das tarefas de classificação, pois nele só existem duas possibilidades de rótulo de classe e cada objeto de dados pertence, exclusivamente, a uma das classes \cite[p.~67]{Feldman:2006:TMH:1076381} \cite[p.~81]{Jo2018TMCIBDC}.
             Um exemplo clássico de categorização binária de texto é um analisador de \textit{spam}\footnote{Conteúdo indesejado, tratado como lixo eletrônico.} para e-mails, nele só existem duas possibilidades de classificação para dado e-mail, ou \textbf{é \textit{spam}} ou \textbf{não é \textit{spam}}.

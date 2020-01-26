@@ -151,7 +151,7 @@
         Suporta também requisições GET em tempo real, o que o torna apropriado para armazenamento como um banco de dados NoSQL \cite{PETER_ELASTICDB_2011, VOLKAN_ELASTIC_DATASTORE_2018}.
         
         Dentre suas funções de indexação, o Elasticsearch possui um módulo de similaridade (\textit{similarity module}) que é responsável pela implantação de funções para ranqueamento de documentos.
-        Este módulo realiza uma implementação da função BM25 como sua função padrão para cálculo de similaridade sobre o nome de \textit{BM25 similarity} \cite{ELASTIC_REFERENCE_SIMILARITY_2019}.
+        Esse módulo realiza uma implementação da função BM25 como sua função padrão para cálculo de similaridade sobre o nome de \textit{BM25 similarity} \cite{ELASTIC_REFERENCE_SIMILARITY_2019}.
         
         \item \textbf{TOOL\_ARANGO}: ArangoDB v3.4.6 é um banco de dados multi-modelo nativo, desenvolvido principalmente em C++ com extensões em JavaScript, que possui código-fonte aberto e possibilita modelos de dados flexíveis, tanto para documentos, gráficos, e valores-chave \cite{ARANGODB_DOC_2019, ARANGODB_GitHub_2019}.
         % https://www.arangodb.com/docs/stable/aql/views-arango-search.html#bm25
@@ -204,9 +204,9 @@
     \input{tex/figure/diagrama-consulta-geracao-atributo.tex}
     
     Cada exemplo do corpus a ser classificado é usado como consulta ao banco de dados NoSQL indexado, e cada uma destas consultas tem como resultado uma lista dos \textit{top-$k$} exemplos presentes no banco de dados, ordenada por pontuação de similaridade da função BM25, sendo esta pontuação calculada pela ferramenta de armazenamento indexação. 
-    Este procedimento está representado na Figura \ref{fig:diagrama-cosulta-geração-atributos}.
+    Esse procedimento está representado na Figura \ref{fig:diagrama-cosulta-geração-atributos}.
     
-    O cálculo dos novos atributos é feito a partir da lista retornada dos \textit{top-$k$} exemplos, onde são utilizadas as três funções de agregação sugeridas por \citeonline[p.~21--23]{WEREN_MESTRADO_2014}:
+    O cálculo dos novos atributos é feito a partir da lista retornada dos \textit{top-$k$} exemplos, e são utilizadas as três funções de agregação sugeridas por \citeonline[p.~21--23]{WEREN_MESTRADO_2014}:
     \begin{enumerate*}[label=(\alph*)]
         \item média,
         \item soma, e

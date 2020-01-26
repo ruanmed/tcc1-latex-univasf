@@ -1,5 +1,6 @@
 \subsection{Ranqueamento} \label{subsec:Ranqueamento}
-    Devido à limitação dos métodos booleanos de somente retornar resultados conforme a presença ou não dos termos da consulta nos documentos \cite[p.~100]{Manning2008IIR}, foi proposto em 1957 por Luhn e em 1959 por Maron \textit{et al.} uma abordagem de recuperação ranqueada \cite[p.~1446]{Sanderson2012THIRR} a qual, em contraste com recuperação booleana, baseada nos termos de consulta estabelecia uma pontuação para cada artigo de modo probabilístico e retornava os artigos de modo ordenado e demonstraram que essa técnica superava a recuperação booleana.
+    Devido à limitação dos métodos booleanos de somente retornar resultados conforme a presença ou não dos termos da consulta nos documentos \cite[p.~100]{Manning2008IIR}, foi proposto em 1957 por Luhn e em 1959 por Maron \textit{et al.} uma abordagem de recuperação ranqueada \cite[p.~1446]{Sanderson2012THIRR} a qual, em contraste com recuperação booleana, era baseada nos termos de consulta e estabelecia uma pontuação para cada artigo de modo probabilístico e retornava os artigos de modo ordenado.
+    Desta maneira, demonstraram que essa técnica superava a recuperação booleana.
     
     % Explicar o funcionamento de uma recuperação ranqueada, como é feito esse ranqueamento?
     O procedimento fundamental para ranqueamento dos documentos, conforme os termos de consulta, consiste na atribuição de pontuação aos documentos a partir da contabilização do número de aparições (chamada de frequência) de cada um dos termos no documento.
@@ -56,7 +57,7 @@
     %     		Utiliza do vetor gerado pelo cálculo dos tf-idf calculados para cada palavra a partir da coleção inteira, e então define que o nível de similaridade entre uma consulta e um arquivo é dado pelo cosseno do ângulo entre os dois vetores.
     
     %   	Do livro do Baeza
-        A modelo vetorial surge a partir das limitações do modelo Booleano, que não considera frequência dos termos, e nele são representados um conjunto de documentos num espaço vetorial comum \cite[p.~110]{Manning2008IIR}.
+        O modelo vetorial surge a partir das limitações do modelo Booleano, que não considera frequência dos termos, e nele são representados um conjunto de documentos num espaço vetorial comum \cite[p.~110]{Manning2008IIR}.
         Oferece a possibilidade de resultados parciais por meio da atribuição de pesos não binários para os termos da consulta e também para os termos presentes nos documentos, que são utilizados para determinar o grau de similaridade entre cada documento armazenado no sistema e uma determinada consulta \cite[p.~77]{Baeza-Yates2011}.
         
         Neste modelo os resultados são apresentados em ordem decrescente de similaridade, considerando a correspondência parcial, e não obrigatoriamente total, com os termos da consulta, provendo assim uma resposta mais precisa para as necessidades de informação do usuário.
@@ -148,7 +149,7 @@
         
         A fórmula do BM25 tem dois parâmetros de refinamento, os termos $b$ e $k_1$. 
         O parâmetro $b$ ($0 \leq b \leq 1$) é utilizado para controlar o grau de normalização por tamanho de documento, onde $b=1$ significa uma escalonamento completo e $b=0$ corresponde a não realizá-lo. 
-        Este refinamento toma como ponto de referência o tamanho médio dos documentos na coleção inteira, $L_{\text{avg}}$, em relação ao tamanho do documento $d$, representado por $L_d$.
+        Esse refinamento toma como ponto de referência o tamanho médio dos documentos na coleção inteira, $L_{\text{avg}}$, em relação ao tamanho do documento $d$, representado por $L_d$.
         
         Já o termo $k_1$ ($0 \leq k_1 \leq \infty$) calibra o efeito da correção de frequência dos termos presente na fórmula, $k_1=0$ significa que não haverá consideração da frequência dos termos, e valores elevados fazem com a fórmula se aproxime da utilização pura do $\text{tf-idf}_{\text{\textit{t},\textit{d}}}$ vista na Equação \ref{eq:tf-idf} \cite[p.~214]{Manning2008IIR}.
         Para consultas extensas, com grande número de termos, \citeonline[p.~214]{Manning2008IIR} afirmam que pode ser adicionado à fórmula um segundo fator $k_3$ que possibilita calibrar o escalonamento de frequência dos termos da consulta, chegando assim à fórmula da Equação \ref{eq:okapi-bm25-tf-consulta} com a simplificação do termo $\text{idf}_{t}$ pela versão simples da Equação \ref{eq:inverse-document-frequency}.
