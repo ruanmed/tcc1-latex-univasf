@@ -1,0 +1,33 @@
+\begin{table}[!thb]
+	%\huge
+    \centering
+    \caption{Melhores valores de CLF\_ACC e CLF\_F1 do classificador SVC da solução 4\_tom após reproduzida com diferentes valores de C.}
+    \begin{adjustbox}{max width={\textwidth},keepaspectratio}%
+    \begin{tabular}{|l|c|c|c|}
+        % \toprule
+        \hline
+        \textbf{Solução}
+        & \textbf{C}
+        & \textbf{Acurácia}
+        & \textbf{$F_1$-Score}
+        \\ \hline
+        original        
+        & 1,4   & 0,8233   & 0,7361 
+        \\ \hline
+        +RI\_arango
+        & 2,1   & 0,8233    & 0,7324          
+        \\ \hline
+        +RI\_elastic
+        & 1,9   & 0,8233    & 0,7324        
+        \\ \hline
+        +RI\_zettair
+        & 1,4   & \textbf{0,8419}    & \textbf{0,7606}          
+        \\ 
+        \hline
+        % \bottomrule
+    \end{tabular}
+    \end{adjustbox}
+    \legend{\ABNTEXfontereduzida \textbf{Fonte:} O autor.}
+    \label{tab:reprodução-4-tom-c} 
+    % \legend{\textbf{Fonte:} O autor.}
+\end{table}

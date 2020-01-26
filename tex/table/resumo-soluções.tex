@@ -3,21 +3,27 @@
     \centering
     \caption{Resumo dos detalhes das soluções selecionadas.}
     \begin{adjustbox}{max width={\textwidth},keepaspectratio}%
-    \begin{tabular}{|c|c|c|c|c|c|c|}
-        \toprule
-        Solução 
-        & Set & Out & Nov & Dez & Jan & Fev
+    \begin{tabular}{|l|c|c|c|c|c|}
+        % \toprule
+        \hline
+        \textbf{Solução}
+        & \textbf{Pré-processamento} & \textbf{Núm. atrib.} & \textbf{Redução dim.} 
+        & \textbf{Núm. atrib. após}  & \textbf{Classificador}
         \\ \hline
         1\_bertha        
-        & X   &     &     &     &     &     
+        & ELMo          & 200 x 1024        & Não
+        & 200 x 1024    & CNN (5 cam. esc.) 
         \\ \hline
         4\_tom
-        & X   &     &     &     &     &     
+        & GloVe         & 300               & Não
+        & 300           & SVC                
         \\ \hline
         2\_daneshvar18
-        & X   &     &     &     &     &          
+        & TFIDF         & 1243271           & Sim
+        & 300           & LinearSVC          
         \\ 
-        \bottomrule
+        \hline
+        % \bottomrule
     \end{tabular}
     \end{adjustbox}
     \legend{\ABNTEXfontereduzida \textbf{Fonte:} O autor.}
