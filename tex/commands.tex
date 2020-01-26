@@ -220,26 +220,49 @@
 %--------------------------------------------------------------------------------
 \newcommand{\Ididthis}{
 %	\legend{\textbf{Fonte:} O autor (\the\year).}
-\legend{\textbf{Fonte:} O autor}
+\legend{\textbf{Fonte:} O autor.}
 }
 
 \newcommand{\Otherguydidthis}[1]{
 	\legend{\textbf{Fonte:} \citeonline{#1}.}
 }
 
-%--------------------------------------------------------------------------------
+% %--------------------------------------------------------------------------------
+% % Comando para inserir códigos - by @leolleocomp
+% %--------------------------------------------------------------------------------
+% \newcommand{\sourcecode}[4]{
+% \begin{listing}[H]
+% 	\refstepcounter{sourcecode}
+% 	\caption{#1}
+% 	\label{cmd:#2}
+% 	\inputminted[linenos, bgcolor=bg, tabsize=4,breaklines]{#3}{codes/#4}
+%   \vspace{-0.5cm}
+% 	\Ididthis
+% \end{listing}
+% }
+
+% --------------------------------------------------------------------------------
 % Comando para inserir códigos - by @leolleocomp
-%--------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------
 \newcommand{\sourcecode}[4]{
 \begin{listing}[H]
 	\refstepcounter{sourcecode}
-	\caption{#1}
-	\label{cmd:#2}
-	\inputminted[linenos, bgcolor=bg, tabsize=4,breaklines]{#3}{codes/#4}
+	\captionof{listing}{#1 \label{cmd:#2}}
+	\inputminted[linenos, bgcolor=bg, tabsize=4, breaklines]{#3}{codes/#4}
+    \vspace{-0.5cm}
 	\Ididthis
 \end{listing}
 }
 
+\newcommand{\sourcecodenolinenos}[4]{
+\begin{listing}[H]
+	\refstepcounter{sourcecode}
+	\captionof{listing}{#1 \label{cmd:#2}}
+	\inputminted[bgcolor=bg, tabsize=4, breaklines]{#3}{codes/#4}
+    \vspace{-0.5cm}
+	\Ididthis
+\end{listing}
+}
 
 % -----------------------------------------------------------------------------
 % Pacotes adicionados por @ruanmed
@@ -255,7 +278,7 @@
 % \newenvironment{code}{\captionsetup{type=listing}}{}
 % \SetupFloatingEnvironment{listing}{name=Código}
 
-% \newcommand{\sourcecodenolist}[4]{
+% \newcommand{\sourcecode}[4]{
 % 	\begin{code}
 % 	    \refstepcounter{sourcecode}
 %         \captionof{listing}{#1 }
@@ -272,12 +295,13 @@
 % 	\Wedidthis
 % }
 
-% \newcommand{\sourcecodenolist}[4]{
-% 	\refstepcounter{sourcecode}
-% 	\captionof{listing}{#1 \label{cmd:#2}}
-% 	\inputminted[linenos, bgcolor=bg, tabsize=4,breaklines]{#3}{codes/#4}
-% 	\Wedidthis
-% }
+\newcommand{\sourcecodenolist}[4]{
+	\refstepcounter{sourcecode}
+	\captionof{listing}{#1 \label{cmd:#2}}
+	\inputminted[linenos, bgcolor=bg, tabsize=4,breaklines]{#3}{codes/#4}
+	\vspace{-0.5cm}
+	\Ididthis
+}
 
 
 \newcommand{\sourcecodeinline}[2]{
