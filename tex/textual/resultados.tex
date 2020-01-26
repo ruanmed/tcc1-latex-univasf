@@ -12,7 +12,7 @@
 	Este capítula apresenta os resultados obtidos neste estudo investigativo do desempenho de atributos de RI em classificadores de Mineração de Texto.
 
 	Nas subseções a seguir primeiro é abordada a configuração experimental utilizada para realizar o estudo, e logo em seguida é apresentada uma visão geral das soluções selecionadas dos corpus DB\_AUTHORPROF e DB\_HYPERPARTISAN, onde o pré-processamento realizado e os classificadores utilizados em cada uma das soluções são descritos brevemente.
-	Por fim, são apresentados os resultados mensurados por meio das medidas escolhidas para avaliação de desempenho, na subseção X estão as medidas de desempenho das ferramentas de armazenamento e indexação, e na subseção Y são expostas as medidas de desempenho dos classificadores.
+	Por fim, são apresentados os resultados mensurados por meio das medidas escolhidas para avaliação de desempenho, na Seção \ref{sec:DesempenhoFerramentas} estão as medidas de desempenho das ferramentas de armazenamento e indexação, e na Seção \ref{sec:DesempenhoClassificadores} são expostas as medidas de desempenho dos classificadores.
 
 	% Na subseção a seguir são abordados os resultados referentes às ferramentas de indexação.
 	% Na subseção posterior são abordados os resultados referente aos desempenho das variáveis de RI em classificadores.
@@ -51,7 +51,7 @@
 			Essa divisão foi feita de modo que as classes mantiveram-se com o mesmo balanceamento do conjunto original (37\% dos artigos hiperpartidário e 63\% não hiperpartidários).
 
 			Então, os 430 artigos foram indexados em todas as ferramentas de indexação permitindo a geração dos atributos de RI posteriormente.
-			A indexação foi feita com auxílio da classe IndexToolManager criada pelo autor, que é abordada com detalhes na seção de desempenho das ferramentas de armazenamento e indexação.
+			A indexação foi feita com auxílio da classe \textit{IndexToolManager} criada pelo autor, que é abordada com detalhes na seção de desempenho das ferramentas de armazenamento e indexação.
 			
 			\subsubsection{Solução 1\_bertha}
 				A solução da equipe Bertha von Suttner (4\_bertha) para essa tarefa da \textit{SemEval 2019} consiste em uma abordagem de classificação com uma Rede Neural Convolucional (\textit{Convolutional Neural Network}, CNN) e o pré-processamento dos documentos do corpus em uma representação destes por meio de uma Rede ESRC (\textit{ELMo Sentence Representation Convolutional Network}), uma representação sugerida e nomeada pela equipe.
@@ -64,62 +64,127 @@
 				A CNN do classificador consiste de 5 camadas convolucionais paralelas internamente que recebem como entrada os agregados ELMo, essas 5 camadas convolucionais se conectam a camada de saída da rede neural, com função de ativação sigmoid, mais detalhes da implementação da CNN podem ser vistos em \citeonline{jiang-etal-2019-team}.
 
 				Para adicionar os 6 atributos de RI à rede foi embutido ao final de cada representação de documento 6 vetores de tamanho 1024, preenchidos pelo valor calculado de cada atributo para o respectivo documento, resultando em documentos com forma 206 x 1024.
-				A adaptação da solução está ilustrada na Figura .
+				A adaptação da solução está ilustrada na Figura XX.
+				
+				% \input{tex/figure/1-bertha-arquitetura-com-ri.tex}
+
+				% \ref{fig:1-bertha-arquitetura-com-ri}
+				A Figura XX é baseada na figura de representação de arquitetura do sistema apresentada no artigo de descrição da solução da equipe \cite{jiang-etal-2019-team}, alguns detalhes da CNN são abstraídos e os atributos de RI adicionados estão representados em verde.
 
 			\subsubsection{Solução 4\_tom}
-				A solução da equipe Tom Jumbo-Grumbo (4\_tom) utilizou de dois classificadores, um de Regressão Logística e outro de Máquina de Vetores de Suporte (SVMs), sendo o utilizado no modelo final o classificador SVC (C-Support Vector Classification) da biblioteca sklearn para Python.
+				A solução da equipe Tom Jumbo-Grumbo (4\_tom) utilizou de dois classificadores, um de Regressão Logística e outro de Máquinas de Vetor de Suporte (SVMs), sendo o utilizado no modelo final o classificador SVC (C-Support Vector Classification) da biblioteca sklearn para Python.
 				Uma SVM funciona transformando os dados de treinamento para uma dimensão maior e então executa uma busca pelo melhor limite de decisão, chamado de hiperplano, para separar as classes \cite[p.~408]{Han:2011:DMC:1972541}.
 				Em especial, o classificador SVC da biblioteca sklearn possui um parâmetro de regularização de sua função de custo (parâmetro chamado de C) que deve ser estritamente positivo, o valor padrão é definido como $C = 1.0$, no entanto a solução da equipe, conforme disposto no código fonte disponível online, utilizou $C = 0.9$ após uma análise com diferentes valores.
 
 				No pré-processamento, a equipe utilizou três estratégias para converter os documentos em atributos para o classificador.
 				A primeira foi de criar vetores baseados na frequência dos termos, descartando termos que apareçam em mais de 90\% dos documentos e utilizando os 50 mil termos mais frequentes dos que sobrarem, guardando o valor tf-idf para cada termo respectivo ao documento.
 				A segunda foi treinar um modelo PV-DM para gerar os atributos referentes a cada documento.
-				E a terceira foi utilizar um agregado pré-treinado em textos da Wikipédia com o algoritmo GloVe, e, similarmente aos agregados ELMo, esses agregados tentam também inferir o significado das palavras dos documentos.
+				E a terceira utilizou um agregado pré-treinado em textos da Wikipédia com o algoritmo GloVe, que, similarmente aos agregados ELMo, tentam também inferir o significado das palavras dos documentos.
 
+				A arquitetura com melhor resultado foi a utilização dos atributos GloVe com o classificador SVM da biblioteca sklearn.
+				Os documentos são convertidos para os vetores GloVe pré-treinados a partir se suas primeiras 1000 palavras, esses vetores GloVe possuem 300 dimensões por palavra, o que resultaria numa representação com forma de 1000 x 300, no entanto o vetor final que representa cada documentos é a média dos vetores de palavras respectivos.
 
-
+				Para adicionar os 6 atributos de RI foram embutidos, ao final de cada representação de documento, estes foram calculados para os respectivos documentos e embutidos no vetor GloVe do documento, resultando em documentos representados por 306 dimensões, ou 306 atributos.
+				A arquitetura da solução adaptada está ilustrada na Figura XX.
+				% \ref{fig:4-tom-arquitetura-com-ri}
+				% \input{tex/figure/4-tom-arquitetura-com-ri.tex}
 
 		\subsection{Corpus DB\_AUTHORPROF}
+			O corpus DB\_AUTHORPROF consiste de \textit{tweets} de autores em três línguas diferentes, inglês, espanhol e árabe.
+			Para avaliação dos atributos de RI o escopo de melhoria de desempenho foram considerados somente os classificadores das soluções para os autores de língua inglesa, e as imagens não foram consideradas.
+
+			O conjunto de treinamento de autores da língua inglesa consiste de 300 mil \textit{tweets} de 3000 autores diferentes, e como o conjunto de validação final está disponível ao público, necessário somente solicitar o acesso, não foi necessário fazer o \textit{holdout} do conjunto de treinamento.
+			O conjunto de validação da língua inglesa consiste de 190 mil tweets de 1900 autores.
+
+			Os 300 mil \textit{tweets} foram indexados em todas as ferramentas de indexação permitindo a geração dos atributos de RI posteriormente para cada \textit{tweet} específico.
 
 			\subsubsection{Solução 2\_daneshvar18}
 			% baseou o seu pré-processamento em soluções das melhores equipes dos anos anteriores em tarefas da PAN CLEF
+			%  O QUE É N-GRAM
+				A solução de \citeonline{daneshvar:2018} utilizou um classificador SVM com diferentes tipos de $n$-grams de palavras e caracteres como atributos, e o melhor resultado obtido foi com a criação dos $n$-grams, posterior redução de dimensionalidade e então utilização do classificador LinearSVC da biblioteca sklearn para Python para criar o modelo de classificação.
 
-	\section{Desempenho das ferramentas de armazenamento e indexação} \label{sec:resex1}
-		Para cálculo das variáveis TIME_INDEX e TIME_QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi utilizada a linguagem de programação Python na qual foi implementada uma classe chamada IndexToolManager, que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
+				A adaptação da solução para adicionar os atributos de RI poderia ser feita adicionando os atributos antes ou depois da redução de dimensionalidade utilizada pela equipe.
+				Os documentos inicialmente são representados por vetores de 1243271 dimensões, após a diminuição da dimensionalidade cada documento é representado por um vetor de 300 dimensões.
+				No entanto, uma peculiaridade da solução está em como é feita a classificação, os 100 \textit{tweets} de cada autor são tratados como um único documento, pois o objetivo é classificar o gênero dos autores em homens ou mulheres.
+				Como os \textit{tweets} foram indexados individualmente, então para adicionar os atributos de RI para cada autor foi feita a geração dos 6 atributos para todos os tweets e então estes foram agregados por autor.
+
+				% \input{tex/figure/2-daneshvar18-arquitetura-com-ri.tex}
+
+				Por fim, os 6 atributos de RI agregados por autor foram embutidos ao final da representação dos documentos, resultando em documentos representados por 1243277 dimensões, e posteriormente também foi configurado outro experimento para embutir os atributos de RI somente após a redução de dimensionalidade, resultado em documentos represetados por 306 atributos.
+
+
+		\subsection{Resumo das soluções} \label{sec:ResumoDasSoluções}
+			Na Tabela \ref{tab:resumo-soluções} a seguir estão resumidas as principais características das soluções selecionadas.
+
+			\input{tex/table/resumo-soluções.tex}
+
+	\section{Desempenho das ferramentas de armazenamento e indexação} \label{sec:DesempenhoFerramentas}
+		Para cálculo das variáveis TIME\_INDEX e TIME\_QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi utilizada a linguagem de programação Python na qual foi implementada uma classe chamada \textit{IndexToolManager}, que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
 
 		Esta classe foi central para todo o estudo.
-
+		% Adicionar funcṍes importantes e cirtar código aqui?
 		\subsection{Tempo de indexação}
-			Para cálculo das variáveis TIME_INDEX foi criado um script python nomeado time_index.py, o qual utilizou da classe IndexToolManager em duas funções feitas para executar a indexação dos banco de dados, DB_AUTHORPROF e DB_HYPERPARTISAN, nas 3 ferramentas, ArangoDB, Elasticsearch e Zettair. 
+			Para cálculo das medidas TIME\_INDEX foi criado um script python nomeado \texttt{time\_index.py}, o qual utilizou da classe \textit{IndexToolManager} em duas funções feitas para executar a indexação dos banco de dados, DB\_AUTHORPROF e DB\_HYPERPARTISAN, nas 3 ferramentas, ArangoDB, Elasticsearch e Zettair.
+			As função principal do script \texttt{time\_index.py} é nomeada \textit{measure\_TIME\_INDEX}, este trecho do código pode ser vista a seguir.
 
+			\sourcecodenolinenos{Função \textit{measure\_TIME\_INDEX} do script \texttt{time\_index.py}.}{function-measure-time-index}{python}{function-measure-TIME-INDEX.py}
+			% \sourcecodeinline{python}{codes/function-measure-TIME-INDEX.py}
+
+			Esta função é responsável por efetuar uma chamada à função \textit{index} com os parâmetros de tipo de indexação, corpus a ser indexado, e qual a ferramenta utilizada nesta indexação, além de uma identificação do experimento.
+			A função \textit{index} faz os devidos tratamentos para chamar os métodos da classe \textit{IndexToolManager} responsáveis por fazer a indexação dos documentos do corpus especificado utilizando a ferramenta especificada, isso enquanto mensura o tempo que cada indexação levou e registra todas as operações num arquivo de texto.
+
+			% Colocar o código fonte da função index aqui?
 			
-
-			Como as ferramentas ArangoDB e Elasticsearch se assemelham bastante a sistemas gerenciadores de bancos de dados, preparados, inclusive, para distribuição geográfica dos dados, há de ser citada essa grande diferença deles para o Zettair, este último que é somente um sistema para indexação em lotes e consulta local dos dados, não permitindo, por exemplo, adição de novos documentos em um índice. A ação de inserção unitária é um procedimento comum em SGBDs. 
-
-			
+			Como as ferramentas ArangoDB e Elasticsearch se assemelham bastante a sistemas gerenciadores de bancos de dados completos, preparados, inclusive, para distribuição geográfica dos dados, há de ser citada essa grande diferença deles para o Zettair, este último que é somente um sistema para indexação em lotes e consulta local dos dados, não permitindo, por exemplo, adição de novos documentos em um índice. 
+			A ação de inserção unitária é um procedimento comum em SGBDs. 			
 
 			A operação de indexação foi executada de dois modos, em lote e unitária, sendo que o Zettair só permite a inserção em lote. 
+			Na Figura \ref{fig:time-index-bulk} pode ser visto o tempo mensurado, em milissegundos gastos por documento, para inserção em lote dos documentos dos corpus em cada ferramenta.
 
+			\input{tex/figure/time-index-bulk.tex}
+
+			O Zettair é a ferramenta mais rápida para completar a indexação de ambos os corpus selecionados, levando somente 2,29 segundos para indexar os 300 mil documentos do corpus DB\_AUTHORPROF, menos de 0,01 milissegundos por documento.
+			Dentre os SGBDs avaliados, o Elasticsearch supera o ArangoDB para inserções em lote, gastando 17,61 segundos para indexar os 300 mil \textit{tweets}, cerca de 0,06 milissegundos por documento.
+			Nota-se ainda que a indexação do corpus DB\_HYPERPARTISAN é mais lenta quando se considera o tempo por documento inserido, porque, apesar do corpus DB\_AUTHORPROF ter um número bem maior de documentos, 300 mil em comparação com 645, cada artigo do DB\_HYPERPARTISAN é bem mais extenso que qualquer dos \textit{tweets} do DB\_AUTHORPROF.
+			A mesma relação de velocidade entre as ferramentas observada para as inserções feitas com os documentos do DB\_AUTHORPROF se mantem para as inserções feitas com os documentos do DB\_HYPERPARTISAN, o Zettair é o mais rápido, e, dentre os SGBDs, o Elasticsearch é mais rápido que o ArangoDB.
 			
+			Para operação de inserção unitária, avaliada somente com o ArangoDB e Elasticsearch, foi levado em conta o tempo total para indexação de todos os documentos de cada corpus, inseridos em sequência, e posteriormente esses valores mensurados foram divididos pelo número de documentos.
+			Na Figura \ref{fig:time-index-individual} estão dispostos os tempos totais para indexação de todos os documentos dos corpus com ambas ferramentas. 
 
-			Na Figura 4.1 podem ser vistos os resultados do tempo para inserção em lote dos documentos dos corpus  em cada ferramenta. 
+			\input{tex/figure/time-index-individual.tex}
 
-			
+			O ArangoDB teve um melhor desempenho para as inserções dos documentos do DB\_AUTHORPROF, com 1,69 milissegundos por documento, em contraste aos 1,92 milissegundos por documento do Elasticsearch.
+			Porém, o Elasticsearch foi mais rápido para inserção dos documentos do DB\_HYPERPARTISAN, com 2,65 milissegundos por documento contra 3,38 milissegundos por documento do ArangoDB.		
 
-			O Zettair é a ferramenta mais rápida para completar a indexação de ambos os corpus selecionados, levando somente 2,x segundos para indexar os 300 mil documentos do corpus DB_AUTHORPROF. 
-
-			Dentre os SGBDs avaliados, vemos que o ELASTIC tem  melhor desempenho que o ArangoDB para inserções em lote, gastando 15 segundos para indexar os 300 mil documentos. 
-
-			
-
-			Para operação de inserção unitária foi levado em conta o tempo total para indexação dos 300 mil documentos, inseridos em sequência, na Figura 4.2 estão dispostos os tempos totais para indexação de todos os documentos dos corpus com ambas ferramentas. 
+			Percebe-se então que o ArangoDB se saiu um pouco melhor que o Elasticsearch na inserção de grande quantidade de documentos pequenos em sequência, evidênciado pelos tempos de inserção unitária da Figura \ref{fig:time-index-individual}.
+			E pode-se supor que isto é derivado de alguma sobrecarga na operação de inserção unitária do Elasticsearch, ou talvez no custo de recálculo do índice que varia com o tamanho dos documentos inseridos, porém com um custo inicial maior, já que para inserção unitária dos documentos do DB\_HYPERPARTISAN, que são artigos extensos, o Elasticsearch teve melhor desempenho.
+				
+			No geral, o desempenho da indexação por inserção unitária fica abaixo da por inserção em lotes, como era esperado.
 
 		\subsection{Tempo de consulta}
+			Para medir o TIME\_QUERY utilizando cada ferramenta durante a execução das soluções foi necessário adaptar os códigos das soluções para fazer o registro do tempo que cada consulta, e posterior geração dos atributos de RI, levou.
 
-	\section{Desempenho dos classificadores com atributos de RI} \label{sec:resex1}
+			A fim de facilitar a geração dos atributos, foram implementados métodos na classe \textit{IndexToolManager} para que dado um texto seja cálculo direto das variáveis de RI já com as ferramentas específicas, como por exemplo o método \textit{arango\_get\_IR\_variables}.
+			A utilização desses métodos pode ser visto no trecho disposto a seguir do script Python \texttt{feat\_GloVe.ipynb} da solução 4\_tom adaptada.
+
+			\sourcecodenolinenos{Trecho da adaptação feita ao script \texttt{feat\_GloVe.ipynb} da solução 4\_tom.}{time-query-calculation-4-tom}{python}{time-query-calculation-4-tom.py}
+
+			Neste trecho, Código \ref{cmd:time-query-calculation-4-tom}, \textit{toolTest} é uma instância da classe \textit{IndexToolManager}, e assim esta classe que é responsável pelo cálculo das variáveis de RI, e o tempo de consulta leva em conta esse cálculo, como fica exposto pela posição das variáveis \textit{initial} e \textit{final}.
+
+			O mesmo tipo de adaptação feito para a solução 4\_tom foi feito para as demais, e as medidas coletadas estão dispostas na Figura \ref{fig:time-query}.
+
+			\input{tex/figure/time-query.tex}
+
+
+
+	\section{Desempenho dos classificadores com atributos de RI} \label{sec:DesempenhoClassificadores}
 
 		\subsection{DB\_HYPERPARTISAN}
 
+			\input{tex/figure/clf-acc-bars-hyperpartisan.tex}
+			
+			\input{tex/figure/clf-f1-bars-hyperpartisan.tex}
+		
 		\subsection{DB\_AUTHORPROF}
 
 	% Fluxograma das alterações feitas nos códigos com exemplos de trechos alterados
