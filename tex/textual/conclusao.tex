@@ -5,11 +5,37 @@
 
 % recapitular tudo, qual o propósito
 % 1 parágrafo
-
+Esse estudo investigativo buscou avaliar o desempenho de atributos oriundos da área de Recuperação de Informação em tarefas de Mineração de Texto, com enfoque em atributos gerados pela função BM25, por meio de uma metodologia própria.
+A geração desses atributos foi subsidiada por ferramentas que implementam a função BM25 e o desempenho dos atributos de RI foi avaliado em dois corpus distintos.
+O desempenho das ferramentas de armazenamento e indexação também foi avaliado.
 % falar o que vi de fato nos resultados
 % -- foi visto que para a base X, Y aconteceu provavelmente  devido a Z
  
+Os resultados obtidos com a metodologia proposta mostram que o Zettair foi a ferramenta mais rápida na questão de indexação e também para consultas com textos de tamanho limitado.
+O Elasticsearch também apresentou bom desempenho, não possuindo limitações de tamanho do texto nas consultas, e foi o melhor dentre os dois SGBDs testados.
+Além disso, ele possui muito mais funcionalidades que o Zettair, que por sua vez não é um SGBD.
+
+Ainda na avaliação de desempenho das ferramentas, percebe-se que o ArangoDB obteve um resultado muito aquém dos demais na medida TIME\_QUERY para o corpus de 300 mil registros, indicando que as consultas utilizando a função BM25 do ArangoDB são lentas para bancos de dados com grande número de documentos.
 % reforçar as melhores ferramentas, porque são resultados de desempenho mais claros
+
+Dentre as soluções selecionadas para reprodução, só foi possível comprovar as medidas do ranking final das competições para a solução 2\_daneshvar18 do corpus DB\_AUTHORPROF, para as duas soluções do corpus DB\_HYPERPARTISAN isso não foi possível pois o conjunto de validação final da competição não foi publicado.
+Contudo, as soluções do DB\_HYPERPARTISAN selecionadas mantiveram a relação de posição quando reproduzidas, com a solução 1\_bertha obtendo melhor acurácia e melhor F1-Score do que a solução 4\_tom.
+
+Na avaliação de desempenho dos classificadores adicionando os atributos de RI, a Rede Neural Convolucional (1\_bertha) apresentou o maior ganho de desempenho, saltando de uma acurácia de $81,40\%$ para $86,51\%$ e $F_1$-Score de $76,19\%$ para $81,05\%$ ao utilizar o ArangoDB para gerar os atributos de RI.
+A adição dos atributos de RI gerados por quaisquer ferramentas proporcionou ganho de desempenho à CNN da solução 1\_bertha para o corpus DB\_HYPERPARTISAN, porém, não houve qualquer ganho de desempenho ao adicionar os atributos de RI ao classificador SVC da solução 4\_tom.
+
+Uma análise e seleção dos parâmetros do classificador SVC mostrou que adicionar os atributos de RI gerados pelo Zettair produz um ganho de desempenho de acurácia de $82,33\%$ para $84,19\%$ e $F_1$-score de $73,61\%$ para $76,06\%$ quando o melhor valor do parâmetro C é selecionado.
+
+Quanto ao corpus DB\_AUTHORPROF, o classificador LinearSVC da solução 2\_daneshvar18 não obteve nenhum ganho de desempenho ao serem adicionados os atributos de RI, nem mesmo ao ser feita a análise e seleção do parâmetro C do classificador.
+Uma investigação posterior revelou que na verdade a magnitude dos atributos de RI era bem maior que a dos atributos originais, prejudicando o classificador LinearSVC.
+No entanto, mesmo com o reparo de magnitude por meio do escalonador MinMaxScaler, e nova análise e seleção do parâmetro C do classificador, não foi obtido nenhum ganho de desempenho ao adicionar os atributos de RI à solução 2\_daneshvar18.
+
+Então, conclui-se que os 6 atributos de RI sugeridos neste estudo proporcionaram ganho de desempenho somente para classificações do corpus DB\_HYPERPARTISAN, um corpus pequeno com documentos extensos.
+Os atributos de RI funcionaram melhor com o classificador CNN, e para o classificador SVC somente o Zettair proporcionou ganho de desempenho.
+No corpus DB\_AUTHORPROF, um corpus grande com documentos curtos, com o classificador LinearSVC, os atributos de RI causaram perda de desempenho.
+Para corroborar o ganho de desempenho, ou não, dos atributos de RI sugeridos são necessários mais testes pois os resultados aqui obtidos não são unânimes.
+São necessários testes com outros classificadores nesses mesmos corpus e também em diferentes corpus, corpus grandes com documentos extensos e corpus pequenos com documentos pequenos. 
+Podem ser pensados também testes com diferentes valores de top-$k$ e parâmetros $k_1$, $k_3$ e $b$ para cálculo dos atributos de RI.
 
 % limitações do que foi feito
 
