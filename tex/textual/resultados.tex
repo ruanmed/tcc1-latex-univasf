@@ -33,6 +33,20 @@
 		Para permitir reprodutibilidade dos resultados obtidos, o gerador de número aleatórios (RNG) do ambiente do Python, assim como os RNGs das bibliotecas utilizadas pelas soluções, tiveram as suas sementes de geração fixadas.
 
 		Todos os códigos fontes dos scripts Python criados para este estudo estão disponíveis em um repositório de código online e público criado pelo autor, acessível pelo seguinte link: \hyperlink{https://github.com/ruanmed/tcc-ii-ir-features-text-mining/}{https://github.com/ruanmed/tcc-ii-ir-features-text-mining/}.
+		A seguir são tratadas as dependências de \textit{software} para execução do estudo.
+
+		\subsection{Dependências de \textit{software}} \label{subsec:DependênciasSoftware}
+			Para execução dos scripts Python gerados por esse estudo é necessário Python >= 3.6 com as bibliotecas elasticsearch-py >= 7.0.5 e python-arango >= 5.2.1.
+			Ambas bibliotecas se encontram disponíveis no PyPI (\textit{Python Package Index}, ou índice de pacotes do Python em tradução livre).
+
+			Também é necessário possuir instâncias do Elasticsearch >= 7.4.0 e do ArangoDB >= 3.5.1 rodando e disponíveis na rede local do sistema, isso pode ser feito por meio da instalação dessas ferramentas no sistema local.
+			O Zettair >= 0.94 também é necessário estar instalado no sistema, sendo possível executá-lo pelo terminal de comandos com o comando 'zet'.
+
+			A instalação das três ferramentas em sistemas Linux foi simplificada com a criação de um arquivo Docker que utiliza de imagens disponíveis online do ArangoDB e do Elasticsearch, reduzindo o número de comandos necessários para executar as ferramentas no sistema computacional.
+			Detalhes de como utilizar esse arquivo Docker se encontram em: \hyperlink{https://github.com/ruanmed/tcc-ii-ir-features-text-mining\#docker-file}{https://github.com/ruanmed/tcc-ii-ir-features-text-mining\#docker-file}.
+
+			Além dessas dependências, é necessário também instalar as bibliotecas específicas de cada uma das soluções selecionadas.
+			Essas estão listadas nos arquivos README disponibilizados junto às soluções.
 
 	\section{Visão geral das soluções selecionadas e adaptações feitas} \label{sec:VisãoSoluçõesEAdaptações}
 		% Falar brevemento sobre o pré-processamento;
@@ -46,6 +60,7 @@
 			O corpus DB\_HYPERPARTISAN possui dois conjuntos de dados, o primeiro com 750 mil artigos classificados por enviesamento do editor, e o segundo com 645 artigos rotulados como hiperpartidários ou não com consenso entre avaliadores via \textit{crowdsourcing}.
 			O objetivo da competição que utilizou esse corpus era classificar artigos como hiperpartidários ou não, e assim os participantes puderam utilizar os dois conjuntos para fazer suas avaliações. 
 			No entanto, a utilização dos 750 mil artigos classificados por enviesamento de editor não foram úteis para ajudar na classificação, e das duas soluções selecionadas nenhuma delas utilizou esses 750 mil artigos nos seus modelos finais, pois utilizar a informação de editor em conjunto reduziu o desempenho de seus classificadores \cite[p.~840]{jiang-etal-2019-team} pois segundo \citeonline[p.~1067]{yeh-etal-2019-tom} o conjunto de dados classificado por enviesamento do editor possui muito ruído.
+			% Nota de rodapé sobre ruído
 
 			O conjunto de validação final da competição, com 628 artigos também classificados manualmente, não foi disponibilizado ao público, portanto para reprodução das soluções foi necessário dividir o conjunto de 645 artigos em treinamento e validação pelo método de \textit{holdout}, ficando assim com 430 artigos para treinamento e 215 artigos para teste. 
 			Essa divisão foi feita de modo que as classes mantiveram-se com o mesmo balanceamento do conjunto original (37\% dos artigos hiperpartidário e 63\% não hiperpartidários).
@@ -64,12 +79,12 @@
 				A CNN do classificador consiste de 5 camadas convolucionais paralelas internamente que recebem como entrada os agregados ELMo, essas 5 camadas convolucionais se conectam a camada de saída da rede neural, com função de ativação sigmoid, mais detalhes da implementação da CNN podem ser vistos em \citeonline{jiang-etal-2019-team}.
 
 				Para adicionar os 6 atributos de RI à rede foram embutidos, ao final de cada representação de documento, 6 vetores de tamanho 1024, preenchidos pelo valor calculado de cada atributo para o respectivo documento, resultando em documentos com forma 206 x 1024.
-				A adaptação da solução está ilustrada na Figura XX.
+				A adaptação da solução está ilustrada na Figura \ref{fig:1-bertha-arquitetura-com-ri}.
 				
-				% \input{tex/figure/1-bertha-arquitetura-com-ri.tex}
+				\input{tex/figure/1-bertha-arquitetura-com-ri.tex}
 
 				% \ref{fig:1-bertha-arquitetura-com-ri}
-				A Figura XX é baseada na figura de representação de arquitetura do sistema apresentada no artigo de descrição da solução da equipe \cite{jiang-etal-2019-team}, alguns detalhes da CNN são abstraídos e os atributos de RI adicionados estão representados em verde.
+				A Figura \ref{fig:1-bertha-arquitetura-com-ri} é baseada na figura de representação de arquitetura do sistema apresentada no artigo de descrição da solução da equipe \cite{jiang-etal-2019-team}, alguns detalhes da CNN são abstraídos e os atributos de RI adicionados estão representados em verde.
 
 				% Tem que adicionar aqui sobre o modo que a solução faz a predição
 
@@ -86,10 +101,11 @@
 				A arquitetura com melhor resultado foi a utilização dos atributos GloVe com o classificador SVM da biblioteca sklearn.
 				Os documentos são convertidos para os vetores GloVe pré-treinados a partir se suas primeiras 1000 palavras, esses vetores GloVe possuem 300 dimensões por palavra, o que resultaria numa representação com forma de 1000 x 300, no entanto o vetor final que representa cada documento é a média dos vetores de palavras respectivo.
 
+				\input{tex/figure/4-tom-arquitetura-com-ri.tex}
+				
 				Para adicionar os 6 atributos de RI estes foram calculados para os respectivos documentos e embutidos no vetor GloVe do documento, resultando em documentos representados por 306 dimensões, ou 306 atributos.
-				A arquitetura da solução adaptada está ilustrada na Figura XX.
+				A arquitetura da solução adaptada está ilustrada na Figura \ref{fig:4-tom-arquitetura-com-ri}.
 				% \ref{fig:4-tom-arquitetura-com-ri}
-				% \input{tex/figure/4-tom-arquitetura-com-ri.tex}
 
 		\subsection{Corpus DB\_AUTHORPROF}
 			O corpus DB\_AUTHORPROF consiste de \textit{tweets} de autores em três línguas diferentes, inglês, espanhol e árabe.
@@ -109,10 +125,12 @@
 				Os documentos inicialmente são representados por vetores de 1243271 dimensões, após a diminuição da dimensionalidade cada documento é representado por um vetor de 300 dimensões.
 				No entanto, uma peculiaridade da solução está em como é feita a classificação, os 100 \textit{tweets} de cada autor são tratados como um único documento, pois o objetivo é classificar o gênero dos autores em homens ou mulheres.
 				Como os \textit{tweets} foram indexados individualmente, então para adicionar os atributos de RI para cada autor foi feita a geração dos 6 atributos para todos os tweets e então estes foram agregados por autor.
+				A arquitetura adaptada do sistema pode ser vista na Figura \ref{fig:2-daneshvar18-arquitetura-com-ri}.
 
-				% \input{tex/figure/2-daneshvar18-arquitetura-com-ri.tex}
+				\input{tex/figure/2-daneshvar18-arquitetura-com-ri.tex}
 
-				Por fim, os 6 atributos de RI agregados por autor foram embutidos ao final da representação dos documentos, resultando em documentos representados por 1243277 dimensões, e posteriormente também foi configurado outro experimento para embutir os atributos de RI somente após a redução de dimensionalidade, resultado em documentos represetados por 306 atributos.
+				% Por fim, os 6 atributos de RI agregados por autor foram embutidos ao final da representação dos documentos, resultando em documentos representados por 1243277 dimensões, e posteriormente também foi configurado outro experimento para embutir os atributos de RI somente após a redução de dimensionalidade, resultando em documentos represetados por 306 atributos.
+				Por fim, os 6 atributos de RI agregados por autor foram embutidos ao final da representação dos documentos após a redução de dimensionalidade, resultando em documentos represetados por 306 atributos.
 
 
 		\subsection{Resumo das soluções} \label{sec:ResumoDasSoluções}
@@ -123,10 +141,10 @@
 	\section{Desempenho das ferramentas de armazenamento e indexação} \label{sec:DesempenhoFerramentas}
 		Para cálculo das medidas TIME\_INDEX e TIME\_QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi utilizada a linguagem de programação Python na qual foi implementada uma classe chamada \textit{IndexToolManager}, que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
 
-		Esta classe foi central para todo o estudo.
-		% Adicionar funcṍes importantes e cirtar código aqui?
+		Essa classe foi central para todo o estudo, a utilização dela concentrou as funções para acesso e manipulação, quando disponível, aos dados das ferramentas de armazenamento e indexação, centralização das diferentes bibliotecas do Python já disponíveis para interagir com o ArangoDB e com o Elasticsearch, python-arango e elasticsearch-py respectivamente.
+		% Adicionar funcṍes importantes e citar código aqui?
 		\subsection{Tempo de indexação}
-			Para cálculo da medida TIME\_INDEX foi criado um script python nomeado \texttt{time\_index.py}, o qual utilizou da classe \textit{IndexToolManager} em duas funções feitas para executar a indexação dos banco de dados, DB\_AUTHORPROF e DB\_HYPERPARTISAN, nas 3 ferramentas, ArangoDB, Elasticsearch e Zettair.
+			Para cálculo da medida TIME\_INDEX foi criado um script Python nomeado \texttt{time\_index.py}, o qual utilizou da classe \textit{IndexToolManager} em duas funções feitas para executar a indexação dos banco de dados, DB\_AUTHORPROF e DB\_HYPERPARTISAN, nas 3 ferramentas, ArangoDB, Elasticsearch e Zettair.
 			As função principal do script \texttt{time\_index.py} possui nome \textit{measure\_TIME\_INDEX}, e um trecho do código que implementa essa função pode ser visto a seguir no Código \ref{cmd:function-measure-time-index}.
 
 			\sourcecodenolinenos{Função \textit{measure\_TIME\_INDEX} do script \texttt{time\_index.py}.}{function-measure-time-index}{python}{function-measure-TIME-INDEX.py}
@@ -204,7 +222,7 @@
 			Pois, para submissão dos classificadores finais para a da competição, ambas as soluções 1\_bertha e 4\_tom treinaram seus classificadores com os 645 artigos e os resultados de acurácia e $F_1$-score disponíveis no ranking da competição foram calculados para as predições feitas nos 628 exemplos do conjunto de validação.
 			Além disso, outro problema é que o script Python da solução 1\_bertha disponibilizado online não possuia números aleatórios fixos, o que torna praticamente impossível reproduzir a mesma solução que foi submetida pela equipe para a competição.
 
-			Encontram-se na Tabela \ref{tab:reprodução-db-hyperpartisan} a seguir as medidas divulgadas na página da competição \textit{SemEval 2019} \cite{PAN_HNDLEADERBOARD_2019} e as reproduções feitas com treinamento em 430 artigos e validação nos 215 restantes.
+			Encontram-se na Tabela \ref{tab:reprodução-db-hyperpartisan} as medidas divulgadas na página da competição \textit{SemEval 2019} \cite{PAN_HNDLEADERBOARD_2019} e as reproduções feitas com treinamento em 430 artigos e validação nos 215 restantes.
 
 			\input{tex/table/reprodução-db-hyperpartisan.tex}
 
@@ -217,10 +235,10 @@
 			
 			\input{tex/figure/clf-f1-bars-hyperpartisan.tex}
 
-			A adição dos atributos de RI proporciona ganho de acurácia e também de $F_1$-Score para a solução 1\_bertha, alcançando valores maiores até mesmo que os finais da competição com os atributos de RI gerados pelo ArangoDB, acurácia de $0,8651$ ($86,51\%$) e $F_1$-Score de $0,8105$ ($81,05\%$).
+			A adição dos atributos de RI proporciona ganho de acurácia e também de $F_1$-Score para a solução 1\_bertha, alcançando valores maiores até mesmo que os finais da competição com acurácia de $0,8651$ ($86,51\%$) e $F_1$-Score de $0,8105$ ($81,05\%$) quando adicionados os atributos de RI gerados pelo ArangoDB.
 			Já para a solução 4\_tom inicialmente a adição dos atributos de RI não proporciona nenhum ganho de acurácia ou $F_1$-Score, pelo contrário, com todas as ferramentas o $F_1$-Score foi menor ao adicionar os atributos de RI, e somente com os atributos de RI do Elasticsearch que a acurácia se manteve a mesma, com o ArangoDB e com o Zettair houve também diminuição da acurácia do classificador da solução 4\_tom.
 
-			Aqui entra então um detalhe importante da solução 4\_tom, que é o classificador utilizado e o modo que foi escolhido para definição dos parâmetros desse classificador, que no caso foi o classificador SVC e na elaboração de sua solução a equipe avaliou diferentes valores do parâmetro C do classificador e escolheu o valor de C com melhor resultado nesse teste, que foi $C = 0,9$.
+			Deve ser observado um detalhe importante da solução 4\_tom, que é o classificador utilizado e o modo escolhido para definição dos parâmetros desse classificador pela equipe, que no caso foi o classificador SVC e na elaboração de sua solução a equipe avaliou diferentes valores do parâmetro C do classificador e escolheu o valor de C com melhor resultado nesse teste, que foi $C = 0,9$.
 			Como o conjunto de treinamento para submissão da equipe consistiu de todos os 645 artigos, e na reprodução feita para este estudo isso não pode ser feito devido à necessidade de um conjunto isolado de validação, foi feita a suposição que o melhor valor de C para a reprodução da solução seria diferente, pois o conjunto de treinamento da reprodução possui somente 430 artigos.
 			
 			Nas Figuras \ref{fig:clf-acc-4-tom} e \ref{fig:clf-f1-4-tom} estão plotadas as medidas CLF\_ACC e CLF\_F1 obtidas com a reprodução da solução 4\_tom com valores de C na faixa de 0,00001 a 10,0.
@@ -232,8 +250,8 @@
 			Uma rápida análise dos gráficos permite perceber que os melhores valores do parâmetro C agora se encontram na faixa de 1,0 a 3,0 para as reproduções, tanto em termos de CLF\_ACC quanto de CLF\_F1.
 			O valor de $C = 0,9$ de fato não está entre os melhores possíveis para o classificador.
 			
-			Nota-se que, mesmo com a adição dos atributos de RI utilizando tanto o ArangoDB quanto o Elasticsearch, o classificador em não nenhum momento consegue superar o melhor valor de C do classificador original, porém com adição dos atributos de RI gerados pelo Zettair ele atinge os valores de $\text{CLF\_ACC} = 0,8419$ e $\text{CLF\_F1} = 0,7606$ quando $C = 1,4$.
-			Os valores máximos atingidos com os respectivos valores C estão dispostos na Tabela \ref{tab:reprodução-4-tom-c}.
+			Nota-se que, mesmo com a adição dos atributos de RI, utilizando tanto o ArangoDB quanto o Elasticsearch, o classificador em nenhum momento consegue superar o melhor valor de C do classificador original, porém, com adição dos atributos de RI gerados pelo Zettair, ele atinge os valores de $\text{CLF\_ACC} = 0,8419$ e $\text{CLF\_F1} = 0,7606$ quando $C = 1,4$.
+			Os valores máximos atingidos com os respectivos valores de C estão dispostos na Tabela \ref{tab:reprodução-4-tom-c}.
 
 			\input{tex/table/reprodução-4-tom-c.tex}
 
@@ -241,11 +259,58 @@
 			Porém, ainda assim o classificador SVC não consegue superar os resultados obtidos com o classificar CNN da solução 1\_bertha ao adicionar os parâmetros de RI com quaisquer das ferramentas.
 			O que pode parecer um tanto estranho, já que na solução 4\_tom somente o Zettair produziu ganho de desempenho do classificador.
 			Talvez isso esteja relacionado ao modo de classificação final utilizado pela solução 1\_bertha, no qual é feito o \textit{ensemble} (junção) dos três melhores modelos de qualquer época durante o treinamento da CNN, é possível que os atributos de RI não sejam os responsáveis pelo ganho de desempenho observado na solução 1\_bertha, mas somente a iteração diferente, devido a alteração no conjunto de atributos feita por cada ferramenta, tenha gerado modelos que tenham melhor desempenho no \textit{ensemble}.
+			% Nota de rodapé sobre ensemble?
 			Pois, mesmo com a fixação da semente do gerador de número aleatório, como os valores dos atributos de RI são alterados (já que cada ferramenta sua própria implementação do BM25 com pequenas diferenças entre si), os modelos gerados pela reprodução com adição dos atributos de RI gerados pelo Zettair é diferente dos gerados pelo Elasticsearch, que também é diferente dos gerados pelo ArangoDB, e todos estes também são diferentes dos modelos gerados sem adição dos atributos de RI.
 
 
 		\subsection{DB\_AUTHORPROF}
+			A solução 2\_daneshvar18 foi reproduzida sem nenhuma adaptação para comparação com os valores que se encontram na página da competição.
+			Na Tabela estão a medida de acurácia divulgada na página da competição \cite{PAN_APCLEF_2018} junto com as medidas da reprodução feita do mesmo modo que a submissão original, treinamento com os tweets de 3000 autores de língua inglesa e validação com os tweets de 1900 autores de língua inglesa.
+			% e a medida $F_1$-score apresentada na descrição da solução pela equipe
+			% PAN_APCLEF_2018.
 
+			\input{tex/table/reprodução-db-authorprof.tex}
+
+			Ao truncar o resultado de acurácia da solução reproduzida em 4 dígitos, confirmamos que o mesmo valor divulgado na página da competição é o obtido ao reproduzir a solução.
+			Tanto a página da competição quanto o artigo de descrição da solução \cite{daneshvar:2018} só mencionam a acurácia da solução, portanto não há como comparar o $F_1$-score obtido ao reproduzir a solução.
+
+			Depois da validação inicial da solução 2\_daneshvar por meio da reprodução dos resultados da competição, ela foi adaptada para incluir os atributos de RI junto aos atributos de entrada do classificador antes da redução de dimensionalidade.
+			As medições de CLF\_ACC e CLF\_F1 obtidas ao reproduzir a solução incluindo os atributos com as diferentes ferramentas estão dispostas nas Figuras \ref{fig:clf-acc-bars-authorprof} e \ref{fig:clf-f1-bars-authorprof}.
+
+
+			\input{tex/figure/clf-acc-bars-authorprof.tex}
+
+
+			\input{tex/figure/clf-f1-bars-authorprof.tex}
+
+			Como pode ser observado nos gráficos, os atributos de RI na verdade provocaram uma perda considerável de desempenho do classificador da solução 2\_daneshvar18, ambas as medidas CLF\_ACC e CLF\_F1 foram menores com a adição dos atributos de RI com quaisquer das ferramentas utilizadas.
+			O classificador da solução se trata de um classificador do tipo de Máquinas de Vetor de Suporte, o LinearSVC, e assim como foi feito com a solução 4\_tom anteriormente, pode-se supor que o parâmetro C do classificador, escolhido como o padrão $C = 1,0$ pela equipe da solução 2\_daneshvar18, não se trata do melhor valor possível para os modelos de classificação gerados ao adicionar os atributos de RI.
+			Então, trabalhando com essa hipótese, a solução foi reproduzida alterando o valor de C do LinearSVC na faixa de valores de $0,00001$ a $10,0$.
+			As medidas coletadas estão plotadas nas Figuras \ref{fig:clf-acc-2-daneshvar18} e \ref{fig:clf-f1-2-daneshvar18}.
+
+
+			\input{tex/figure/clf-acc-2-daneshvar18.tex}
+
+			\input{tex/figure/clf-f1-2-daneshvar18.tex}
+
+			Os gráficos de desempenho com diferentes valores de C comprovam que os atributos de RI pioraram os modelos gerados pelo classificador LinearSVC da solução 2\_daneshvar18.
+			Pode-se dizer que a introdução dos atributos de RI se trata de uma introdução de ruído que atrapalha o classificador e o impede alcançar os níveis de desempenho atingidos utilizando somente os atributos originais.
+
+			Por que isso ocorreu?
+			Ao analisar os atributos originais após a redução de dimensionalidade foi constatado que os valores máximos e mínimos de cada uma das colunas dos 300 atributos estavam na faixa de $-1,0$ a $1,0$ enquanto que os 6 atributos de RI gerados pelas ferramentas estavam na faixa de $8,0$ até a casa dos milhares.
+			Os classificadores do tipo SVM atribuem maior importância a atributos com maiores magnitudes conforme o núcleo selecionado \cite{Kumar2014}, e isso estava acontecendo com o núcleo padrão do classificador LinearSVC do sklearn.
+
+			Para tentar resolver o problema foi utilizado o escalonador MinMaxScaler nos 6 atributos de RI para dimensioná-los para a faixa de $-1,0$ a $1,0$. 
+			Os medidas coletadas podem ser observadas nas Figuras \ref{fig:clf-acc-2-daneshvar18-ir-scaled} e \ref{fig:clf-f1-2-daneshvar18-ir-scaled}. 
+
+			\input{tex/figure/clf-acc-2-daneshvar18-ir-scaled.tex}
+
+			\input{tex/figure/clf-f1-2-daneshvar18-ir-scaled.tex}
+
+			Apesar do desempenho do classificador da solução 2\_daneshvar18 ter sido maior com os atributos de RI escalonados, como mostra o gráfico da Figura \ref{fig:clf-acc-2-daneshvar18-ir-scaled} em comparação com o da Figura \ref{fig:clf-acc-2-daneshvar18}, ainda assim o desempenho continuou abaixo da reprodução da solução original.
+			Na Tabela \ref{tab:reprodução-2-daneshvar18-c} podem ser vistos os valores máximos atingidos com os respectivos valores de C.
+
+			\input{tex/table/reprodução-2-daneshvar18-c.tex}
 	% Fluxograma das alterações feitas nos códigos com exemplos de trechos alterados
 	% Rosalvo disse que é para colocar no Apêndice
 
