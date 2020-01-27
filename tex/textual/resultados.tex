@@ -102,7 +102,7 @@
 				Os documentos são convertidos para os vetores GloVe pré-treinados a partir se suas primeiras 1000 palavras, esses vetores GloVe possuem 300 dimensões por palavra, o que resultaria numa representação com forma de 1000 x 300, no entanto o vetor final que representa cada documento é a média dos vetores de palavras respectivo.
 
 				\input{tex/figure/4-tom-arquitetura-com-ri.tex}
-				
+
 				Para adicionar os 6 atributos de RI estes foram calculados para os respectivos documentos e embutidos no vetor GloVe do documento, resultando em documentos representados por 306 dimensões, ou 306 atributos.
 				A arquitetura da solução adaptada está ilustrada na Figura \ref{fig:4-tom-arquitetura-com-ri}.
 				% \ref{fig:4-tom-arquitetura-com-ri}
@@ -134,14 +134,15 @@
 
 
 		\subsection{Resumo das soluções} \label{sec:ResumoDasSoluções}
-			Na Tabela \ref{tab:resumo-soluções} a seguir estão resumidas as principais características das soluções selecionadas.
+			Na Tabela \ref{tab:resumo-soluções} a seguir estão as principais características das soluções selecionadas.
 
 			\input{tex/table/resumo-soluções.tex}
 
 	\section{Desempenho das ferramentas de armazenamento e indexação} \label{sec:DesempenhoFerramentas}
-		Para cálculo das medidas TIME\_INDEX e TIME\_QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi utilizada a linguagem de programação Python na qual foi implementada uma classe chamada \textit{IndexToolManager}, que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
+		Para cálculo das medidas TIME\_INDEX e TIME\_QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi empregada a linguagem de programação Python, utilizada para implementada uma classe chamada \textit{IndexToolManager} que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
 
-		Essa classe foi central para todo o estudo, a utilização dela concentrou as funções para acesso e manipulação, quando disponível, aos dados das ferramentas de armazenamento e indexação, centralização das diferentes bibliotecas do Python já disponíveis para interagir com o ArangoDB e com o Elasticsearch, python-arango e elasticsearch-py respectivamente.
+		Essa classe foi central para todo o estudo, a utilização dela concentrou as funções para acesso e manipulação, quando disponível, aos dados das ferramentas de armazenamento e indexação, centralização das diferentes bibliotecas do Python já disponíveis para interagir com o ArangoDB e com o Elasticsearch, python-arango e elasticsearch-py respectivamente. 
+		Trechos da implementação da classe \textit{IndexToolManager} estão no Apêndice \ref{apên:implementação-indextoolmanager}.
 		% Adicionar funcṍes importantes e citar código aqui?
 		\subsection{Tempo de indexação}
 			Para cálculo da medida TIME\_INDEX foi criado um script Python nomeado \texttt{time\_index.py}, o qual utilizou da classe \textit{IndexToolManager} em duas funções feitas para executar a indexação dos banco de dados, DB\_AUTHORPROF e DB\_HYPERPARTISAN, nas 3 ferramentas, ArangoDB, Elasticsearch e Zettair.
@@ -151,7 +152,7 @@
 			% \sourcecodeinline{python}{codes/function-measure-TIME-INDEX.py}
 
 			Essa função é responsável por efetuar uma chamada à função \textit{index} com os parâmetros de tipo de indexação, corpus a ser indexado, e qual a ferramenta utilizada nessa indexação, além de uma identificação do experimento.
-			A função \textit{index} faz os devidos tratamentos para chamar os métodos da classe \textit{IndexToolManager} responsáveis por fazer a indexação dos documentos do corpus especificado utilizando a ferramenta especificada, isso enquanto mensura o tempo que cada indexação levou e registra todas as operações num arquivo de texto.
+			A função \textit{index}, que pode ser vista no Apêndice \ref{apên:função-index}, faz os devidos tratamentos para chamar os métodos da classe \textit{IndexToolManager} responsáveis por fazer a indexação dos documentos do corpus especificado utilizando a ferramenta especificada, isso enquanto mensura o tempo que cada indexação levou e registra todas as operações num arquivo de texto.
 
 			% Colocar o código fonte da função index aqui?
 			
@@ -187,7 +188,16 @@
 			A fim de facilitar a geração dos atributos, foram implementados métodos na classe \textit{IndexToolManager} para que: dado um texto, seja cálculo direto das variáveis de RI já com as ferramentas específicas, como por exemplo o método \textit{arango\_get\_IR\_variables}.
 			A utilização desses métodos pode ser visto no trecho disposto a seguir do script Python \texttt{feat\_GloVe.ipynb} da solução 4\_tom adaptada.
 
-			\sourcecodenolinenos{Trecho da adaptação feita ao script \texttt{feat\_GloVe.ipynb} da solução 4\_tom.}{time-query-calculation-4-tom}{python}{time-query-calculation-4-tom.py}
+			% \sourcecodenolinenos{Trecho da adaptação feita ao script \texttt{feat\_GloVe.ipynb} da solução 4\_tom.}{time-query-calculation-4-tom}{python}{time-query-calculation-4-tom.py}
+			\begin{listing}[H]
+				\refstepcounter{sourcecode}
+				\captionof{listing}{Trecho da adaptação feita ao script \texttt{feat\_GloVe.ipynb} da solução 4\_tom.\label{cmd:time-query-calculation-4-tom}}
+			\end{listing}
+			\vspace{-1.0cm}
+			\inputminted[bgcolor=bg, 
+			tabsize=4, baselinestretch=1, breaklines]{python}{codes/time-query-calculation-4-tom.py}
+			\vspace{-1.0cm}
+			\Ididthis
 
 			Neste trecho, Código \ref{cmd:time-query-calculation-4-tom}, \textit{toolTest} é uma instância da classe \textit{IndexToolManager} com \textit{top-$k$} igual a 100. 
 			Esta classe que é responsável pelo cálculo das variáveis de RI, e o tempo de consulta leva em conta esse cálculo, como fica exposto pela posição das variáveis \textit{initial} e \textit{final}.
@@ -275,13 +285,15 @@
 			Tanto a página da competição quanto o artigo de descrição da solução \cite{daneshvar:2018} só mencionam a acurácia da solução, portanto não há como comparar o $F_1$-score obtido ao reproduzir a solução.
 
 			Depois da validação inicial da solução 2\_daneshvar por meio da reprodução dos resultados da competição, ela foi adaptada para incluir os atributos de RI junto aos atributos de entrada do classificador antes da redução de dimensionalidade.
-			As medições de CLF\_ACC e CLF\_F1 obtidas ao reproduzir a solução incluindo os atributos com as diferentes ferramentas estão dispostas nas Figuras \ref{fig:clf-acc-bars-authorprof} e \ref{fig:clf-f1-bars-authorprof}.
+			As medições de CLF\_ACC e CLF\_F1 obtidas ao reproduzir a solução incluindo os atributos com as diferentes ferramentas estão dispostas nas Figura \ref{fig:clf-bars-authorprof}.
+			%  e \ref{fig:clf-f1-bars-authorprof}.
+
+			\input{tex/figure/clf-bars-authorprof.tex}
+
+			% \input{tex/figure/clf-acc-bars-authorprof.tex}
 
 
-			\input{tex/figure/clf-acc-bars-authorprof.tex}
-
-
-			\input{tex/figure/clf-f1-bars-authorprof.tex}
+			% \input{tex/figure/clf-f1-bars-authorprof.tex}
 
 			Como pode ser observado nos gráficos, os atributos de RI na verdade provocaram uma perda considerável de desempenho do classificador da solução 2\_daneshvar18, ambas as medidas CLF\_ACC e CLF\_F1 foram menores com a adição dos atributos de RI com quaisquer das ferramentas utilizadas.
 			O classificador da solução se trata de um classificador do tipo de Máquinas de Vetor de Suporte, o LinearSVC, e assim como foi feito com a solução 4\_tom anteriormente, pode-se supor que o parâmetro C do classificador, escolhido como o padrão $C = 1,0$ pela equipe da solução 2\_daneshvar18, não se trata do melhor valor possível para os modelos de classificação gerados ao adicionar os atributos de RI.
@@ -311,6 +323,9 @@
 			Na Tabela \ref{tab:reprodução-2-daneshvar18-c} podem ser vistos os valores máximos atingidos com os respectivos valores de C.
 
 			\input{tex/table/reprodução-2-daneshvar18-c.tex}
+
+			Pode-se perceber que o melhor desempenho com os atributos de RI é quando gerado pelo Zettair, no entanto ainda assim fica abaixo da solução original.
+			Obtendo acurácia de $81,68\%$ contra $82,22\%$ da original, e $F_1$-score de $81,72\%$ contra $82,08\%$ da original.
 	% Fluxograma das alterações feitas nos códigos com exemplos de trechos alterados
 	% Rosalvo disse que é para colocar no Apêndice
 

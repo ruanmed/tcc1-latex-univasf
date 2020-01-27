@@ -8,7 +8,12 @@
     A área de Recuperação de Informação contribui para o desenvolvimento da Mineração de Texto no pré-processamento, porém sua utilização direta na criação de atributos não é usual, sendo proposto pela primeira vez por \citeonline{WEREN_CLEF_2014}.
     
     A partir de uma revisão bibliográfica das áreas de Recuperação de Informação e de Mineração de Texto, o autor sugere uma metodologia para criação de atributos utilizando a função de ranqueamento BM25, similar à utilizada por \citeonline{WEREN_MESTRADO_2014}, e utilizando ferramentas de armazenamento e indexação já existentes para o cálculo.
-    Nesta metodologia, a análise do desempenho dos novos atributos sugeridos é feita por meio da mensuração do desempenho de classificador por medidas consolidadas na literatura de Mineração de Texto.
+    Nesta metodologia, a análise do desempenho dos novos atributos sugeridos é feita por meio da mensuração do desempenho de classificador por medidas consolidadas na literatura de Mineração de Texto como acurácia $F_1$-score.
+
+    Os resultados obtidos a partir da reprodução da metodologia sugerida demonstram o Zettair como a ferramenta com melhor desempenho para indexação de documentos, e o Elasticsearch como o melhor SGBD tanto no quesito desempenho de indexação quanto de consulta.
+
+    Os atributos sugeridos, derivados de Recuperação de Informação, apresentam ganho de desempenho em classificadores de um corpus pequeno com documentos longos, 645 artigos.
+    Estes mesmos atributos aplicados em outro classificador para um corpus grande com documentos pequenos, 300 mil \textit{tweets}, causa perda de desempenho desse classificador.
     
     \vspace{\onelineskip}
     

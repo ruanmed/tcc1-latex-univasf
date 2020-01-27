@@ -41,5 +41,16 @@ Podem ser pensados também testes com diferentes valores de top-$k$ e parâmetro
 
 % 
 \section{Trabalhos futuros}
+    Para trabalhos futuros está planejada uma maior análise exploratória dos parâmetros da solução 2\_daneshvar18, reproduzindo a solução com maiores variações nos parâmetros do classificador LinearSVC, inclusive com alteração do núcleo do mesmo, para verificar se alguma configuração dele possui desempenho superior constante ao serem adicionados os atributos de RI. 
+    Isso não foi feito neste estudo devido à limitação temporal para executar todas as variações necessárias para chegar a mais conclusões, mas alguns resultados já estão guardados.
+    % mas algumas das diferentes configurações já foram executadas ou reproduzidas
+
+    Quanto maior o número de soluções reproduzidas para cada corpus melhor, mas trabalhar com um mínimo talvez seja o ideal, então para todas as reproduções futuras é bom tomar como base no mínimo duas soluções, ou classificadores distintos, por corpus, para efetuar as comparações.
+    Então, em um trabalho futuro imediato planeja-se reproduzir mais uma das soluções do corpus DB\_AUTHORPROF disponíveis online.
+
+    Como mencionado antes, trabalhos futuros podem também trabalhar somente analisando diferentes valores que influenciem somente nos atributos de RI gerados, o top-$k$ e os parâmetros $k_1$, $k_3$ e $b$ reproduzindo-os para os mesmos corpus.
+
+    Além disso, uma outra possibilidade de estudo, é o maior isolamento do índice de geração dos atributos de RI do conjunto de treinamento por meio da separação dos corpus em 3 pedaços.
+    Nessa separação o primeiro pedaço seria utilizado para para treinamento do classificador, o segundo pedaço seria utilizado como o índice para geração dos atributos derivados da função BM25 para o primeiro pedaço, e o terceiro pedaço ficaria para teste/validação do classificador.
 
 % \lipsum[55]
