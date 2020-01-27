@@ -1,0 +1,33 @@
+\begin{table}[!thb]
+	%\huge
+    \centering
+    \caption{Melhores valores de CLF\_ACC e CLF\_F1 do classificador LinearSVC da solução 2\_daneshvar18 após reproduzida com diferentes valores de C, com atributos de RI escalonados pelo MinMaxScaler.}
+    \begin{adjustbox}{max width={\textwidth},keepaspectratio}%
+    \begin{tabular}{|l|c|c|c|}
+        % \toprule
+        \hline
+        \textbf{Solução}
+        & \textbf{C}
+        & \textbf{Acurácia}
+        & \textbf{$F_1$-Score}
+        \\ \hline
+        original        
+        & 1,0   & \textbf{0,822105}   & \textbf{0,820785}
+        \\ \hline
+        +RI\_arango
+        & 1,6   & 0,813158   & 0,810059          
+        \\ \hline
+        +RI\_elastic
+        & 0,4   & 0,808947    & 0,810444
+        \\ \hline
+        +RI\_zettair
+        & 0,6   & 0,816842	    & 0,817227
+        \\ 
+        \hline
+        % \bottomrule
+    \end{tabular}
+    \end{adjustbox}
+    \legend{\ABNTEXfontereduzida \textbf{Fonte:} O autor.}
+    \label{tab:reprodução-2-daneshvar18-c} 
+    % \legend{\textbf{Fonte:} O autor.}
+\end{table}
