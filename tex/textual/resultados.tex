@@ -30,7 +30,7 @@
 		% Fixação do número aleatório do Python e das bibliotecas utilizadas nas soluções, quando isto não era feito originalmente, para permitir reprodutibilidade exata dos resultados obtidos.
 		% [ ] FOOTNOTE DO VSCODIUM?
 		O ambiente de programação utilizado foi o VSCodium e a linguagem de programação utilizada foi o Python 3.7.5.
-		Para permitir reprodutibilidade dos resultados obtidos, o gerador de número aleatórios (RNG) do ambiente do Python, assim como os RNGs das bibliotecas utilizadas pelas soluções, tiveram as suas sementes de geração fixadas.
+		Para permitir reprodutibilidade dos resultados obtidos, o gerador de números aleatórios (RNG) do ambiente do Python, assim como os RNGs das bibliotecas utilizadas pelas soluções, tiveram as suas sementes de geração fixadas.
 
 		Todos os códigos fontes dos scripts Python criados para este estudo estão disponíveis em um repositório de código online e público criado pelo autor, acessível pelo seguinte link: \hyperlink{https://github.com/ruanmed/tcc-ii-ir-features-text-mining/}{https://github.com/ruanmed/tcc-ii-ir-features-text-mining/}.
 		A seguir são tratadas as dependências de \textit{software} para execução do estudo.
@@ -141,12 +141,12 @@
 	\section{Desempenho das ferramentas de armazenamento e indexação} \label{sec:DesempenhoFerramentas}
 		Para cálculo das medidas TIME\_INDEX e TIME\_QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi empregada a linguagem de programação Python, utilizada para implementada uma classe chamada \textit{IndexToolManager} que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
 
-		Essa classe foi central para todo o estudo, a utilização dela concentrou as funções para acesso e manipulação, quando disponível, aos dados das ferramentas de armazenamento e indexação, centralização das diferentes bibliotecas do Python já disponíveis para interagir com o ArangoDB e com o Elasticsearch, python-arango e elasticsearch-py respectivamente. 
+		Essa classe foi central para todo o estudo, a utilização dela concentrou as funções para acesso e manipulação, quando disponíveis, aos dados das ferramentas de armazenamento e indexação, centralização das diferentes bibliotecas do Python já disponíveis para interagir com o ArangoDB e com o Elasticsearch, python-arango e elasticsearch-py respectivamente. 
 		Trechos da implementação da classe \textit{IndexToolManager} estão no Apêndice \ref{apên:implementação-indextoolmanager}.
 		% Adicionar funcṍes importantes e citar código aqui?
 		\subsection{Tempo de indexação}
-			Para cálculo da medida TIME\_INDEX foi criado um script Python nomeado \texttt{time\_index.py}, o qual utilizou da classe \textit{IndexToolManager} em duas funções feitas para executar a indexação dos banco de dados, DB\_AUTHORPROF e DB\_HYPERPARTISAN, nas 3 ferramentas, ArangoDB, Elasticsearch e Zettair.
-			As função principal do script \texttt{time\_index.py} possui nome \textit{measure\_TIME\_INDEX}, e um trecho do código que implementa essa função pode ser visto a seguir no Código \ref{cmd:function-measure-time-index}.
+			Para cálculo da medida TIME\_INDEX foi criado um script Python nomeado \texttt{time\_index.py}, o qual utilizou da classe \textit{IndexToolManager} em duas funções feitas para executar a indexação dos bancos de dados, DB\_AUTHORPROF e DB\_HYPERPARTISAN, nas 3 ferramentas, ArangoDB, Elasticsearch e Zettair.
+			A função principal do script \texttt{time\_index.py} possui nome \textit{measure\_TIME\_INDEX}, e um trecho do código que implementa essa função pode ser visto a seguir no Código \ref{cmd:function-measure-time-index}.
 
 			\sourcecodenolinenos{Função \textit{measure\_TIME\_INDEX} do script \texttt{time\_index.py}.}{function-measure-time-index}{python}{function-measure-TIME-INDEX.py}
 			% \sourcecodeinline{python}{codes/function-measure-TIME-INDEX.py}
@@ -275,7 +275,7 @@
 
 		\subsection{DB\_AUTHORPROF}
 			A solução 2\_daneshvar18 foi reproduzida sem nenhuma adaptação para comparação com os valores que se encontram na página da competição.
-			Na Tabela estão a medida de acurácia divulgada na página da competição \cite{PAN_APCLEF_2018} junto com as medidas da reprodução feita do mesmo modo que a submissão original, treinamento com os tweets de 3000 autores de língua inglesa e validação com os tweets de 1900 autores de língua inglesa.
+			Na Tabela \ref{tab:reprodução-db-authorprof} está a medida de acurácia divulgada na página da competição \cite{PAN_APCLEF_2018} junto com as medidas da reprodução feitas do mesmo modo que a submissão original, treinamento com os tweets de 3000 autores de língua inglesa e validação com os tweets de 1900 autores de língua inglesa.
 			% e a medida $F_1$-score apresentada na descrição da solução pela equipe
 			% PAN_APCLEF_2018.
 

@@ -30,7 +30,7 @@ Quanto ao corpus DB\_AUTHORPROF, o classificador LinearSVC da solução 2\_danes
 Uma investigação posterior revelou que na verdade a magnitude dos atributos de RI era bem maior que a dos atributos originais, prejudicando o classificador LinearSVC.
 No entanto, mesmo com o reparo de magnitude por meio do escalonador MinMaxScaler, e nova análise e seleção do parâmetro C do classificador, não foi obtido nenhum ganho de desempenho ao adicionar os atributos de RI à solução 2\_daneshvar18.
 
-Então, conclui-se que os 6 atributos de RI sugeridos neste estudo proporcionaram ganho de desempenho somente para classificações do corpus DB\_HYPERPARTISAN, um corpus pequeno com documentos extensos.
+Então, conclui-se que os 6 atributos de RI sugeridos nesse estudo proporcionaram ganho de desempenho somente para classificações do corpus DB\_HYPERPARTISAN, um corpus pequeno com documentos extensos.
 Os atributos de RI funcionaram melhor com o classificador CNN, e para o classificador SVC somente o Zettair proporcionou ganho de desempenho.
 No corpus DB\_AUTHORPROF, um corpus grande com documentos curtos, com o classificador LinearSVC, os atributos de RI causaram perda de desempenho.
 Para corroborar o ganho de desempenho, ou não, dos atributos de RI sugeridos são necessários mais testes pois os resultados aqui obtidos não são unânimes.
