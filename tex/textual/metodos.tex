@@ -14,7 +14,7 @@
     
     O processo de Mineração de Texto pode ser segmentado em 7 etapas, conforme ressaltado anteriormente na Seção \ref{sec:MineraçãoTexto}.
     Na metodologia proposta aqui a fase de MT assume que as 3 etapas iniciais de limpeza, integração, e seleção dos dados, já foram realizadas no banco de dados de teste, assim os conjuntos divididos em treinamento e validação passam diretamente pela etapa seguinte que é a \textbf{(3) Transformação dos dados com adição dos atributos de RI}.
-    Nesta etapa, os banco de dados NoSQL indexados recebem \textbf{(3.1) Consultas} com a utilização das funções de ranqueamento baseadas no BM25 que cada ferramenta implementa, sendo mensurado o tempo para efetuar cada consulta e gerar os novos atributos sugeridos adiante na Seção \ref{sec:Atributos-de-RI-sugeridos}.
+    Nessa etapa, os banco de dados NoSQL indexados recebem \textbf{(3.1) Consultas} com a utilização das funções de ranqueamento baseadas no BM25 que cada ferramenta implementa, sendo mensurado o tempo para efetuar cada consulta e gerar os novos atributos sugeridos adiante na Seção \ref{sec:Atributos-de-RI-sugeridos}.
     % Será feita uma consulta para cada exemplo dos conjuntos, e a resposta dessas consultas servirá para criar os atributos de RI detalhados logo mais na Seção \ref{sec:Atributos-de-RI-sugeridos}.
     
     O processo de \textbf{(4) Mineração dos Dados} é feito por meio da réplica de soluções dos corpus para avaliação selecionados, que possuem seus códigos-fonte disponíveis, sendo então reproduzida cada solução 
@@ -27,7 +27,7 @@
     % Na fase de Mineração de Texto os conjuntos de treinamento e de validação passarão pela \textbf{(3) Transformação dos dados com adição dos atributos de RI} onde 
     
     
-    % Para utilização da função de ranqueamento BM25 como variável em tarefas de mineração de texto é necessário efetuar o armazenamento e a indexação dos textos do conjunto de treinamento, e para esta tarefa serão utilizadas ferramentas de armazenamento em banco de dados (não relacionais?) que fornecem implementações do BM25 para consulta, estas serão apresentadas na Seção \ref{sec:Armazenamento-e-indexação}.
+    % Para utilização da função de ranqueamento BM25 como variável em tarefas de mineração de texto é necessário efetuar o armazenamento e a indexação dos textos do conjunto de treinamento, e para essa tarefa serão utilizadas ferramentas de armazenamento em banco de dados (não relacionais?) que fornecem implementações do BM25 para consulta, essas serão apresentadas na Seção \ref{sec:Armazenamento-e-indexação}.
     
     % Se faz necessário também definir medidas para avaliação do ganho de desempenho com as variáveis de RI, assim como elencar as bases de dados que vão servir para efetuar essa avaliação, disposto logo mais nas Seções \ref{sec:Medidas-para-avaliação-de-desempenho} e \ref{sec:Corpus-para-avaliação}.
 
@@ -79,7 +79,7 @@
         % 30. Rahgoyu - https://github.com/HamedBabaei/PAN2019_bots_gender_profiling
         % 32 Pryzybyla Przybyła - https://github.com/pan-webis-de/przybyla19
         
-        \item \textbf{DB\underscore{}HYPARTISAN - \textit{Hyperpartisan News Detection - PAN @ SemEval 2019 Task 4}:} Esta tarefa da competição \textit{SemEval 2019} promovida pela PAN consiste em, dada uma notícia, avaliar se esta segue uma argumentação hiperpartidária, que significa verificar se ela possui fidelidade cega, preconceituosa, ou irracional a um partido, grupo, causa, ou pessoa \cite{PAN_HND_2019}.
+        \item \textbf{DB\underscore{}HYPARTISAN - \textit{Hyperpartisan News Detection - PAN @ SemEval 2019 Task 4}:} Essa tarefa da competição \textit{SemEval 2019} promovida pela PAN consiste em, dada uma notícia, avaliar se essa segue uma argumentação hiperpartidária, que significa verificar se ela possui fidelidade cega, preconceituosa, ou irracional a um partido, grupo, causa, ou pessoa \cite{PAN_HND_2019}.
         Portanto pode-se dizer que se trata de um problema de classificação binária, a classe real é a presença ou ausência de hiperpartidarismo em cada exemplo.
         
         Os dados consistem em artigos de notícias divididos em múltiplos arquivos onde cada arquivo com parte inicial ``articles-'' consiste em uma notícia e a classificação real da notícia está presente em um arquivo com inicial ``ground-truth-''. 
@@ -203,7 +203,7 @@
     
     \input{tex/figure/diagrama-consulta-geracao-atributo.tex}
     
-    Cada exemplo do corpus a ser classificado é usado como consulta ao banco de dados NoSQL indexado, e cada uma destas consultas tem como resultado uma lista dos \textit{top-$k$} exemplos presentes no banco de dados, ordenada por pontuação de similaridade da função BM25, sendo esta pontuação calculada pela ferramenta de armazenamento indexação. 
+    Cada exemplo do corpus a ser classificado é usado como consulta ao banco de dados NoSQL indexado, e cada uma dessas consultas tem como resultado uma lista dos \textit{top-$k$} exemplos presentes no banco de dados, ordenada por pontuação de similaridade da função BM25, sendo essa pontuação calculada pela ferramenta de armazenamento indexação. 
     Esse procedimento está representado na Figura \ref{fig:diagrama-cosulta-geração-atributos}.
     
     O cálculo dos novos atributos é feito a partir da lista retornada dos \textit{top-$k$} exemplos, e são utilizadas as três funções de agregação sugeridas por \citeonline[p.~21--23]{WEREN_MESTRADO_2014}:

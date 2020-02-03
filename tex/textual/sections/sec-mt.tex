@@ -26,7 +26,7 @@
     
     \input{tex/figure/han2011-figure-1-4-mineracao-dados.tex}
     
-    É importante notar essas 7 etapas de desenvolvimento de Mineração de Dados para abordamos a definição de MT, pois esta deriva muitas técnicas desenvolvidas na pesquisa do campo de Mineração de Dados para seu campo de aplicação, logo sistemas baseados em ambas áreas vão apresentar similaridades estruturais \cite[p.~1]{Feldman:2006:TMH:1076381}. 
+    É importante notar essas 7 etapas de desenvolvimento de Mineração de Dados para abordamos a definição de MT, pois essa deriva muitas técnicas desenvolvidas na pesquisa do campo de Mineração de Dados para seu campo de aplicação, logo sistemas baseados em ambas áreas vão apresentar similaridades estruturais \cite[p.~1]{Feldman:2006:TMH:1076381}. 
     
     % Text mining can be broadly defined as a knowledge-intensive process in which a user interacts with a document collection over time by using a suite of analysis tools. In a manner analogous to data mining, text mining seeks to extract useful information from data sources through the identification and exploration of interesting patterns.
     
@@ -43,7 +43,7 @@
     % -- Utiliza das técnicas de RI para indexar os textos em algumas de suas aplicações
     % Text mining preprocessing operations include a variety of different types of techniques culled and adapted from information retrieval, information extraction, and computational linguistics research that transform raw, unstructured, original-format content (like that which can be downloaded from PubMed) into a carefully structured, intermediate data format. Knowledge discovery operations, in turn, are operated against this specially structured intermediate representation of the original document collection.
     
-    As operações de pré-processamento para MT utilizam de várias técnicas adaptadas dos campos de Recuperação de Informação, extração de informação e linguística computacional para transformar as coleções de documentos desestruturados em dados intermediários cuidadosamente estruturados \cite[p.~2--3]{Feldman:2006:TMH:1076381}. 
+    As operações de pré-processamento para MT utilizam várias técnicas adaptadas dos campos de Recuperação de Informação, extração de informação e linguística computacional para transformar as coleções de documentos desestruturados em dados intermediários cuidadosamente estruturados \cite[p.~2--3]{Feldman:2006:TMH:1076381}. 
     Essa estrutura intermediária é definida por um modelo representacional dos documentos de texto composto por um conjunto de atributos, sendo sempre preferidos os modelos com menor número de variáveis significativas para a representação \cite[p.~4]{Feldman:2006:TMH:1076381}.
     % In Table 1.1, the differences between the mining and the retrieval are presented. The output of data mining is the implicit knowledge which is necessary directly for making decisions, whereas that of retrieval is some of data items which are relevant to the given query. For example, in the domain of stock prices, the prediction of future stock prices is a typical task of data mining, whereas taking some of past and current stock prices is that of information retrieval. Note that the perfect certainty never exists in the data mining, compared to the retrieval. The more advanced computation for making knowledge from the raw data, which is called synthesis, is required for doing the data mining tasks.
     
@@ -131,9 +131,9 @@
             Então, este modelo de treinamento é utilizado para prever a classe de exemplos não vistos anteriormente, isso quer dizer que estes exemplos não fazem parte do conjunto de treinamento.
             Segundo \citeonline[p.~286, tradução nossa]{Aggarwal_DMTT_2015}, então, a maior parte dos algoritmos de classificação possui duas fases:
             \begin{enumerate}
-                \item \textbf{Fase de treinamento}: nesta fase um modelo de treinamento é construído à parte das instâncias de treinamento. Isto pode ser entendido, intuitivamente, como um resumo do modelo matemático dos grupos rotulados no conjunto de dados de treinamento;
+                \item \textbf{Fase de treinamento}: nessa fase um modelo de treinamento é construído à parte das instâncias de treinamento. Isto pode ser entendido, intuitivamente, como um resumo do modelo matemático dos grupos rotulados no conjunto de dados de treinamento;
                 
-                \item \textbf{Fase de teste}: nesta fase o modelo de treinamento é utilizado para determinar os rótulos de classe (ou identificadores de grupos) de uma ou mais instâncias não vistas.
+                \item \textbf{Fase de teste}: nessa fase o modelo de treinamento é utilizado para determinar os rótulos de classe (ou identificadores de grupos) de uma ou mais instâncias não vistas.
             \end{enumerate}
                 
             A tarefa de classificação é também chamada de aprendizado supervisionado porque exemplos dos dados são utilizados para aprender as estruturas de agrupamento das classes \cite[p.~285]{Aggarwal_DMTT_2015}.
@@ -146,7 +146,7 @@
     \subsection{Engenharia de atributos} \label{subsec:Engenharia-de-atributos}
         % Falar do sentido amplo da feature engineering, abrangindo feature extraction, creation, selection, etc.
         O processo para extrair atributos passíveis de serem utilizados por classificadores da mineração de dados é chamado por \citeonline{ZhengFEML2018} de \textit{feature engineering}, que em uma tradução livre tentando preservar o contexto pode ser chamado de \textit{manejo de atributos}.
-        Num conceito mais generalista, \citeonline[p.~3, tradução nossa]{DongFEMLDA2018} define \textit{feature engineering} como uma área que abrange ``os tópicos de transformação de atributos, geração de atributos, extração de atributos, seleção de atributos, análise e avaliação de atributos, metodologias de manejo generalista e automatizado de atributos, e aplicações do manejo de atributos'', sendo esta a definição de engenharia de atributos no processo de KDD.
+        Num conceito mais generalista, \citeonline[p.~3, tradução nossa]{DongFEMLDA2018} define \textit{feature engineering} como uma área que abrange ``os tópicos de transformação de atributos, geração de atributos, extração de atributos, seleção de atributos, análise e avaliação de atributos, metodologias de manejo generalista e automatizado de atributos, e aplicações do manejo de atributos'', sendo essa a definição de engenharia de atributos no processo de KDD.
         
         Cada um dos tópicos da engenharia de atributos é definido por \citeonline[p.~3]{DongFEMLDA2018} como segue:
         \begin{itemize}
@@ -194,10 +194,10 @@
                 Por exemplo, no domínio da classificação de imagens os dados brutos são os \textit{pixels}, que não são apropriados para tarefas de classificação, no entanto os dados podem ser processados para fornecer informações de presença de contornos, que podem então ser utilizados por técnicas de classificação para identificar rostos;
                 
                 \item \textbf{Mapeamento dos dados para um novo espaço}: mudar completamente a visualização dos dados.
-                Considerando uma série temporal, por exemplo, os dados podem ser transformados na informação de frequência dessa stem-seérie por meio da transformada de Fourier;
+                Considerando uma série temporal, por exemplo, os dados podem ser transformados na informação de frequência dessa série por meio da transformada de Fourier;
                 
-                \item \textbf{Construção de atributos}: os atributos presentes nos dados possuem a informação necessária para o processo de mineração, mas não estão na forma adequada, assim novos atributos podem ser construídos na forma adequada. 
-                Um exemplo é numa tarefa de classificação que os dados contém informação de volume e massa de itens, pode ser construído o atributo de densidade.
+                \item \textbf{Construção de atributos}: os atributos presentes nos dados possuem a informação necessária para o processo de mineração, mas não estão na forma adequada, assim novos atributos podem ser construídos na forma adequada.
+                Um exemplo é a construção de um atributo de densidade em uma tarefa de classificação na qual os dados contém informação de volume e massa de itens.
             \end{itemize}
             
         

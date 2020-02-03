@@ -12,7 +12,9 @@
 	Este capítulo apresenta os resultados obtidos neste estudo investigativo do desempenho de atributos de RI em classificadores de Mineração de Texto.
 
 	Nas subseções a seguir primeiro é abordada a configuração experimental utilizada para realizar o estudo, e logo em seguida é apresentada uma visão geral das soluções selecionadas dos corpus DB\underscore{}AUTHORPROF e DB\underscore{}HYPERPARTISAN, na qual o pré-processamento realizado e os classificadores utilizados em cada uma das soluções são descritos brevemente.
-	Por fim, são apresentados os resultados mensurados por meio das medidas escolhidas para avaliação de desempenho, na Seção \ref{sec:DesempenhoFerramentas} estão as medidas de desempenho das ferramentas de armazenamento e indexação, e na Seção \ref{sec:DesempenhoClassificadores} são expostas as medidas de desempenho dos classificadores.
+	Por fim, são apresentados os resultados mensurados por meio das medidas escolhidas para avaliação de desempenho.
+	Na Seção \ref{sec:DesempenhoFerramentas} estão as medidas de desempenho das ferramentas de armazenamento e indexação.
+	E na Seção \ref{sec:DesempenhoClassificadores} são expostas as medidas de desempenho dos classificadores.
 
 	% Na subseção a seguir são abordados os resultados referentes às ferramentas de indexação.
 	% Na subseção posterior são abordados os resultados referente aos desempenho das variáveis de RI em classificadores.
@@ -39,14 +41,15 @@
 			Para execução dos scripts Python gerados por esse estudo é necessário Python >= 3.6 com as bibliotecas elasticsearch-py >= 7.0.5 e python-arango >= 5.2.1.
 			Ambas bibliotecas se encontram disponíveis no PyPI (\textit{Python Package Index}, ou índice de pacotes do Python em tradução livre).
 
-			Também é necessário possuir instâncias do Elasticsearch >= 7.4.0 e do ArangoDB >= 3.5.1 rodando e disponíveis na rede local do sistema, isso pode ser feito por meio da instalação dessas ferramentas no sistema local.
-			O Zettair >= 0.94 também é necessário estar instalado no sistema, sendo possível executá-lo pelo terminal de comandos com o comando 'zet'.
+			Também é necessário possuir instâncias do Elasticsearch >= 7.4.0 e do ArangoDB >= 3.5.1 rodando e disponíveis na rede local do sistema.
+			Isso pode ser feito por meio da instalação dessas ferramentas no sistema local.
+			O Zettair >= 0.94 também é precisa estar instalado no sistema, sendo possível executá-lo pelo terminal de comandos com o comando \texttt{zet}.
 
 			A instalação das três ferramentas em sistemas Linux foi simplificada com a criação de um arquivo Docker que utiliza de imagens disponíveis online do ArangoDB e do Elasticsearch, reduzindo o número de comandos necessários para executar as ferramentas no sistema computacional.
 			Detalhes de como utilizar esse arquivo Docker se encontram em: \url{https://github.com/ruanmed/tcc-ii-ir-features-text-mining\#docker-file}.
 
-			Além dessas dependências, é necessário também instalar as bibliotecas específicas de cada uma das soluções selecionadas.
-			Essas estão listadas nos arquivos README disponibilizados junto às soluções.
+			Além das dependências listadas, é necessário instalar as bibliotecas específicas de cada uma das soluções selecionadas.
+			Essas estão listadas nos arquivos \texttt{README} disponibilizados junto às soluções.
 
 	\section{Visão geral das soluções selecionadas e adaptações feitas} \label{sec:VisãoSoluçõesEAdaptações}
 		% Falar brevemento sobre o pré-processamento;
@@ -130,7 +133,7 @@
 				\input{tex/figure/2-daneshvar18-arquitetura-com-ri.tex}
 
 				% Por fim, os 6 atributos de RI agregados por autor foram embutidos ao final da representação dos documentos, resultando em documentos representados por 1243277 dimensões, e posteriormente também foi configurado outro experimento para embutir os atributos de RI somente após a redução de dimensionalidade, resultando em documentos represetados por 306 atributos.
-				Por fim, os 6 atributos de RI agregados por autor foram embutidos ao final da representação dos documentos após a redução de dimensionalidade, resultando em documentos represetados por 306 atributos.
+				Por fim, os 6 atributos de RI agregados por autor foram embutidos ao final da representação dos documentos após a redução de dimensionalidade, resultando em documentos representados por 306 atributos.
 
 
 		\subsection{Resumo das soluções} \label{sec:ResumoDasSoluções}
@@ -139,7 +142,8 @@
 			\input{tex/table/resumo-soluções.tex}
 
 	\section{Desempenho das ferramentas de armazenamento e indexação} \label{sec:DesempenhoFerramentas}
-		Para cálculo das medidas TIME\underscore{}INDEX e TIME\underscore{}QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi empregada a linguagem de programação Python, utilizada para implementada uma classe chamada \textit{IndexToolManager} que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
+		Para cálculo das medidas TIME\underscore{}INDEX e TIME\underscore{}QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi empregada a linguagem de programação Python.
+		Foi implementada uma classe chamada \textit{IndexToolManager} que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
 
 		Essa classe foi central para todo o estudo, a utilização dela concentrou as funções para acesso e manipulação, quando disponíveis, aos dados das ferramentas de armazenamento e indexação, centralização das diferentes bibliotecas do Python já disponíveis para interagir com o ArangoDB e com o Elasticsearch, python-arango e elasticsearch-py respectivamente. 
 		Trechos da implementação da classe \textit{IndexToolManager} estão no Apêndice \ref{apên:implementação-indextoolmanager}.
@@ -245,8 +249,8 @@
 			
 			\input{tex/figure/clf-f1-bars-hyperpartisan.tex}
 
-			A adição dos atributos de RI proporciona ganho de acurácia e também de $F_1$-Score para a solução 1\underscore{}bertha, alcançando valores maiores até mesmo que os finais da competição com acurácia de $0,8651$ ($86,51\%$) e $F_1$-Score de $0,8105$ ($81,05\%$) quando adicionados os atributos de RI gerados pelo ArangoDB.
-			Já para a solução 4\underscore{}tom inicialmente a adição dos atributos de RI não proporciona nenhum ganho de acurácia ou $F_1$-Score, pelo contrário, com todas as ferramentas o $F_1$-Score foi menor ao adicionar os atributos de RI, e somente com os atributos de RI do Elasticsearch que a acurácia se manteve a mesma, com o ArangoDB e com o Zettair houve também diminuição da acurácia do classificador da solução 4\underscore{}tom.
+			A adição dos atributos de RI proporciona ganho de acurácia e também de $F_1$-score para a solução 1\underscore{}bertha, alcançando valores maiores até mesmo que os finais da competição com acurácia de $0,8651$ ($86,51\%$) e $F_1$-score de $0,8105$ ($81,05\%$) quando adicionados os atributos de RI gerados pelo ArangoDB.
+			Já para a solução 4\underscore{}tom inicialmente a adição dos atributos de RI não proporciona nenhum ganho de acurácia ou $F_1$-score, pelo contrário, com todas as ferramentas o $F_1$-score foi menor ao adicionar os atributos de RI, e somente com os atributos de RI do Elasticsearch que a acurácia se manteve a mesma, com o ArangoDB e com o Zettair houve também diminuição da acurácia do classificador da solução 4\underscore{}tom.
 
 			Deve ser observado um detalhe importante da solução 4\underscore{}tom, que é o classificador utilizado e o modo escolhido para definição dos parâmetros desse classificador pela equipe, que no caso foi o classificador SVC e na elaboração de sua solução a equipe avaliou diferentes valores do parâmetro C do classificador e escolheu o valor de C com melhor resultado nesse teste, que foi $C = 0,9$.
 			Como o conjunto de treinamento para submissão da equipe consistiu de todos os 645 artigos, e na reprodução feita para este estudo isso não pode ser feito devido à necessidade de um conjunto isolado de validação, foi feita a suposição que o melhor valor de C para a reprodução da solução seria diferente, pois o conjunto de treinamento da reprodução possui somente 430 artigos.

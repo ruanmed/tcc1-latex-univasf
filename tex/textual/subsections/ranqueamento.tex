@@ -44,7 +44,8 @@
     A ordenação dos documentos apresentados como resultado à consulta \textit{auto car} seria então a seguinte: 1\textordmasculine{} - D\textsubscript{2}; 2\textordmasculine{} - D\textsubscript{1}; e 3\textordmasculine{} - D\textsubscript{3}, que se observamos a Tabela \ref{tab:exemplo-tf-idf} é um bom resultado, já que o D\textsubscript{2} contém uma grande frequência do termo \textit{auto} e o D\textsubscript{3} não possui este termo.
     
     
-    Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sobre a recuperação booleana \cite{Jones:1981:IRE:539571}, e são as técnicas de recuperação ranqueadas que trazem maior interesse para a área de Mineração de Textos, em específico estamos interessados nos modelos vetoriais e os modelos probabilísticos de RI que são evoluções da recuperação ranqueada.
+    Ao longo dos anos foi demonstrada a superioridade da recuperação ranqueada sobre a recuperação booleana \cite{Jones:1981:IRE:539571}, e são as técnicas de recuperação ranqueadas que trazem maior interesse para a área de Mineração de Textos.
+    Em específico estamos interessados nos modelos vetoriais e os modelos probabilísticos de RI que são evoluções da recuperação ranqueada.
     % ESTOU PENSANDO EM JÁ CITAR O BM25 no parágrafo acima.
     % -- Em algum ponto mencionar que Recuperação de Informação (Information Retrieval) não deve ser confundido com Procura de Informação (Information Search), pois a Procura de Informação é o campo que estuda a interação das pessoas com sistemas de recuperação de informação.
     
@@ -64,7 +65,7 @@
         A similaridade nos modelos de espaço vetorial é tratada como uma noção de relevância, e a principal premissa é de que a relevância de um documento em relação a uma consulta está correlacionada com a similaridade entre o documento e consulta \cite[p.~110]{Zhai2016TDMA}.
         
         Segundo \citeonline[p.~77]{Baeza-Yates2011}, os pesos $w_{i,j}$ associados com um par termo-documento são não negativos e não binários.
-        Os termos de indexação são considerados mutualmente independentes e são representados como vetores unitários de um espaço $t$-dimensional, aonde $t$ é número total de termos de indexação.
+        Os termos de indexação são considerados mutuamente independentes e são representados como vetores unitários de um espaço $t$-dimensional, aonde $t$ é número total de termos de indexação.
         A representação de um documento $d_j$ e uma consulta $q$ são vetores $t$-dimensionais representados como segue nas Equações \ref{eq:vetor-pesos-documento} e \ref{eq:vetor-pesos-consulta} abaixo:
         \begin{equation}
             \label{eq:vetor-pesos-documento}
@@ -82,7 +83,7 @@
         
         \input{tex/figure/cosine-sim.tex}
         
-        A avaliação do grau de similaridade entre esses vetores, sendo esta correlação, ou pontuação que o documento $d_j$ vai receber para a consulta $q$, quantificada pelo cosseno do ângulo entre esses dois vetores, conforme demonstra a Equação \ref{eq:pontuação-similaridade-cosseno} \cite[p.~78]{Baeza-Yates2011}.
+        A avaliação do grau de similaridade entre esses vetores é quantificada pelo cosseno do ângulo entre eles, sendo essa correlação a pontuação que o documento $d_j$ vai receber para a consulta $q$, conforme a Equação \ref{eq:pontuação-similaridade-cosseno} \cite[p.~78]{Baeza-Yates2011}.
         \begin{equation}
             \label{eq:pontuação-similaridade-cosseno}
     		\text{Pontuação\underscore{}COS}(\vec{d_j}, \vec{q}) = \frac{\vec{d_j} \bullet \vec{q} }{ \norm{\vec{d_j}} \times \norm{\vec{q}} }
@@ -102,9 +103,9 @@
             \item \textbf{Normalização dos tamanhos dos documentos} embutida.
         \end{itemize}
         
-        Os mesmos autores ainda apontam que a principal desvantagem é a presunção de que os termos indexados são mutualmente independentes, e ressaltam que a tarefa de considerar a dependência dos termos é algo bastante complicado e geram resultados ruins caso não seja feita de modo adequado.
+        Os mesmos autores ainda apontam que a principal desvantagem é a presunção de que os termos indexados são mutuamente independentes, e ressaltam que a tarefa de considerar a dependência dos termos é algo bastante complicado e geram resultados ruins caso não seja feita de modo adequado.
         % Pontuações por Baeza, 1) a esquemática de pesos dos termos melhora a qualidade, 2) sua capacidade de correspondência parcial permite a recuperação de documentos que se aproximam das consultas, 3) o ranqueamento pelo cosseno dos vetores organiza os resultados pelo seu grau de similaridade com a consulta, 4) possui normalização dos tamanhos dos documentos embutida.
-        % desvantagem: assume que os termos indexados são mutualmente independentes (porém ele cita que considerar a dependência de termos é uma tarefa complicada que se não for feito do modo apropriado pode levar a resultados ruins).
+        % desvantagem: assume que os termos indexados são mutuamente independentes (porém ele cita que considerar a dependência de termos é uma tarefa complicada que se não for feito do modo apropriado pode levar a resultados ruins).
     
     \subsubsection{Modelo probabilístico}  \label{subsubsec:Modelo-probabilístico}
     % Fazer resumo de como se chegou ao BM25, um método probabilístico criado pelo Kevin Spack e pelo Jones em 85 eu acho, que depois deu início ao BM11 e ao BM15, a junção dos dois deu origem ao BM25, e então o Okapi BM25 surgiu logo após com a adição de técnica de alteração dos pesos dos termos desenvolvida por Okapi.
@@ -119,7 +120,7 @@
         Como já abordado, os sistemas de RI tentam determinar o quão bem os documentos satisfazem as necessidades de informação do usuário, porém existe um grau de incerteza sobre quais documentos tem conteúdo relevante. 
         Partindo desse princípio, da existência da incerteza na relevância dos documentos, temos os modelos probabilísticos, que baseiam-se na teoria probabilística que fundamenta o raciocínio em cima de incertezas \cite[p.~201]{Manning2008IIR}. 
         
-        Nos modelos probabilísticos, a função de ranqueamento é definida baseada na probabilidade que um documento $d$ é relevante para uma consulta $q$, ou estatisticamente $P(R = 1| d,q)$ onde $R \in \{0, 1\}$ é uma variável binária aleatória que denota a relevância \cite[p.~111--112]{Zhai2016TDMA}, sendo esta a base para o princípio do ranqueamento probabilístico (PRP) \cite[p.~203]{Manning2008IIR}.
+        Nos modelos probabilísticos, a função de ranqueamento é definida baseada na probabilidade que um documento $d$ é relevante para uma consulta $q$, ou estatisticamente $P(R = 1| d,q)$ onde $R \in \{0, 1\}$ é uma variável binária aleatória que denota a relevância \cite[p.~111--112]{Zhai2016TDMA}, sendo essa a base para o princípio do ranqueamento probabilístico (PRP) \cite[p.~203]{Manning2008IIR}.
         
         O PRP é a base para o chamado \textit{Framework} de Relevância Probabilística o qual, por sua vez, deu origem ao modelo de independência binária (BIM), aos modelos de \textit{feedback} de relevância, ao nosso caso de interesse, o BM25, e também a diversas variações do BM25 \cite[p.~333]{robertson_probabilistic_2010}. 
         
