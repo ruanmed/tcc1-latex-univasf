@@ -15,6 +15,25 @@
 	hyphens             % adicionando quebras de linhas para links
 	]{abntex2}
 
+% Antes de incluir o minted é necessário remover
+% as opções globais chapter e section do abntex2 que
+% vão para todos os comandos
+\makeatletter
+  \@ifclasswith{abntex2}{chapter=TITLE}{
+    \begingroup
+    \def\x#1chapter=TITLE,#2\@nil{%
+      \endgroup\def\@classoptionslist{#1#2}%
+    }\expandafter\x\@classoptionslist\@nil
+  }{}
+
+  \@ifclasswith{abntex2}{section=TITLE}{
+    \begingroup
+    \def\x#1section=TITLE,#2\@nil{%
+      \endgroup\def\@classoptionslist{#1#2}%
+    }\expandafter\x\@classoptionslist\@nil
+  }
+\makeatother
+
 % ---------------------------------------------------------------------------
 % Inclui os comandos do projeto
 % ---------------------------------------------------------------------------
@@ -80,6 +99,8 @@
 		\input{tex/textual/conclusao.tex}
 
 	\postextual
+
+		\justify
 		\bibliography{tex/references}
 % 		\input{tex/anexos}
 		\input{tex/apendices.tex}

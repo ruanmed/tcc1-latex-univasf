@@ -4,16 +4,19 @@
 \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
 \begin{resumo}[Abstract]
     \begin{otherlanguage*}{english}
+
         In the information age currently going on, the world generates a huge amount of textual data on a daily basis, and Text Mining aims to turn this data into useful information, knowledge, and that has applications even in the forensic area.
-        The study field of Information Retrieval contributes to the development of Text Mining in preprocessing, however it can also used in the creation of attributes for classifiers.
+        The study field of Information Retrieval contributes to the development of Text Mining in preprocessing, however it's not usual to use it to create attributes, firstly proposed by \citeonline{WEREN_CLEF_2014}.
         
-        From a literature review of the study fields of  Information Retrieval and Text Mining, we suggest to create attributes using the BM25 ranking function, similar to attributes created by \citeonline{WEREN_MESTRADO_2014}, and using existing storage and indexing tools to calculate them.
-        A methodology for analyzing the performance of the suggested new attributes is established, and the measurement of classifier performance by consolidated measures in the Text Mining literature is proposed, such measurements are accuracy and $F_1$-score.
+        After a literature review of the study fields of Information Retrieval and Text Mining, we suggest methodology to create attributes using the BM25 ranking function and using existing storage and indexing tools to calculate them.
+        The attributes are created similar as done by \citeonline{WEREN_MESTRADO_2014}.
+        In this methodology, the performance of the new suggested attributes is analyzed by measuration of classifier performance by consolidated measures in the Text Mining literature, such measurements are accuracy and $F_1$-score.
 
-        The results obtained by reproducing the suggested methodology demonstrate Zettair as the tool with the best perfomance for document indexing, and Elasticsearch as the best DBMS both in terms of indexing and query performance.
+        The results obtained by reproducing the suggested methodology are presented in two parts. 
+        The first part shows the performance of the storage and indexing tools that indicates Zettair as the tool with the best perfomance for document indexing, and Elasticsearch as the best DBMS both in terms of indexing and query performance.
 
-        The suggested attributes, derived from Information Retrieval, exibith performance gains in classifiers of a small corpus with long documents, 645 articles.
-        These same attributes applied in another classifier for a large corpus with small documents, 300 thousand \ textit {tweets}, cause this classifier to lose performance.
+        The second part shows that the suggested attributes, derived from Information Retrieval, increase performance of classifiers applied to a small corpus with long documents, 645 articles.
+        These same attributes applied in another classifier applied to a large corpus with small documents, 300 thousand \textit{tweets}, cause this classifier to lose performance.
    
     	\vspace{\onelineskip}
     

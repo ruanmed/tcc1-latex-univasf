@@ -85,7 +85,7 @@
         A avaliação do grau de similaridade entre esses vetores, sendo esta correlação, ou pontuação que o documento $d_j$ vai receber para a consulta $q$, quantificada pelo cosseno do ângulo entre esses dois vetores, conforme demonstra a Equação \ref{eq:pontuação-similaridade-cosseno} \cite[p.~78]{Baeza-Yates2011}.
         \begin{equation}
             \label{eq:pontuação-similaridade-cosseno}
-    		\text{Pontuação\_COS}(\vec{d_j}, \vec{q}) = \frac{\vec{d_j} \bullet \vec{q} }{ \norm{\vec{d_j}} \times \norm{\vec{q}} }
+    		\text{Pontuação\underscore{}COS}(\vec{d_j}, \vec{q}) = \frac{\vec{d_j} \bullet \vec{q} }{ \norm{\vec{d_j}} \times \norm{\vec{q}} }
         \end{equation}
     
         % falta falar sobre as vantagens e desvantagens citadas pelos autores
@@ -132,7 +132,7 @@
         
         \begin{equation}
             \label{eq:okapi-bm25}
-    		\text{Pontuação\_BM25}(d_j, q) = \sum_{t \in q} \text{idf}_{\text{\textit{t}}} 
+    		\text{Pontuação\underscore{}BM25}(d_j, q) = \sum_{t \in q} \text{idf}_{\text{\textit{t}}} 
     		\cdot
     		\frac{(k_1 + 1) \text{tf}_{t,d}}{k_1((1-b)+b \times (\frac{L_d}{L_{\text{avg}}})) + \text{tf}_{t,d}} 
         \end{equation}
@@ -156,7 +156,7 @@
         
         \begin{equation}
             \label{eq:okapi-bm25-tf-consulta}
-    		\text{Pontuação\_BM25}(d_j, q) = 
+    		\text{Pontuação\underscore{}BM25}(d_j, q) = 
     		\sum_{t \in q} 
     		\Bigg[ \log{\frac{N}{\text{df}_{t}}} \Bigg]
     		\cdot 

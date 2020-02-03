@@ -49,7 +49,6 @@ def index(idx_type='normal', db='authorprof', tool='arango', db_name='authorprof
       bulkBody = testTool.bulkHelperInsertGeneratorElastic(bulk)
       end = time.time()
       mylogger.info(f'bulkHelperInsertGeneratorElastic {end - start}')
-
       start = time.time()
       testTool.bulkHelperElastic(bulkBody)
       end = time.time()
@@ -65,7 +64,6 @@ def index(idx_type='normal', db='authorprof', tool='arango', db_name='authorprof
     testTool.saveToTrecFileZettair(bulk)
     end = time.time()
     mylogger.info(f'saveToTrecFileZettair {end - start}')
-
     start = time.time()
     testTool.zettair_index()
     end = time.time()

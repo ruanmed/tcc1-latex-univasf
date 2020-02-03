@@ -63,12 +63,13 @@
 % Pacotes adicionados por @Gabrielr2508
 % ----------------------------------------------------------------------------- 
 \usepackage{hyperref}
-
+% \usepackage{breakurl}
 % Para forçar quebra de linhas em urls muito longos
 % https://tex.stackexchange.com/questions/3033/forcing-linebreaks-in-url
 % \RequirePackage[hyphens]{url}
+% \PassOptionsToPackage{hyphens}{url}
 % \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
-
+% \usepackage[anythingbreaks]{breakurl}
 % \usepackage{hyperref}
 
 \usepackage{tocloft}
@@ -184,7 +185,8 @@
 %--------------------------------------------------------------------------------
 % Biblioteca para códigos-fonte
 %--------------------------------------------------------------------------------
-\usepackage[newfloat=true]{minted}
+
+\usepackage[newfloat=true, chapter]{minted}
 
 %--------------------------------------------------------------------------------
 % Caixas batutas - by @leolleocomp
@@ -269,7 +271,29 @@
 % ----------------------------------------------------------------------------- 
 \usepackage[binary-units=true]{siunitx}     %   Pacote de unidades do SI com unidades binárias
 
+% -----------------------------------------------------------------------------
+% Comando para quebrar linhas com "underscore" \_
+% ----------------------------------------------------------------------------- 
+% \let\underscore{\discretionary{\_}{}{\_}}
+% \renewcommand{\_}{\discretionary{\underscore}{\underscore}{\underscore}}
+% \usepackage{underscore}
+% \newcommand{\underscore}{\discretionary{\_-}{}{\_}}
+% \newcommand{\underscore}{{\_}}
+\let\svus\_
+\newcommand{\underscore}{{\svus\allowbreak\hspace{0pt}}}
 
+% \newcommand\myunderscoredword{\let\svus\_\def\_{\svus\allowbreak\hspace{0pt}}DB\_AUTHORPROF \let\_\svus}
+% \def\_{\svus\allowbreak\hspace{0pt}}
+
+% \usepackage{microtype}
+% -----------------------------------------------------------------------------
+% Comando fonte monoespaçada em urls.
+% ----------------------------------------------------------------------------- 
+\urlstyle{tt}
+% -----------------------------------------------------------------------------
+% Comando para número da última página
+% ----------------------------------------------------------------------------- 
+\usepackage{lastpage}
 %--------------------------------------------------------------------------------
 % Comando para inserir códigos - by @ruanmed
 %--------------------------------------------------------------------------------
@@ -313,7 +337,7 @@
 %--------------------------------------------------------------------------------
 \RequirePackage{tikz}
 \usepackage{tikz}
-\usepackage[siunitx]{circuitikz}			% para habilitar o desenho de circuitos
+\usepackage[siunitx, RPvoltages]{circuitikz}			% para habilitar o desenho de circuitos
 \usetikzlibrary{babel}
 % ---
 

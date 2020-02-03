@@ -11,7 +11,7 @@
 	% -> Introdução: "Este capítulo apresenta os resultados obtidos e discute-os..." 
 	Este capítulo apresenta os resultados obtidos neste estudo investigativo do desempenho de atributos de RI em classificadores de Mineração de Texto.
 
-	Nas subseções a seguir primeiro é abordada a configuração experimental utilizada para realizar o estudo, e logo em seguida é apresentada uma visão geral das soluções selecionadas dos corpus DB\_AUTHORPROF e DB\_HYPERPARTISAN, na qual o pré-processamento realizado e os classificadores utilizados em cada uma das soluções são descritos brevemente.
+	Nas subseções a seguir primeiro é abordada a configuração experimental utilizada para realizar o estudo, e logo em seguida é apresentada uma visão geral das soluções selecionadas dos corpus DB\underscore{}AUTHORPROF e DB\underscore{}HYPERPARTISAN, na qual o pré-processamento realizado e os classificadores utilizados em cada uma das soluções são descritos brevemente.
 	Por fim, são apresentados os resultados mensurados por meio das medidas escolhidas para avaliação de desempenho, na Seção \ref{sec:DesempenhoFerramentas} estão as medidas de desempenho das ferramentas de armazenamento e indexação, e na Seção \ref{sec:DesempenhoClassificadores} são expostas as medidas de desempenho dos classificadores.
 
 	% Na subseção a seguir são abordados os resultados referentes às ferramentas de indexação.
@@ -32,7 +32,7 @@
 		O ambiente de programação utilizado foi o VSCodium e a linguagem de programação utilizada foi o Python 3.7.5.
 		Para permitir reprodutibilidade dos resultados obtidos, o gerador de números aleatórios (RNG) do ambiente do Python, assim como os RNGs das bibliotecas utilizadas pelas soluções, tiveram as suas sementes de geração fixadas.
 
-		Todos os códigos fontes dos scripts Python criados para este estudo estão disponíveis em um repositório de código online e público criado pelo autor, acessível pelo seguinte link: \hyperlink{https://github.com/ruanmed/tcc-ii-ir-features-text-mining/}{https://github.com/ruanmed/tcc-ii-ir-features-text-mining/}.
+		Todos os códigos fontes dos scripts Python criados para este estudo estão disponíveis em um repositório de código online e público criado pelo autor, acessível pelo seguinte link: \url{https://github.com/ruanmed/tcc-ii-ir-features-text-mining/}.
 		A seguir são tratadas as dependências de \textit{software} para execução do estudo.
 
 		\subsection{Dependências de \textit{software}} \label{subsec:DependênciasSoftware}
@@ -43,7 +43,7 @@
 			O Zettair >= 0.94 também é necessário estar instalado no sistema, sendo possível executá-lo pelo terminal de comandos com o comando 'zet'.
 
 			A instalação das três ferramentas em sistemas Linux foi simplificada com a criação de um arquivo Docker que utiliza de imagens disponíveis online do ArangoDB e do Elasticsearch, reduzindo o número de comandos necessários para executar as ferramentas no sistema computacional.
-			Detalhes de como utilizar esse arquivo Docker se encontram em: \hyperlink{https://github.com/ruanmed/tcc-ii-ir-features-text-mining\#docker-file}{https://github.com/ruanmed/tcc-ii-ir-features-text-mining\#docker-file}.
+			Detalhes de como utilizar esse arquivo Docker se encontram em: \url{https://github.com/ruanmed/tcc-ii-ir-features-text-mining\#docker-file}.
 
 			Além dessas dependências, é necessário também instalar as bibliotecas específicas de cada uma das soluções selecionadas.
 			Essas estão listadas nos arquivos README disponibilizados junto às soluções.
@@ -54,10 +54,10 @@
 		% Indicar o Notebook de cada solução para mais detalhes
 		As soluções selecionadas para reprodução e posterior adição dos atributos de RI utilizam de diferentes técnicas para pré-processamento dos corpus e também de classificadores diferentes, tornando necessário, em alguns casos, ajustes antes da adição dos atributos de RI.
 
-		Nas subseções a seguir são brevemente abordadas as soluções 1\_bertha e 4\_tom do corpus DB\_HYPARTISAN, e a solução 2\_daneshvar18 do corpus DB\_AUTHORPROF.
+		Nas subseções a seguir são brevemente abordadas as soluções 1\underscore{}bertha e 4\underscore{}tom do corpus DB\underscore{}HYPARTISAN, e a solução 2\underscore{}daneshvar18 do corpus DB\underscore{}AUTHORPROF.
 
-		\subsection{Corpus DB\_HYPERPARTISAN}
-			O corpus DB\_HYPERPARTISAN possui dois conjuntos de dados, o primeiro com 750 mil artigos classificados por enviesamento do editor, e o segundo com 645 artigos rotulados como hiperpartidários ou não com consenso entre avaliadores via \textit{crowdsourcing}.
+		\subsection{Corpus DB\underscore{}HYPERPARTISAN}
+			O corpus DB\underscore{}HYPERPARTISAN possui dois conjuntos de dados, o primeiro com 750 mil artigos classificados por enviesamento do editor, e o segundo com 645 artigos rotulados como hiperpartidários ou não com consenso entre avaliadores via \textit{crowdsourcing}.
 			O objetivo da competição que utilizou esse corpus era classificar artigos como hiperpartidários ou não, e assim os participantes puderam utilizar os dois conjuntos para fazer suas avaliações. 
 			No entanto, a utilização dos 750 mil artigos classificados por enviesamento de editor não foram úteis para ajudar na classificação, e das duas soluções selecionadas nenhuma delas utilizou esses 750 mil artigos nos seus modelos finais, pois utilizar a informação de editor em conjunto reduziu o desempenho de seus classificadores \cite[p.~840]{jiang-etal-2019-team} pois segundo \citeonline[p.~1067]{yeh-etal-2019-tom} o conjunto de dados classificado por enviesamento do editor possui muito ruído.
 			% Nota de rodapé sobre ruído
@@ -68,8 +68,8 @@
 			Então, os 430 artigos foram indexados em todas as ferramentas de indexação permitindo a posterior geração dos atributos de RI.
 			A indexação foi feita com auxílio da classe \textit{IndexToolManager} criada pelo autor, que é abordada com detalhes na seção de desempenho das ferramentas de armazenamento e indexação.
 			
-			\subsubsection{Solução 1\_bertha}
-				A solução da equipe Bertha von Suttner (4\_bertha) para essa tarefa da \textit{SemEval 2019} consiste em uma abordagem de classificação com uma Rede Neural Convolucional (\textit{Convolutional Neural Network}, CNN) e o pré-processamento dos documentos do corpus em uma representação destes por meio de uma Rede ESRC (\textit{ELMo Sentence Representation Convolutional Network}), uma representação sugerida e nomeada pela equipe.
+			\subsubsection{Solução 1\underscore{}bertha}
+				A solução da equipe Bertha von Suttner (4\underscore{}bertha) para essa tarefa da \textit{SemEval 2019} consiste em uma abordagem de classificação com uma Rede Neural Convolucional (\textit{Convolutional Neural Network}, CNN) e o pré-processamento dos documentos do corpus em uma representação destes por meio de uma Rede ESRC (\textit{ELMo Sentence Representation Convolutional Network}), uma representação sugerida e nomeada pela equipe.
 
 				A representação na Rede ESRC é uma alternativa à representação usual dos documentos por termos (ou \textit{tokens}).
 				Essa representação consiste no cálculo da média dos agregados ELMo para os documentos, a nível de frase, e cada documento é representado como uma sequência desses agregados, que são vetores de tamanho de 1024 \textit{floats}. 
@@ -88,8 +88,8 @@
 
 				% Tem que adicionar aqui sobre o modo que a solução faz a predição
 
-			\subsubsection{Solução 4\_tom}
-				A solução da equipe Tom Jumbo-Grumbo (4\_tom) utilizou de dois classificadores, um de Regressão Logística e outro de Máquinas de Vetor de Suporte (SVMs), sendo o utilizado no modelo final o classificador SVC (C-Support Vector Classification) da biblioteca sklearn para Python.
+			\subsubsection{Solução 4\underscore{}tom}
+				A solução da equipe Tom Jumbo-Grumbo (4\underscore{}tom) utilizou de dois classificadores, um de Regressão Logística e outro de Máquinas de Vetor de Suporte (SVMs), sendo o utilizado no modelo final o classificador SVC (C-Support Vector Classification) da biblioteca sklearn para Python.
 				Uma SVM funciona transformando os dados de treinamento para uma dimensão maior e então executa uma busca pelo melhor limite de decisão, chamado de hiperplano, para separar as classes \cite[p.~408]{Han:2011:DMC:1972541}.
 				Em especial, o classificador SVC da biblioteca sklearn possui um parâmetro de regularização de sua função de custo (parâmetro chamado de C) que deve ser estritamente positivo, o valor padrão é definido como $C = 1,0$, no entanto a solução da equipe, conforme disposto no código fonte disponível online, utilizou $C = 0,9$ após uma análise com diferentes valores.
 
@@ -107,8 +107,8 @@
 				A arquitetura da solução adaptada está ilustrada na Figura \ref{fig:4-tom-arquitetura-com-ri}.
 				% \ref{fig:4-tom-arquitetura-com-ri}
 
-		\subsection{Corpus DB\_AUTHORPROF}
-			O corpus DB\_AUTHORPROF consiste de \textit{tweets} de autores em três línguas diferentes, inglês, espanhol e árabe.
+		\subsection{Corpus DB\underscore{}AUTHORPROF}
+			O corpus DB\underscore{}AUTHORPROF consiste de \textit{tweets} de autores em três línguas diferentes, inglês, espanhol e árabe.
 			Para avaliação dos atributos de RI o escopo de melhoria de desempenho foram considerados somente os classificadores das soluções para os autores de língua inglesa, e as imagens não foram consideradas.
 
 			O conjunto de treinamento de autores da língua inglesa consiste de 300 mil \textit{tweets} de 3000 autores diferentes, e como o conjunto de validação final está disponível ao público, necessário somente solicitar o acesso, não foi necessário fazer o \textit{holdout} do conjunto de treinamento.
@@ -116,7 +116,7 @@
 
 			Os 300 mil \textit{tweets} foram indexados em todas as ferramentas de indexação permitindo a geração dos atributos de RI posteriormente para cada \textit{tweet} específico.
 
-			\subsubsection{Solução 2\_daneshvar18}
+			\subsubsection{Solução 2\underscore{}daneshvar18}
 			% baseou o seu pré-processamento em soluções das melhores equipes dos anos anteriores em tarefas da PAN CLEF
 			%  O QUE É N-GRAM
 				A solução de \citeonline{daneshvar:2018} utilizou um classificador SVM com diferentes tipos de $n$-grams de palavras e caracteres como atributos, e o melhor resultado obtido foi com a criação dos $n$-grams, posterior redução de dimensionalidade e então utilização do classificador LinearSVC da biblioteca sklearn para Python para criar o modelo de classificação.
@@ -139,16 +139,16 @@
 			\input{tex/table/resumo-soluções.tex}
 
 	\section{Desempenho das ferramentas de armazenamento e indexação} \label{sec:DesempenhoFerramentas}
-		Para cálculo das medidas TIME\_INDEX e TIME\_QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi empregada a linguagem de programação Python, utilizada para implementada uma classe chamada \textit{IndexToolManager} que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
+		Para cálculo das medidas TIME\underscore{}INDEX e TIME\underscore{}QUERY, conforme sugeridas no Capítulo \ref{ch:MateriaisMétodos}, foi empregada a linguagem de programação Python, utilizada para implementada uma classe chamada \textit{IndexToolManager} que abstrai a indexação e o cálculo das variáveis de RI com as ferramentas. 
 
 		Essa classe foi central para todo o estudo, a utilização dela concentrou as funções para acesso e manipulação, quando disponíveis, aos dados das ferramentas de armazenamento e indexação, centralização das diferentes bibliotecas do Python já disponíveis para interagir com o ArangoDB e com o Elasticsearch, python-arango e elasticsearch-py respectivamente. 
 		Trechos da implementação da classe \textit{IndexToolManager} estão no Apêndice \ref{apên:implementação-indextoolmanager}.
 		% Adicionar funcṍes importantes e citar código aqui?
 		\subsection{Tempo de indexação}
-			Para cálculo da medida TIME\_INDEX foi criado um script Python nomeado \texttt{time\_index.py}, o qual utilizou da classe \textit{IndexToolManager} em duas funções feitas para executar a indexação dos bancos de dados, DB\_AUTHORPROF e DB\_HYPERPARTISAN, nas 3 ferramentas, ArangoDB, Elasticsearch e Zettair.
-			A função principal do script \texttt{time\_index.py} possui nome \textit{measure\_TIME\_INDEX}, e um trecho do código que implementa essa função pode ser visto a seguir no Código \ref{cmd:function-measure-time-index}.
+			Para cálculo da medida TIME\underscore{}INDEX foi criado um script Python nomeado \texttt{time\underscore{}index.py}, o qual utilizou da classe \textit{IndexToolManager} em duas funções feitas para executar a indexação dos bancos de dados, DB\underscore{}AUTHORPROF e DB\underscore{}HYPERPARTISAN, nas 3 ferramentas, ArangoDB, Elasticsearch e Zettair.
+			A função principal do script \texttt{time\underscore{}index.py} possui nome \textit{measure\underscore{}TIME\underscore{}INDEX}, e um trecho do código que implementa essa função pode ser visto a seguir no Código \ref{cmd:function-measure-time-index}.
 
-			\sourcecodenolinenos{Função \textit{measure\_TIME\_INDEX} do script \texttt{time\_index.py}.}{function-measure-time-index}{python}{function-measure-TIME-INDEX.py}
+			\sourcecodenolinenos{Função \textit{measure\underscore{}TIME\underscore{}INDEX} do script \texttt{time\underscore{}index.py}.}{function-measure-time-index}{python}{function-measure-TIME-INDEX.py}
 			% \sourcecodeinline{python}{codes/function-measure-TIME-INDEX.py}
 
 			Essa função é responsável por efetuar uma chamada à função \textit{index} com os parâmetros de tipo de indexação, corpus a ser indexado, e qual a ferramenta utilizada nessa indexação, além de uma identificação do experimento.
@@ -164,34 +164,34 @@
 
 			\input{tex/figure/time-index-bulk.tex}
 
-			O Zettair é a ferramenta mais rápida para completar a indexação de ambos os corpus selecionados, levando somente 2,29 segundos para indexar os 300 mil documentos do corpus DB\_AUTHORPROF, menos de 0,01 milissegundos por documento.
+			O Zettair é a ferramenta mais rápida para completar a indexação de ambos os corpus selecionados, levando somente 2,29 segundos para indexar os 300 mil documentos do corpus DB\underscore{}AUTHORPROF, menos de 0,01 milissegundos por documento.
 			Dentre os SGBDs avaliados, o Elasticsearch supera o ArangoDB para inserções em lote, gastando 17,61 segundos para indexar os 300 mil \textit{tweets}, cerca de 0,06 milissegundos por documento.
-			Nota-se ainda que a indexação do corpus DB\_HYPERPARTISAN é mais lenta quando se considera o tempo por documento inserido, porque, apesar do corpus DB\_AUTHORPROF ter um número bem maior de documentos, 300 mil em comparação com 645, cada artigo do DB\_HYPERPARTISAN é bem mais extenso que qualquer dos \textit{tweets} do DB\_AUTHORPROF.
-			A mesma relação de velocidade entre as ferramentas observada para as inserções feitas com os documentos do DB\_AUTHORPROF se mantem para as inserções feitas com os documentos do DB\_HYPERPARTISAN, o Zettair é o mais rápido, e, dentre os SGBDs, o Elasticsearch é mais rápido que o ArangoDB.
+			Nota-se ainda que a indexação do corpus DB\underscore{}HYPERPARTISAN é mais lenta quando se considera o tempo por documento inserido, porque, apesar do corpus DB\underscore{}AUTHORPROF ter um número bem maior de documentos, 300 mil em comparação com 645, cada artigo do DB\underscore{}HYPERPARTISAN é bem mais extenso que qualquer dos \textit{tweets} do DB\underscore{}AUTHORPROF.
+			A mesma relação de velocidade entre as ferramentas observada para as inserções feitas com os documentos do DB\underscore{}AUTHORPROF se mantem para as inserções feitas com os documentos do DB\underscore{}HYPERPARTISAN, o Zettair é o mais rápido, e, dentre os SGBDs, o Elasticsearch é mais rápido que o ArangoDB.
 			
 			Para operação de inserção unitária, avaliada somente com o ArangoDB e Elasticsearch, foi levado em conta o tempo total para indexação de todos os documentos de cada corpus, inseridos em sequência, e posteriormente esses valores mensurados foram divididos pelo número de documentos.
 			Na Figura \ref{fig:time-index-individual} estão dispostos os tempos totais para indexação de todos os documentos dos corpus com ambas as ferramentas. 
 
 			\input{tex/figure/time-index-individual.tex}
 
-			O ArangoDB teve um melhor desempenho para as inserções dos documentos do DB\_AUTHORPROF, com 1,69 milissegundos por documento, em contraste aos 1,92 milissegundos por documento do Elasticsearch.
-			Porém, o Elasticsearch foi mais rápido para inserção dos documentos do DB\_HYPERPARTISAN, com 2,65 milissegundos por documento contra 3,38 milissegundos por documento do ArangoDB.		
+			O ArangoDB teve um melhor desempenho para as inserções dos documentos do DB\underscore{}AUTHORPROF, com 1,69 milissegundos por documento, em contraste aos 1,92 milissegundos por documento do Elasticsearch.
+			Porém, o Elasticsearch foi mais rápido para inserção dos documentos do DB\underscore{}HYPERPARTISAN, com 2,65 milissegundos por documento contra 3,38 milissegundos por documento do ArangoDB.		
 
 			Percebe-se então que o ArangoDB se saiu um pouco melhor que o Elasticsearch na inserção de grande quantidade de documentos pequenos em sequência, evidenciado pelos tempos de inserção unitária da Figura \ref{fig:time-index-individual}.
-			E pode-se supor que isto é derivado de alguma sobrecarga na operação de inserção unitária do Elasticsearch, ou talvez no custo de recálculo do índice que varia com o tamanho dos documentos inseridos, porém com um custo inicial maior, já que para inserção unitária dos documentos do DB\_HYPERPARTISAN, que são artigos extensos, o Elasticsearch teve melhor desempenho.
+			E pode-se supor que isto é derivado de alguma sobrecarga na operação de inserção unitária do Elasticsearch, ou talvez no custo de recálculo do índice que varia com o tamanho dos documentos inseridos, porém com um custo inicial maior, já que para inserção unitária dos documentos do DB\underscore{}HYPERPARTISAN, que são artigos extensos, o Elasticsearch teve melhor desempenho.
 				
 			No geral, o desempenho da indexação por inserção unitária fica abaixo da por inserção em lotes, como era esperado.
 
 		\subsection{Tempo de consulta}
-			Para medir o TIME\_QUERY utilizando cada ferramenta durante a execução das soluções foi necessário adaptar os códigos das soluções para fazer o registro do tempo que cada consulta, e posterior geração dos atributos de RI, levou.
+			Para medir o TIME\underscore{}QUERY utilizando cada ferramenta durante a execução das soluções foi necessário adaptar os códigos das soluções para fazer o registro do tempo que cada consulta, e posterior geração dos atributos de RI, levou.
 
-			A fim de facilitar a geração dos atributos, foram implementados métodos na classe \textit{IndexToolManager} para que: dado um texto, seja cálculo direto das variáveis de RI já com as ferramentas específicas, como por exemplo o método \textit{arango\_get\_IR\_variables}.
-			A utilização desses métodos pode ser visto no trecho disposto a seguir do script Python \texttt{feat\_GloVe.ipynb} da solução 4\_tom adaptada.
+			A fim de facilitar a geração dos atributos, foram implementados métodos na classe \textit{IndexToolManager} para que: dado um texto, seja cálculo direto das variáveis de RI já com as ferramentas específicas, como por exemplo o método \textit{arango\underscore{}get\underscore{}IR\underscore{}variables}.
+			A utilização desses métodos pode ser visto no trecho disposto a seguir do script Python \texttt{feat\underscore{}GloVe.ipynb} da solução 4\underscore{}tom adaptada.
 
-			% \sourcecodenolinenos{Trecho da adaptação feita ao script \texttt{feat\_GloVe.ipynb} da solução 4\_tom.}{time-query-calculation-4-tom}{python}{time-query-calculation-4-tom.py}
+			% \sourcecodenolinenos{Trecho da adaptação feita ao script \texttt{feat\underscore{}GloVe.ipynb} da solução 4\underscore{}tom.}{time-query-calculation-4-tom}{python}{time-query-calculation-4-tom.py}
 			\begin{listing}[H]
 				\refstepcounter{sourcecode}
-				\captionof{listing}{Trecho da adaptação feita ao script \texttt{feat\_GloVe.ipynb} da solução 4\_tom.\label{cmd:time-query-calculation-4-tom}}
+				\captionof{listing}{Trecho da adaptação feita ao script \texttt{feat\underscore{}GloVe.ipynb} da solução 4\underscore{}tom.\label{cmd:time-query-calculation-4-tom}}
 			\end{listing}
 			\vspace{-1.0cm}
 			\inputminted[bgcolor=bg, 
@@ -202,79 +202,79 @@
 			Neste trecho, Código \ref{cmd:time-query-calculation-4-tom}, \textit{toolTest} é uma instância da classe \textit{IndexToolManager} com \textit{top-$k$} igual a 100. 
 			Esta classe que é responsável pelo cálculo das variáveis de RI, e o tempo de consulta leva em conta esse cálculo, como fica exposto pela posição das variáveis \textit{initial} e \textit{final}.
 
-			O mesmo tipo de adaptação feito para a solução 4\_tom foi feito para as demais, e as medidas coletadas estão dispostas na Figura \ref{fig:time-query}.
+			O mesmo tipo de adaptação feito para a solução 4\underscore{}tom foi feito para as demais, e as medidas coletadas estão dispostas na Figura \ref{fig:time-query}.
 
 			\input{tex/figure/time-query.tex}
 
 			% Zettair, colocar detalhe dos modos de operação para consulta, iterativa e consulta única
 
-			Ao ver os resultados percebe-se uma discrepância entre os resultados do Zettair nos dois corpus, levando somente 12 milissegundos para o cálculo dos atributos de RI no corpus  corpus DB\_AUTHORPROF e mais de 110 milissegundos para as soluções do corpus DB\_HYPERPARTISAN.
+			Ao ver os resultados percebe-se uma discrepância entre os resultados do Zettair nos dois corpus, levando somente 12 milissegundos para o cálculo dos atributos de RI no corpus  corpus DB\underscore{}AUTHORPROF e mais de 110 milissegundos para as soluções do corpus DB\underscore{}HYPERPARTISAN.
 			Isso acontece pois o Zettair possui dois modos de operação para consultas, o 
 			\begin{enumerate*}[label=(\alph*)]
 				\item modo iterativo e o 
 				\item modo de consulta única
 			\end{enumerate*}.
-			Em ambos os modos o Zettair efetua uma etapa de inicialização, copiando o índice gerado para a memória, e para efetuar consultas em série o modo iterativo é o ideal, no entanto ele possui uma limitação não documentada de cerca de 2048 caracteres nas consultas, como no corpus DB\_AUTHORPROF todos os documentos são pequenos, portanto menores que esse limite, as consultas para gerar os atributos de RI com o Zettair puderam ser executadas no modo iterativo.
-			No entanto, para o corpus DB\_HYPERPARTISAN isso não foi possível pois diversos  documentos ultrapassam essa limitação de 2048 caracteres, portanto, para este corpus, as consultas realizadas com o Zettair utilizaram o modo de consulta única.
+			Em ambos os modos o Zettair efetua uma etapa de inicialização, copiando o índice gerado para a memória, e para efetuar consultas em série o modo iterativo é o ideal, no entanto ele possui uma limitação não documentada de cerca de 2048 caracteres nas consultas, como no corpus DB\underscore{}AUTHORPROF todos os documentos são pequenos, portanto menores que esse limite, as consultas para gerar os atributos de RI com o Zettair puderam ser executadas no modo iterativo.
+			No entanto, para o corpus DB\underscore{}HYPERPARTISAN isso não foi possível pois diversos  documentos ultrapassam essa limitação de 2048 caracteres, portanto, para este corpus, as consultas realizadas com o Zettair utilizaram o modo de consulta única.
 
-			A outra surpresa foi o ArangoDB, que levou 558 milissegundos para efetuar cada consulta no corpus DB\_AUTHORPROF, o que indica que seu algoritmo para cálculo do BM25 tem um custo de desempenho proporcional ao número de documentos indexados no banco de dados, pois o corpus DB\_AUTHORPROF possui 300 mil documentos indexados, e o DB\_HYPERPARTISAN somente 430.
-			Enquanto isso, o Elasticsearch teve desempenho similar para cálculo dos atributos de RI nos dois corpus, chegando no máximo a 18 milissegundos por consulta no corpus DB\_AUTHORPROF.
+			A outra surpresa foi o ArangoDB, que levou 558 milissegundos para efetuar cada consulta no corpus DB\underscore{}AUTHORPROF, o que indica que seu algoritmo para cálculo do BM25 tem um custo de desempenho proporcional ao número de documentos indexados no banco de dados, pois o corpus DB\underscore{}AUTHORPROF possui 300 mil documentos indexados, e o DB\underscore{}HYPERPARTISAN somente 430.
+			Enquanto isso, o Elasticsearch teve desempenho similar para cálculo dos atributos de RI nos dois corpus, chegando no máximo a 18 milissegundos por consulta no corpus DB\underscore{}AUTHORPROF.
 
-			O Zettair é a ferramenta mais rápida para a consulta e geração dos atributos de RI no corpus DB\_AUTHORPROF, porém o Elasticsearch é a melhor ferramenta, em quesito geral de tempo de consulta, devido à limitação do tamanho de documento do modo iterativo do Zettair.
+			O Zettair é a ferramenta mais rápida para a consulta e geração dos atributos de RI no corpus DB\underscore{}AUTHORPROF, porém o Elasticsearch é a melhor ferramenta, em quesito geral de tempo de consulta, devido à limitação do tamanho de documento do modo iterativo do Zettair.
 
 	\section{Desempenho dos classificadores com atributos de RI} \label{sec:DesempenhoClassificadores}
-		O desempenho dos classificadores foi mensurado conforme as medidas CLF\_ACC e CLF\_F1 estabelecidas na Subseção \ref{subsec:Desempenho-de-classificador} do Capítulo \ref{ch:MateriaisMétodos}, esses valores foram coletados reproduzindo as soluções originais e então reproduzindo as soluções com as adaptações para incluir os atributos de RI gerados por cada uma das ferramentas.
+		O desempenho dos classificadores foi mensurado conforme as medidas CLF\underscore{}ACC e CLF\underscore{}F1 estabelecidas na Subseção \ref{subsec:Desempenho-de-classificador} do Capítulo \ref{ch:MateriaisMétodos}, esses valores foram coletados reproduzindo as soluções originais e então reproduzindo as soluções com as adaptações para incluir os atributos de RI gerados por cada uma das ferramentas.
 
 		A seguir são apresentados as medidas coletadas para as soluções dos corpus.
 
-		\subsection{DB\_HYPERPARTISAN}
+		\subsection{DB\underscore{}HYPERPARTISAN}
 			Antes da adaptação das soluções selecionadas foi necessário reproduzi-las, no entanto, como o conjunto de validação da competição de 628 não foi disponibilizado ao público e foi necessário fazer o \textit{holdout} no conjunto de treinamento, não é possível comparar diretamente os resultados finais divulgados na página da competição com os obtidos.
-			Pois, para submissão dos classificadores finais para a da competição, ambas as soluções 1\_bertha e 4\_tom treinaram seus classificadores com os 645 artigos e os resultados de acurácia e $F_1$-score disponíveis no ranking da competição foram calculados para as predições feitas nos 628 exemplos do conjunto de validação.
-			Além disso, outro problema é que o script Python da solução 1\_bertha disponibilizado online não possuia números aleatórios fixos, o que torna praticamente impossível reproduzir a mesma solução que foi submetida pela equipe para a competição.
+			Pois, para submissão dos classificadores finais para a da competição, ambas as soluções 1\underscore{}bertha e 4\underscore{}tom treinaram seus classificadores com os 645 artigos e os resultados de acurácia e $F_1$-score disponíveis no ranking da competição foram calculados para as predições feitas nos 628 exemplos do conjunto de validação.
+			Além disso, outro problema é que o script Python da solução 1\underscore{}bertha disponibilizado online não possuia números aleatórios fixos, o que torna praticamente impossível reproduzir a mesma solução que foi submetida pela equipe para a competição.
 
 			Encontram-se na Tabela \ref{tab:reprodução-db-hyperpartisan} as medidas divulgadas na página da competição \textit{SemEval 2019} \cite{PAN_HNDLEADERBOARD_2019} e as reproduções feitas com treinamento em 430 artigos e validação nos 215 restantes.
 
 			\input{tex/table/reprodução-db-hyperpartisan.tex}
 
 			Após essa validação que não há nada de muito errado com as soluções reproduzidas em comparação com os resultados divulgados pela competição, pois os resultados reproduzidos ficam dentro do esperado para um conjunto de treinamento reduzido, as soluções foram adaptadas para incluir os atributos de RI conforme o descrito nas seções anteriores.
-			Na Figura \ref{fig:clf-acc-bars-hyperpartisan} estão dispostas as medidas CLF\_ACC para ambas as soluções.
+			Na Figura \ref{fig:clf-acc-bars-hyperpartisan} estão dispostas as medidas CLF\underscore{}ACC para ambas as soluções.
 			
 			\input{tex/figure/clf-acc-bars-hyperpartisan.tex}
 
-			E na Figura \ref{fig:clf-f1-bars-hyperpartisan} estão dispostas as medidas CLF\_F1.
+			E na Figura \ref{fig:clf-f1-bars-hyperpartisan} estão dispostas as medidas CLF\underscore{}F1.
 			
 			\input{tex/figure/clf-f1-bars-hyperpartisan.tex}
 
-			A adição dos atributos de RI proporciona ganho de acurácia e também de $F_1$-Score para a solução 1\_bertha, alcançando valores maiores até mesmo que os finais da competição com acurácia de $0,8651$ ($86,51\%$) e $F_1$-Score de $0,8105$ ($81,05\%$) quando adicionados os atributos de RI gerados pelo ArangoDB.
-			Já para a solução 4\_tom inicialmente a adição dos atributos de RI não proporciona nenhum ganho de acurácia ou $F_1$-Score, pelo contrário, com todas as ferramentas o $F_1$-Score foi menor ao adicionar os atributos de RI, e somente com os atributos de RI do Elasticsearch que a acurácia se manteve a mesma, com o ArangoDB e com o Zettair houve também diminuição da acurácia do classificador da solução 4\_tom.
+			A adição dos atributos de RI proporciona ganho de acurácia e também de $F_1$-Score para a solução 1\underscore{}bertha, alcançando valores maiores até mesmo que os finais da competição com acurácia de $0,8651$ ($86,51\%$) e $F_1$-Score de $0,8105$ ($81,05\%$) quando adicionados os atributos de RI gerados pelo ArangoDB.
+			Já para a solução 4\underscore{}tom inicialmente a adição dos atributos de RI não proporciona nenhum ganho de acurácia ou $F_1$-Score, pelo contrário, com todas as ferramentas o $F_1$-Score foi menor ao adicionar os atributos de RI, e somente com os atributos de RI do Elasticsearch que a acurácia se manteve a mesma, com o ArangoDB e com o Zettair houve também diminuição da acurácia do classificador da solução 4\underscore{}tom.
 
-			Deve ser observado um detalhe importante da solução 4\_tom, que é o classificador utilizado e o modo escolhido para definição dos parâmetros desse classificador pela equipe, que no caso foi o classificador SVC e na elaboração de sua solução a equipe avaliou diferentes valores do parâmetro C do classificador e escolheu o valor de C com melhor resultado nesse teste, que foi $C = 0,9$.
+			Deve ser observado um detalhe importante da solução 4\underscore{}tom, que é o classificador utilizado e o modo escolhido para definição dos parâmetros desse classificador pela equipe, que no caso foi o classificador SVC e na elaboração de sua solução a equipe avaliou diferentes valores do parâmetro C do classificador e escolheu o valor de C com melhor resultado nesse teste, que foi $C = 0,9$.
 			Como o conjunto de treinamento para submissão da equipe consistiu de todos os 645 artigos, e na reprodução feita para este estudo isso não pode ser feito devido à necessidade de um conjunto isolado de validação, foi feita a suposição que o melhor valor de C para a reprodução da solução seria diferente, pois o conjunto de treinamento da reprodução possui somente 430 artigos.
 			
-			Nas Figuras \ref{fig:clf-acc-4-tom} e \ref{fig:clf-f1-4-tom} estão plotadas as medidas CLF\_ACC e CLF\_F1 obtidas com a reprodução da solução 4\_tom com valores de C na faixa de 0,00001 a 10,0.
+			Nas Figuras \ref{fig:clf-acc-4-tom} e \ref{fig:clf-f1-4-tom} estão plotadas as medidas CLF\underscore{}ACC e CLF\underscore{}F1 obtidas com a reprodução da solução 4\underscore{}tom com valores de C na faixa de 0,00001 a 10,0.
 			
 			\input{tex/figure/clf-acc-4-tom.tex}
 
 			\input{tex/figure/clf-f1-4-tom.tex}
 			
-			Uma rápida análise dos gráficos permite perceber que os melhores valores do parâmetro C agora se encontram na faixa de 1,0 a 3,0 para as reproduções, tanto em termos de CLF\_ACC quanto de CLF\_F1.
+			Uma rápida análise dos gráficos permite perceber que os melhores valores do parâmetro C agora se encontram na faixa de 1,0 a 3,0 para as reproduções, tanto em termos de CLF\underscore{}ACC quanto de CLF\underscore{}F1.
 			O valor de $C = 0,9$ de fato não está entre os melhores possíveis para o classificador.
 			
-			Nota-se que, mesmo com a adição dos atributos de RI, utilizando tanto o ArangoDB quanto o Elasticsearch, o classificador em nenhum momento consegue superar o melhor valor de C do classificador original, porém, com adição dos atributos de RI gerados pelo Zettair, ele atinge os valores de $\text{CLF\_ACC} = 0,8419$ e $\text{CLF\_F1} = 0,7606$ quando $C = 1,4$.
+			Nota-se que, mesmo com a adição dos atributos de RI, utilizando tanto o ArangoDB quanto o Elasticsearch, o classificador em nenhum momento consegue superar o melhor valor de C do classificador original, porém, com adição dos atributos de RI gerados pelo Zettair, ele atinge os valores de $\text{CLF\underscore{}ACC} = 0,8419$ e $\text{CLF\underscore{}F1} = 0,7606$ quando $C = 1,4$.
 			Os valores máximos atingidos com os respectivos valores de C estão dispostos na Tabela \ref{tab:reprodução-4-tom-c}.
 
 			\input{tex/table/reprodução-4-tom-c.tex}
 
-			Observa-se então que a adição dos atributos de RI, utilizando o Zettair para gerá-los, oferece um ganho de desempenho para o classificador SVC da solução 4\_tom quando efetuada a otimização de hiperparâmetros.
-			Porém, ainda assim o classificador SVC não consegue superar os resultados obtidos com o classificar CNN da solução 1\_bertha ao adicionar os parâmetros de RI com quaisquer das ferramentas.
-			O que pode parecer um tanto estranho, já que na solução 4\_tom somente o Zettair produziu ganho de desempenho do classificador.
-			Talvez isso esteja relacionado ao modo de classificação final utilizado pela solução 1\_bertha, no qual é feito o \textit{ensemble} (junção) dos três melhores modelos de qualquer época durante o treinamento da CNN, é possível que os atributos de RI não sejam os responsáveis pelo ganho de desempenho observado na solução 1\_bertha, mas somente a iteração diferente, devido a alteração no conjunto de atributos feita por cada ferramenta, tenha gerado modelos que tenham melhor desempenho no \textit{ensemble}.
+			Observa-se então que a adição dos atributos de RI, utilizando o Zettair para gerá-los, oferece um ganho de desempenho para o classificador SVC da solução 4\underscore{}tom quando efetuada a otimização de hiperparâmetros.
+			Porém, ainda assim o classificador SVC não consegue superar os resultados obtidos com o classificar CNN da solução 1\underscore{}bertha ao adicionar os parâmetros de RI com quaisquer das ferramentas.
+			O que pode parecer um tanto estranho, já que na solução 4\underscore{}tom somente o Zettair produziu ganho de desempenho do classificador.
+			Talvez isso esteja relacionado ao modo de classificação final utilizado pela solução 1\underscore{}bertha, no qual é feito o \textit{ensemble} (junção) dos três melhores modelos de qualquer época durante o treinamento da CNN, é possível que os atributos de RI não sejam os responsáveis pelo ganho de desempenho observado na solução 1\underscore{}bertha, mas somente a iteração diferente, devido a alteração no conjunto de atributos feita por cada ferramenta, tenha gerado modelos que tenham melhor desempenho no \textit{ensemble}.
 			% Nota de rodapé sobre ensemble?
 			Pois, mesmo com a fixação da semente do gerador de número aleatório, como os valores dos atributos de RI são alterados (já que cada ferramenta sua própria implementação do BM25 com pequenas diferenças entre si), os modelos gerados pela reprodução com adição dos atributos de RI gerados pelo Zettair é diferente dos gerados pelo Elasticsearch, que também é diferente dos gerados pelo ArangoDB, e todos estes também são diferentes dos modelos gerados sem adição dos atributos de RI.
 
 
-		\subsection{DB\_AUTHORPROF}
-			A solução 2\_daneshvar18 foi reproduzida sem nenhuma adaptação para comparação com os valores que se encontram na página da competição.
+		\subsection{DB\underscore{}AUTHORPROF}
+			A solução 2\underscore{}daneshvar18 foi reproduzida sem nenhuma adaptação para comparação com os valores que se encontram na página da competição.
 			Na Tabela \ref{tab:reprodução-db-authorprof} está a medida de acurácia divulgada na página da competição \cite{PAN_APCLEF_2018} junto com as medidas da reprodução feitas do mesmo modo que a submissão original, treinamento com os tweets de 3000 autores de língua inglesa e validação com os tweets de 1900 autores de língua inglesa.
 			% e a medida $F_1$-score apresentada na descrição da solução pela equipe
 			% PAN_APCLEF_2018.
@@ -284,8 +284,8 @@
 			Ao truncar o resultado de acurácia da solução reproduzida em 4 dígitos, confirmamos que o mesmo valor divulgado na página da competição é o obtido ao reproduzir a solução.
 			Tanto a página da competição quanto o artigo de descrição da solução \cite{daneshvar:2018} só mencionam a acurácia da solução, portanto não há como comparar o $F_1$-score obtido ao reproduzir a solução.
 
-			Depois da validação inicial da solução 2\_daneshvar por meio da reprodução dos resultados da competição, ela foi adaptada para incluir os atributos de RI junto aos atributos de entrada do classificador antes da redução de dimensionalidade.
-			As medições de CLF\_ACC e CLF\_F1 obtidas ao reproduzir a solução incluindo os atributos com as diferentes ferramentas estão dispostas nas Figura \ref{fig:clf-bars-authorprof}.
+			Depois da validação inicial da solução 2\underscore{}daneshvar por meio da reprodução dos resultados da competição, ela foi adaptada para incluir os atributos de RI junto aos atributos de entrada do classificador antes da redução de dimensionalidade.
+			As medições de CLF\underscore{}ACC e CLF\underscore{}F1 obtidas ao reproduzir a solução incluindo os atributos com as diferentes ferramentas estão dispostas nas Figura \ref{fig:clf-bars-authorprof}.
 			%  e \ref{fig:clf-f1-bars-authorprof}.
 
 			\input{tex/figure/clf-bars-authorprof.tex}
@@ -295,8 +295,8 @@
 
 			% \input{tex/figure/clf-f1-bars-authorprof.tex}
 
-			Como pode ser observado nos gráficos, os atributos de RI na verdade provocaram uma perda considerável de desempenho do classificador da solução 2\_daneshvar18, ambas as medidas CLF\_ACC e CLF\_F1 foram menores com a adição dos atributos de RI com quaisquer das ferramentas utilizadas.
-			O classificador da solução se trata de um classificador do tipo de Máquinas de Vetor de Suporte, o LinearSVC, e assim como foi feito com a solução 4\_tom anteriormente, pode-se supor que o parâmetro C do classificador, escolhido como o padrão $C = 1,0$ pela equipe da solução 2\_daneshvar18, não se trata do melhor valor possível para os modelos de classificação gerados ao adicionar os atributos de RI.
+			Como pode ser observado nos gráficos, os atributos de RI na verdade provocaram uma perda considerável de desempenho do classificador da solução 2\underscore{}daneshvar18, ambas as medidas CLF\underscore{}ACC e CLF\underscore{}F1 foram menores com a adição dos atributos de RI com quaisquer das ferramentas utilizadas.
+			O classificador da solução se trata de um classificador do tipo de Máquinas de Vetor de Suporte, o LinearSVC, e assim como foi feito com a solução 4\underscore{}tom anteriormente, pode-se supor que o parâmetro C do classificador, escolhido como o padrão $C = 1,0$ pela equipe da solução 2\underscore{}daneshvar18, não se trata do melhor valor possível para os modelos de classificação gerados ao adicionar os atributos de RI.
 			Então, trabalhando com essa hipótese, a solução foi reproduzida alterando o valor de C do LinearSVC na faixa de valores de $0,00001$ a $10,0$.
 			As medidas coletadas estão plotadas nas Figuras \ref{fig:clf-acc-2-daneshvar18} e \ref{fig:clf-f1-2-daneshvar18}.
 
@@ -305,7 +305,7 @@
 
 			\input{tex/figure/clf-f1-2-daneshvar18.tex}
 
-			Os gráficos de desempenho com diferentes valores de C comprovam que os atributos de RI pioraram os modelos gerados pelo classificador LinearSVC da solução 2\_daneshvar18.
+			Os gráficos de desempenho com diferentes valores de C comprovam que os atributos de RI pioraram os modelos gerados pelo classificador LinearSVC da solução 2\underscore{}daneshvar18.
 			Pode-se dizer que a introdução dos atributos de RI se trata de uma introdução de ruído que atrapalha o classificador e o impede alcançar os níveis de desempenho atingidos utilizando somente os atributos originais.
 
 			Por que isso ocorreu?
@@ -319,7 +319,7 @@
 
 			\input{tex/figure/clf-f1-2-daneshvar18-ir-scaled.tex}
 
-			Apesar do desempenho do classificador da solução 2\_daneshvar18 ter sido maior com os atributos de RI escalonados, como mostra o gráfico da Figura \ref{fig:clf-acc-2-daneshvar18-ir-scaled} em comparação com o da Figura \ref{fig:clf-acc-2-daneshvar18}, ainda assim o desempenho continuou abaixo da reprodução da solução original.
+			Apesar do desempenho do classificador da solução 2\underscore{}daneshvar18 ter sido maior com os atributos de RI escalonados, como mostra o gráfico da Figura \ref{fig:clf-acc-2-daneshvar18-ir-scaled} em comparação com o da Figura \ref{fig:clf-acc-2-daneshvar18}, ainda assim o desempenho continuou abaixo da reprodução da solução original.
 			Na Tabela \ref{tab:reprodução-2-daneshvar18-c} podem ser vistos os valores máximos atingidos com os respectivos valores de C.
 
 			\input{tex/table/reprodução-2-daneshvar18-c.tex}
